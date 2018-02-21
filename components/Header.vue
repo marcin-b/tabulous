@@ -1,6 +1,6 @@
 <template>
     <header>
-        <span>Tabulous</span>
+        <span id="logo">Tabulous</span>
         <div class="search">
 
             <input type="text" name="search" value="">
@@ -14,46 +14,55 @@
 
 <style>
 header {
-    height: 4em;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     margin: 0;
     padding: 0;
-    background-color: #333;
+    background-color: #222;
     color: darkorange;
     padding: 0 1em;
 }
 header span {
-    display: block;
-    font-family: "Rock Salt", script;
-    font-size: 2em;
-    line-height: 150%;
-    letter-spacing: .05em;
-    font-weight: 400;
     box-sizing: border-box;
+    font-family: "Rock Salt", script;
+    font-size: 2.3em;
+    font-weight: 400;
+    display: block;
+    line-height: 150%;
+    /* letter-spacing: .05em; */
+    text-shadow: 1px 2px 3px #000;
 }
 .search {
-    background-color: darkorange;
+
     display: flex;
     align-items: center;
 }
 header input {
+    border: 1px solid;
     font-size: 1.2em;
     line-height: 100%;
     height: 1.8em;
     width: 180px;
+    padding: 0 0 0 .5em;
+}
+header input:focus {
+    border: 1px solid darkorange;
 }
 header button {
-    margin: 0 0.5em;
-    padding:0;
+    margin: 0 .3em;
+    padding: .2em .3em;
     cursor: pointer;
     background-color: transparent;
-    height: 2.5em;
-    width: 2.5em;
-    border: 0;
+    height: 2.6em;
+    width: 2.7em;
+    border: 1px solid darkorange;
+}
+header button:hover {
+    background-color: darkorange;
+
 }
 header button img {
     align-self: center;
