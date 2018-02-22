@@ -12,7 +12,7 @@ app.set('port', port)
 
 // Parsing
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // Import API Routes
 app.use('/api', api)

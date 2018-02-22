@@ -28,11 +28,11 @@ header {
 header span {
     box-sizing: border-box;
     font-family: "Rock Salt", script;
-    font-size: 2.3em;
+    font-size: 3em;
     font-weight: 400;
     display: block;
     line-height: 150%;
-    /* letter-spacing: .05em; */
+
     text-shadow: 1px 2px 3px #000;
 }
 .search {

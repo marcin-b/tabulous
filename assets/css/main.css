@@ -59,8 +59,8 @@ blockquote, q {
 
 html, body
 {
-    background-color: #fff;
-    color: #000;
+    background-color: #222;
+    color: #eee;
     letter-spacing: 0.5px;
     font-family: "Source Sans Pro", Arial, sans-serif;
     height: 100vh;

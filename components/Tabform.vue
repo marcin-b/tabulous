@@ -88,7 +88,7 @@ select {
     padding: .5em;
     width: 516px;
 }
-#addtab, #submit-btn {
+#submit-btn {
     border: 1px solid darkorange;
     background-color: darkorange;
     color: #222;
@@ -101,7 +101,7 @@ select {
     width: 150px;
     height: 1.6em;
 }
-#addtab:hover, #submit-btn:hover {
+#submit-btn:hover {
     /* text-shadow: none; */
     background-color: #222;
     color: darkorange;

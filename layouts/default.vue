@@ -1,26 +1,39 @@
 <template>
     <div>
         <my-header/>
-        <Nav/>
-        <Tabform/>
+
         <nuxt/>
+
         <my-footer/>
     </div>
 </template>
 
 <script>
+import axios from '~/plugins/axios'
 import MyFooter from '~/components/Footer.vue'
 import MyHeader from '~/components/Header.vue'
 import Nav from '~/components/Nav.vue'
 import Tabform from '~/components/Tabform.vue'
+import Tabs from '~/components/Tabs.vue'
 
 
 export default {
     components: {
         MyHeader,
         Nav,
-        MyFooter,
-        Tabform
+        Tabform,
+        Tabs,
+        MyFooter
+    },
+    mounted () {
+        axios.get("/api/tabs")
+        .then(tabs => {
+            console.log("tab get resp data:", tabs);
+            return {
+                tabs: tabs
+            }
+
+        })
     }
 }
 </script>

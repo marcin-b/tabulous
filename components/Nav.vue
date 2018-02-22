@@ -39,22 +39,25 @@ export default {
 nav {
     display: flex;
     flex-wrap: wrap;
-    background-color: #222;
+    background-color: #eee;
     text-align: center;
     justify-content: center;
+    width: 100%;
 }
 nav > a {
-    color: #eee;
+    display: block;
+    color: #222;
     font-family: 'Lato';
     font-weight: bold;
-    font-size: 1.5em;
+    font-size: 1.8em;
+    line-height: 150%;
     text-decoration: none;
     letter-spacing: .3em;
     transition: transform ease-out .1s;
 }
 nav > a:hover {
     color: darkorange;
-    text-shadow: 1px 2px 3px #000;
-    transform: translateY(-2px);
+    text-shadow: 0px 2px 1px #000;
+    transform: translateY(-3px);
 }
 </style>
