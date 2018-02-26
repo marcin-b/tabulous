@@ -4,18 +4,23 @@
             <li v-for="(tabs, letter) in sortedTabs" :key="letter" v-bind:id="letter" class="abc">
                 {{letter}}
                 <ul>
-                    <li v-for="tab in tabs">
-                        <nuxt-link :to="{ name: '', params: { id: tab.id}}">
+                    <li v-for="(tab, index) in tabs" @click="show = !show" :key="index" :id="tab.id" >
+                        <nuxt-link
+                        :id="tab.id"
+                        :to="tab.id"
+                        >
                             {{ tab.title }} - {{ tab.artist }}
-                            <span v-if="tab.hasLyrics">has lyrics</span><br>
                         </nuxt-link>
-                        <pre v-if="shown">{{ tab.tab }}</pre>
+                        <span v-if="tab.haslyrics == 'true'">has lyrics</span>
+                        <transition name="slide-fade" >
+                            <pre v-if="show">{{ tab.tab }}</pre>
+                        </transition>
                     </li>
                 </ul>
             </li>
         </ul>
         <div class="">
-            Here are some cool tabs
+
         </div>
 
     </div>
@@ -23,11 +28,15 @@
 
 <script>
 import axios from '~/plugins/axios'
+import Tab from "~/components/Tab.vue"
 
 export default {
+
     data () {
         return {
-            sortedTabs: [{}]
+            sortedTabs: [{}],
+            show: false
+
         }
     },
     mounted () {
@@ -44,7 +53,19 @@ export default {
         let { tabulatures } = await axios.get('/api/tabs')
         console.log("tabulatures:", tabulatures);
         return { tabulatures }
+    },
+    methods: {
+        singleTab(event) {
+            event.preventDefault()
+            console.log("target", event.target.id);
+            axios.get("/api/tab/" + event.target.id)
+                .then(({data}) => {
+                    this.pickedTab = data
+                })
+
+        }
     }
+
 
 }
 </script>
@@ -58,8 +79,7 @@ export default {
     align-items: center;
     background-color: #222;
     color: #eee;
-    margin-top: 3em;
-
+    margin-top: 1em;
 }
 .abc {
     color: darkorange;
@@ -67,27 +87,30 @@ export default {
 }
 
 ul > li > a {
-    display: block;
+    display: inline-block;
     color: #eee;
-    font: normal normal 600 1em/150% "Lato", sans-serif;
+    font: normal normal 600 .9em/150% "Lato", sans-serif;
     letter-spacing: .08em;
     text-decoration: none;
     transition: transform ease-out .1s;
-
 }
 ul > li > a:hover {
     color: darkorange;
     text-shadow: 1px 2px 3px #000;
     transform: translateY(-2px);
 }
+ul > li > span {
+    margin-left: 1em;
+    font-size: .5em;
+}
 pre {
     padding-top: 10px;
     /* margin-left: -25px; */
-    font: normal 1em "Inconsolata", monospace;
+    font: normal .6em "Inconsolata", monospace;
     background-color: #ddd;
     color: #222;
-    border-top: 1px solid darkorange;
-    border-bottom: 1px solid #ddd;
-    max-width: 100vw;
+    border: 1px solid darkorange;
+    width: 700px;
+    white-space: pre-wrap;
 }
 </style>

@@ -46,12 +46,17 @@ export default {
 <style lang="css">
 .form {
     align-items: center;
+    background-color: #222;
+    color: #ccc;
     display: flex;
     flex-direction: column;
     font: normal 1em/150% "Muli", sans-serif;
+    height: calc(100vh - 14em);
+    position: absolute;
     padding-top: 1em;
-    background-color: #222;
-    color: #ccc;
+    z-index: 1;
+    top: 13em;
+    overflow: auto;
 }
 .form > input {
     border: 1px solid black;
@@ -61,7 +66,7 @@ export default {
     height: 2em;
     width: 200px;
 }
-.form > input:focus, .form > textarea:focus, select:focus {
+.form > input:focus, .form > textarea:focus, select:focus, #tabinput:focus {
     border: 1px solid darkorange;
 }
 .options {
@@ -83,10 +88,10 @@ select {
     border: 1px solid black;
     color: black;
     font: normal 1em "Inconsolata", monospace;
-    min-height: 300px;
+    height: 400px;
     margin-bottom: 1em;
     padding: .5em;
-    width: 516px;
+    width: 650px;
 }
 #submit-btn {
     border: 1px solid darkorange;

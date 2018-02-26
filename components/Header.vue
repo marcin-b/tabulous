@@ -14,16 +14,20 @@
 
 <style>
 header {
+    align-items: center;
+    background-color: #222;
+    color: darkorange;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-    align-items: center;
     margin: 0;
     padding: 0;
-    background-color: #222;
-    color: darkorange;
     padding: 0 1em;
+    z-index: 5;
+}
+header > * {
+    z-index: 5;
 }
 header span {
     box-sizing: border-box;
@@ -31,12 +35,11 @@ header span {
     font-size: 3em;
     font-weight: 400;
     display: block;
-    line-height: 150%;
-
+    line-height: 200%;
+    align-self: flex-end;
     text-shadow: 1px 2px 3px #000;
 }
 .search {
-
     display: flex;
     align-items: center;
 }

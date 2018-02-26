@@ -23,7 +23,7 @@ router.get("/tabs", (req, res, next) => {
     console.log("Inside GET tabs");
     db.query(`SELECT * FROM tabs`)
         .then(results => {
-            console.log("get tabs Result:", results[0]);
+            //console.log("get tabs Result:", results[0]);
             results = results.sort(function(a, b) {
                 return a.title.toLowerCase().localeCompare(b.title.toLowerCase());
             })
@@ -38,7 +38,7 @@ router.get("/tabs", (req, res, next) => {
 router.get("/tab/:id", (req, res, next) => {
     db.query(`SELECT * FROM tabs WHERE id = $1`, [ req.params.id ])
         .then(result => {
-            console.log("get tab:", result);
+            //console.log("get tab:", result);
             res.json(result)
         })
         .catch(err => res.json({ response: "Error: " + err }))

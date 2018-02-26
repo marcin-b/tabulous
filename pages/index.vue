@@ -12,11 +12,6 @@
         </transition>
         <Tabs/>
 
-        <img src="~assets/img/logo.png" alt="Nuxt.js Logo" class="logo" />
-        <h1 class="title">
-            USERS
-        </h1>
-
     </section>
 </template>
 
@@ -86,6 +81,7 @@ section {
     padding: 0 .5em;
     height: 1.6em;
     position: relative;
+    box-shadow: 1px 2px 3px #000;
 }
 #addtab:hover {
     /* text-shadow: none; */
@@ -96,7 +92,7 @@ section {
 /* Enter and leave animations can use different */
 /* durations and timing functions.              */
 .slide-fade-enter-active, .slide-fade-leave-active {
-    transition: transform ease-out .6s, bottom linear 2s;
+    transition: all ease .7s;
 }
 /* .slide-fade-leave-active {
     transition: transform 2s ease-out;
@@ -104,9 +100,13 @@ section {
 } */
 .slide-fade-enter
 /* .slide-fade-leave-active below version 2.1.8 */ {
-    transform: translateX(-100vw);
+    /* transform: translateX(-100vw); */
+    transform: scale(0,0) translateX(100vw);
+    opacity: 0;
 }
 .slide-fade-leave-to {
-    transform: translatex(100vw);
+    /* transform: translateX(-100vw); */
+    transform: scale(1.8,1.8) translateX(-100vw);
+    opacity: 0;
 }
 </style>

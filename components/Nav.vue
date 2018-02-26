@@ -43,6 +43,7 @@ nav {
     text-align: center;
     justify-content: center;
     width: 100%;
+    z-index: 5;
 }
 nav > a {
     display: block;
@@ -50,14 +51,16 @@ nav > a {
     font-family: 'Lato';
     font-weight: bold;
     font-size: 1.8em;
-    line-height: 150%;
+    line-height: 120%;
     text-decoration: none;
-    letter-spacing: .3em;
+    padding: 0 .25em;
     transition: transform ease-out .1s;
 }
 nav > a:hover {
+    background-color: #222;
     color: darkorange;
+    transform: scale(1.5, 1.5);
     text-shadow: 0px 2px 1px #000;
-    transform: translateY(-3px);
+    /* transform: translateY(-3px); */
 }
 </style>
