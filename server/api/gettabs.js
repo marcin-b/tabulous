@@ -13,7 +13,7 @@ var sortResults = function(results) {
         } else {
             sortedTabs[tab.title.charAt(0).toUpperCase()].push(tab)
         }
-        console.log("sortedTabs", sortedTabs);
+        // console.log("sortedTabs", sortedTabs);
     })
     return sortedTabs;
 }
@@ -42,5 +42,5 @@ router.get("/tab/:id", (req, res, next) => {
             res.json(result)
         })
         .catch(err => res.json({ response: "Error: " + err }))
-}
+})
 export default router

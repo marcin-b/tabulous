@@ -8,7 +8,7 @@
             Close
         </button>
         <transition name="slide-fade">
-            <Tabform v-show="show" />
+            <Tabform v-show="show" :tabformShown="this.show" />
         </transition>
         <Tabs/>
 
@@ -35,26 +35,12 @@ export default {
     data() {
         return {
             show: false,
-            tabFormShown: false
+            tabFormShown: false,
+            sortedTabs: [{}]
         }
     },
     methods: {
-
-            toggleTabForm() {
-                if(!this.tabFormShown) {
-                     this.tabFormShown = true
-                     console.log("shown?", this.tabFormShown);
-                } else {
-                     this.tabFormShown = false
-                }
-            }
-
-
     },
-    // async asyncData() {
-    //     let { data } = await axios.get('/api/users')
-    //     return { users: data }
-    // },
     head() {
         return {
             title: 'Tabulous'
@@ -77,7 +63,7 @@ section {
     display: inline-block;
     font: bold 1.6em/130% "Muli", sans-serif;
     text-rendering: optimizeLegibility;
-    margin: 1em 0;
+    margin: .5em 0 1em;
     padding: 0 .5em;
     height: 1.6em;
     position: relative;
@@ -89,24 +75,5 @@ section {
     background-color: darkorange;
     color: #222;
 }
-/* Enter and leave animations can use different */
-/* durations and timing functions.              */
-.slide-fade-enter-active, .slide-fade-leave-active {
-    transition: all ease .7s;
-}
-/* .slide-fade-leave-active {
-    transition: transform 2s ease-out;
-    transition: height 1s ease-out 1s;
-} */
-.slide-fade-enter
-/* .slide-fade-leave-active below version 2.1.8 */ {
-    /* transform: translateX(-100vw); */
-    transform: scale(0,0) translateX(100vw);
-    opacity: 0;
-}
-.slide-fade-leave-to {
-    /* transform: translateX(-100vw); */
-    transform: scale(1.8,1.8) translateX(-100vw);
-    opacity: 0;
-}
+
 </style>

@@ -44,6 +44,7 @@ header span {
     align-items: center;
 }
 header input {
+    font-family: Muli;
     border: 1px solid;
     font-size: 1.2em;
     line-height: 100%;

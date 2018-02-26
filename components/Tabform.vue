@@ -1,5 +1,5 @@
 <template lang="html">
-    <form class="form">
+    <form class="form" v-on:submit="">
 		<div class="options">
 			<select v-model="newTab.type" id="type" class="type" name="type">
 				<option selected value="guitar">Guitar</option>
@@ -19,8 +19,10 @@
 import axios from "~/plugins/axios"
 
 export default {
+    props: [ "tabFormShown" ],
     data() {
         return {
+            sortedTabs: [{}],
             newTab: {
                 title: "",
                 type: "guitar",
@@ -31,12 +33,12 @@ export default {
         }
     },
     methods: {
-        tabAdd(e) {
-            e.preventDefault();
+        tabAdd() {
             console.log("new Tab", this.newTab);
             axios.post("/api/addtab", this.newTab)
                 .then(({ data }) => {
                     console.log("resp data:", data);
+                    tabFormShown = false;
                 })
         }
     }
@@ -47,7 +49,7 @@ export default {
 .form {
     align-items: center;
     background-color: #222;
-    color: #ccc;
+    color: #eee;
     display: flex;
     flex-direction: column;
     font: normal 1em/150% "Muli", sans-serif;
@@ -55,16 +57,16 @@ export default {
     position: absolute;
     padding-top: 1em;
     z-index: 1;
-    top: 13em;
+    top: 14em;
     overflow: auto;
 }
 .form > input {
     border: 1px solid black;
-    font: normal 1em "Muli", sans-serif;
+    font: normal 1.2em/150% "Muli", sans-serif;
     padding-left: .8em;
     margin-bottom: 1em;
     height: 2em;
-    width: 200px;
+    width: 250px;
 }
 .form > input:focus, .form > textarea:focus, select:focus, #tabinput:focus {
     border: 1px solid darkorange;
@@ -111,5 +113,25 @@ select {
     background-color: #222;
     color: darkorange;
     border: 1px solid #ccc;
+}
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.slide-fade-enter-active, .slide-fade-leave-active {
+    transition: all ease .5s;
+}
+/* .slide-fade-leave-active {
+    transition: transform 2s ease-out;
+    transition: height 1s ease-out 1s;
+} */
+.slide-fade-enter
+/* .slide-fade-leave-active below version 2.1.8 */ {
+    /* transform: translateX(-100vw); */
+    transform: translateX(100vw) scale(0 , 0);
+    /* opacity: 0; */
+}
+.slide-fade-leave-to {
+    /* transform: translateX(-100vw); */
+    transform: scale(2,2) translateX(-100vw);
+    /* opacity: 0; */
 }
 </style>
