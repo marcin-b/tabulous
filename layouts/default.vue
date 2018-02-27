@@ -16,7 +16,6 @@ import Nav from '~/components/Nav.vue'
 import Tabform from '~/components/Tabform.vue'
 import Tabs from '~/components/Tabs.vue'
 
-
 export default {
     components: {
         MyHeader,
@@ -27,13 +26,13 @@ export default {
     },
     mounted () {
         axios.get("/api/tabs")
-        .then(tabs => {
-            console.log("tab get resp data:", tabs);
-            return {
-                tabs: tabs
-            }
+            .then(tabs => {
+                console.log("tab get resp data:", tabs);
+                return {
+                    tabs: tabs
+                }
 
-        })
+            })
     }
 }
 </script>

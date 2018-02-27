@@ -5,7 +5,7 @@
 				<option selected value="guitar">Guitar</option>
 				<option value="bass">Bass</option>
 			</select>
-			<input v-model="newTab.hasLyrics" class="checkbox" type="checkbox">With Lyrics?
+			<input v-model="newTab.haslyrics" class="checkbox" type="checkbox">With Lyrics?
 		</div>
 
 		<input v-model="newTab.title" type="text" id="title" placeholder="Song Title" autofocus>
@@ -25,20 +25,19 @@ export default {
             sortedTabs: [{}],
             newTab: {
                 title: "",
-                type: "guitar",
                 artist: "",
-                hasLyrics: false,
+                type: "guitar",
+                haslyrics: false,
                 tab: ""
             }
         }
     },
     methods: {
         tabAdd() {
-            console.log("new Tab", this.newTab);
             axios.post("/api/addtab", this.newTab)
                 .then(({ data }) => {
                     console.log("resp data:", data);
-                    tabFormShown = false;
+
                 })
         }
     }

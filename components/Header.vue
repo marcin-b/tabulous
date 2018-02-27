@@ -2,7 +2,6 @@
     <header>
         <span id="logo">Tabulous</span>
         <div class="search">
-
             <input type="text" name="search" value="">
             <button type="buttton" name="submit" value="">
                 <img src="~/assets/img/null.png" alt="">
