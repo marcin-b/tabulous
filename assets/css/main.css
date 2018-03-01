@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css?family=Lato');
 @import url('https://fonts.googleapis.com/css?family=Inconsolata');
 
+
 /* This section is resetting browser defaults */
 * {
     box-sizing: border-box;
@@ -33,6 +34,7 @@ body {
 	line-height: 1;
 	color: black;
 	background: white;
+    margin-bottom: 5em;
 }
 ol, ul {
 	list-style: none;
@@ -62,11 +64,12 @@ html, body
     background-color: #222;
     color: #eee;
     letter-spacing: 0.5px;
-    font-family: "Source Sans Pro", Arial, sans-serif;
     height: 100vh;
     margin: 0;
 }
-
+#__nuxt {
+    padding-bottom: 3em;
+}
 a {
     color: black;
 }

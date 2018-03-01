@@ -58,10 +58,10 @@ section {
 #addtab {
     background-color: #222;
     color: darkorange;
-    border: 1px solid #ccc;
+    border: 1px solid #eee;
     cursor: pointer;
     display: inline-block;
-    font: bold 1.6em/130% "Muli", sans-serif;
+    font: normal 1.6em/130% "Muli", sans-serif;
     text-rendering: optimizeLegibility;
     margin: .5em 0 1em;
     padding: 0 .5em;
@@ -73,7 +73,7 @@ section {
     /* text-shadow: none; */
     border: 1px solid darkorange;
     background-color: darkorange;
-    color: #222;
+    color: #000;
 }
 
 </style>

@@ -39,6 +39,7 @@ export default {
                     console.log("resp data:", data);
 
                 })
+                .catch(err => "Problem adding Tab: ", err)
         }
     }
 }
@@ -47,15 +48,17 @@ export default {
 <style lang="css">
 .form {
     align-items: center;
+    border: 2px dashed darkorange;
     background-color: #222;
     color: #eee;
     display: flex;
     flex-direction: column;
     font: normal 1em/150% "Muli", sans-serif;
-    height: calc(100vh - 14em);
+    /* height: calc(100vh - 14em); */
+    margin-bottom: 1em;
     position: absolute;
-    padding-top: 1em;
-    z-index: 1;
+    padding: 1em;
+    z-index: 2;
     top: 14em;
     overflow: auto;
 }
@@ -71,16 +74,18 @@ export default {
     border: 1px solid darkorange;
 }
 .options {
+    display: flex;
     margin-bottom: 10px;
+    align-items: flex-start;
 }
 select {
     border: 1px solid black;
-    padding: 3px 10px;
+    padding: 0 .8em;
     font: normal 1em/100% "Muli", sans-serif;
 }
 .checkbox {
-    height: 1.5em;
-    width: 1.5em;
+    height: 18px;
+    width: 18px;
     margin-bottom: 5px;
     margin-left: .8em;
     vertical-align: middle;
@@ -97,15 +102,16 @@ select {
 #submit-btn {
     border: 1px solid darkorange;
     background-color: darkorange;
-    color: #222;
+    color: #000;
     cursor: pointer;
     display: inline-block;
-    font: bold 1.6em/130% "Muli", sans-serif;
-    text-rendering: optimizeLegibility;
-    margin-bottom: 1em;
+    font: normal 1.6em "Muli", sans-serif;
+    height: 1.7em;
+    /* text-rendering: optimizeLegibility; */
+    margin-bottom: 0;
     padding: 0;
     width: 150px;
-    height: 1.6em;
+    box-shadow: 1px 2px 3px #000;
 }
 #submit-btn:hover {
     /* text-shadow: none; */
