@@ -25,14 +25,7 @@ export default {
         MyFooter
     },
     mounted () {
-        axios.get("/api/tabs")
-            .then(tabs => {
-                console.log("tab get resp data:", tabs);
-                return {
-                    tabs: tabs
-                }
-
-            })
+        
     }
 }
 </script>

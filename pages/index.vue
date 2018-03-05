@@ -1,15 +1,20 @@
 <template>
     <section>
+
         <Nav/>
+
         <button v-if="!show" @click="show = !show" id="addtab">
             Add new Tab
         </button>
+
         <button v-else="show" @click="show = !show" id="addtab">
             Close
         </button>
+
         <transition name="slide-fade">
             <Tabform v-show="show" :tabformShown="this.show" />
         </transition>
+
         <Tabs/>
 
     </section>
@@ -61,16 +66,16 @@ section {
     border: 1px solid #eee;
     cursor: pointer;
     display: inline-block;
-    font: normal 1.6em/130% "Muli", sans-serif;
+    font: normal 1.5em/150% "Muli", sans-serif;
     text-rendering: optimizeLegibility;
-    margin: .5em 0 1em;
-    padding: 0 .5em;
-    height: 1.6em;
+    margin: .5em 0 .5em;
+    padding: 0 1em;
     position: relative;
     box-shadow: 1px 2px 3px #000;
+    transition: transform ease .1s;
 }
 #addtab:hover {
-    /* text-shadow: none; */
+    transform: scale(1.3, 1.3);
     border: 1px solid darkorange;
     background-color: darkorange;
     color: #000;

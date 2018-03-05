@@ -7,6 +7,12 @@ const router = Router()
 var sortResults = function(results) {
     let sortedTabs = {};
     results.forEach(tab => {
+        // Convert "true/false" strings to boolean for better v-if compatibility
+        if (tab.haslyrics === "true") {
+            tab.haslyrics = true
+        } else {
+            tab.haslyrics = false
+        }
         // Create new letter object if it doesn't exist
         if (!sortedTabs[tab.title.charAt(0).toUpperCase()]) {
             sortedTabs[tab.title.charAt(0).toUpperCase()] = [tab]
@@ -18,12 +24,13 @@ var sortResults = function(results) {
     return sortedTabs;
 }
 
-// POST new tab to database
+// GET all Tabs from Database
 router.get("/tabs", (req, res, next) => {
     console.log("Inside GET tabs");
     db.query(`SELECT * FROM tabs`)
         .then(results => {
             //console.log("get tabs Result:", results[0]);
+            // Sort by Letters and then Alphabetically
             results = results.sort(function(a, b) {
                 return a.title.toLowerCase().localeCompare(b.title.toLowerCase());
             })
@@ -35,7 +42,9 @@ router.get("/tabs", (req, res, next) => {
         .catch(err => res.json({ response: "Error: " + err }))
 })
 
+// GET single tab
 router.get("/tab/:id", (req, res, next) => {
+    console.log("Inside GET SINGLE TAB");
     db.query(`SELECT * FROM tabs WHERE id = $1`, [ req.params.id ])
         .then(result => {
             //console.log("get tab:", result);

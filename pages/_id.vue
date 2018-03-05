@@ -40,9 +40,9 @@ export default {
         axios.get("/api/tab/" + params.id)
             .then(({data}) => {
 
-                console.log("tab get resp data:", data);
+                // console.log("tab get resp data:", data);
                 this.tab = data
-                console.log("tabs:", this.sortedTabs);
+                // console.log("tabs:", this.sortedTabs);
             })
             .catch(err => console.log("Error getting tabs:", err))
     }

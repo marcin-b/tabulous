@@ -18,9 +18,8 @@
                     Edit
                 </button>
 
-                <button @click="startScroll()" type="button" id="start-scroll">
-                    Scroll
-                </button>
+                <Scroller
+                :isActive="isActive"/>
 
                 <div class="pre-cont">
                     <pre>{{ updatedTab.tab }}</pre>
@@ -60,9 +59,11 @@
 
 <script>
 import axios from '~/plugins/axios'
+import Scroller from '~/components/Scroller.vue'
+
 
 export default {
-
+    components: { Scroller },
     name: "Tab",
     props: [ "tab" ],
     data () {
@@ -77,7 +78,7 @@ export default {
                 tab: this.tab.tab,
                 id: this.tab.id
             },
-            currY: 0,
+
         }
 
     },
@@ -97,35 +98,8 @@ export default {
                     this.toggleEditor();
                 })
         },
-        scroller() {
-            console.log("scroll: ", this.currY, document.body.scrollHeight);
 
-            this.currY = window.pageYOffset + 1;
-            window.scroll(0, this.currY);
-            // ADD A LISTENER FOR STOP BUTTON
-            if(this.currY + window.innerHeight != document.body.scrollHeight){
-                requestAnimationFrame(this.scroller)
-            } else {
-                return;
-            }
-        },
-        startScroll() {
-            let reqId;
-            requestAnimationFrame(this.scroller)
-            // this.scroller()
-            // return this.currY
-            // window.setInterval(() => {
-            //     this.currY = window.pageYOffset + 1;
-            //     window.scroll(0, this.currY);
-            //
-            // }, 1000)
-        }
     },
-    // computed: {
-    //     currY(){
-    //         this.currY
-    //     }
-    // }
 }
 </script>
 
@@ -187,11 +161,7 @@ pre {
     left: -6.7em;
     top: -2em;
 }
-#start-scroll {
-    position: absolute;
-    left: -4.7em;
-    top: 2em;
-}
+
 #open-editor {
     position: absolute;
     left: -4em;

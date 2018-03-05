@@ -37,11 +37,12 @@ export default {
 
 <style lang="css">
 nav {
-    display: flex;
-    flex-wrap: wrap;
     background-color: #eee;
-    text-align: center;
+    flex-wrap: wrap;
+    display: flex;
     justify-content: center;
+    margin-bottom: .5em;
+    text-align: center;
     width: 100%;
     z-index: 5;
 }

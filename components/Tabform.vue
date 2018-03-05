@@ -54,12 +54,11 @@ export default {
     display: flex;
     flex-direction: column;
     font: normal 1em/150% "Muli", sans-serif;
-    /* height: calc(100vh - 14em); */
-    margin-bottom: 1em;
+    margin: .8em 0 1em;
     position: absolute;
     padding: 1em;
     z-index: 2;
-    top: 14em;
+    top: 12em;
     overflow: auto;
 }
 .form > input {
@@ -101,23 +100,24 @@ select {
 }
 #submit-btn {
     border: 1px solid darkorange;
+    box-shadow: 1px 2px 3px #000;
     background-color: darkorange;
     color: #000;
     cursor: pointer;
     display: inline-block;
-    font: normal 1.6em "Muli", sans-serif;
-    height: 1.7em;
-    /* text-rendering: optimizeLegibility; */
+    font: normal 1.4em/150% "Muli", sans-serif;
+    text-rendering: optimizeLegibility;
     margin-bottom: 0;
-    padding: 0;
-    width: 150px;
-    box-shadow: 1px 2px 3px #000;
+    padding: 0 1em;
+    width: auto;
+    transition: transform ease .1s;
+
 }
 #submit-btn:hover {
-    /* text-shadow: none; */
     background-color: #222;
-    color: darkorange;
     border: 1px solid #ccc;
+    color: darkorange;
+    transform: scale(1.3, 1.3);
 }
 /* Enter and leave animations can use different */
 /* durations and timing functions.              */
