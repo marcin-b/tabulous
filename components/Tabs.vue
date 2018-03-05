@@ -1,7 +1,15 @@
 <template lang="html">
     <div class="tab-container">
-        <div v-if="!tabsLoaded" class="loader">
-            T
+        <div
+            v-if="!tabsLoaded"
+            class="loader-cont">
+
+            Loading Tabs...
+
+            <div class="loader">
+                T
+            </div>
+
         </div>
         <ul v-else>
             <li v-for="(tabs, letter) in sortedTabs"
@@ -14,7 +22,6 @@
                 </ul>
             </li>
         </ul>
-
 
 
     </div>
@@ -32,7 +39,7 @@ export default {
             sortedTabs: [{}],
         }
     },
-    created() {
+    mounted() {
         axios.get("/api/tabs")
             .then(({data}) => {
                 this.sortedTabs = data
@@ -56,7 +63,7 @@ export default {
     align-items: center;
     background-color: #222;
     color: #eee;
-    
+
 }
 .abc {
 
@@ -71,18 +78,24 @@ export default {
     text-align: left;
     text-shadow: 1px 2px 3px #000;
 }
-
+.loader-cont {
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .loader {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #000;
-    font-size: 3em;
+    color: #222;
+    font-size: 3.3em;
     width: 100px;
     height: 100px;
     background-color: darkorange;
     border-radius: 10px;
     font-family: "Rock Salt";
+    font-weight: bold;
     animation-name: load;
     animation-duration: 800ms;
     animation-iteration-count: infinite;
@@ -90,10 +103,10 @@ export default {
     transition: all;
 }
 @keyframes load {
-    0% { transform: scale(1, 1) translateY(0) ; opacity: 1; }
+    0% { transform: scale(1, 1) translateY(0) ; opacity: .8; }
     /* 25% { transform: scale(.8, .8) ; opacity:.8;} */
-    50% { transform: scale(.2, .2) translateX(0) ; opacity: .5; }
+    50% { transform: scale(.1, .1) translateX(0) ; opacity: .2; }
     /* 75% { transform: scale(.8, .8); opacity:.8; } */
-    100% { transform: scale(1, 1) translateY(0) ; opacity: 1; }
+    100% { transform: scale(1, 1) translateY(0) ; opacity: .8; }
 }
 </style>

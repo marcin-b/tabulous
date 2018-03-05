@@ -6,7 +6,7 @@
         </a>
         <span v-if="updatedTab.haslyrics">has lyrics</span>
 
-        <!-- Tab and Editor block -->
+        <!-- Tab Block -->
         <transition name="slide">
             <div v-if="isActive" class="pre-tab-container">
 
@@ -18,22 +18,27 @@
                     Edit
                 </button>
 
-                <Scroller
-                :isActive="isActive"/>
+                <!-- Scroller -->
+                <Scroller/>
 
+                <!-- Tab container -->
                 <div class="pre-cont">
                     <pre>{{ updatedTab.tab }}</pre>
                 </div>
+
             </div>
         </transition>
 
+
         <!-- Editor -->
         <transition name="fade">
+
             <div v-if="showEditor" class="tab-editor">
 
                 <button @click="toggleEditor" type="button" id="close-editor">
                     Close Editor
                 </button>
+
                 <div class="options">
                     <select v-model="updatedTab.type" id="type" class="type" name="type">
                         <option selected value="guitar">Guitar</option>
@@ -41,11 +46,14 @@
                     </select>
                     <input v-model="updatedTab.haslyrics" class="checkbox" type="checkbox">With Lyrics?
                 </div>
+
                 <button @click="updateTab" type="button" id="update-tab">
                     Update
                 </button>
+
                 Title <input v-model="updatedTab.title" type="text" id="title" >
                 Artist <input v-model="updatedTab.artist" type="text" id="artist">
+
                 <textarea v-model="updatedTab.tab" name="tab">
                     {{ updatedTab.tab }}
                 </textarea>
@@ -136,7 +144,7 @@ li > span {
     border: 2px dashed darkorange;
     position: absolute;
     clear: both;
-    height:auto;
+    height: auto;
     padding: 1em;
     display: flex;
     background-color: #222;
@@ -183,6 +191,7 @@ pre {
     border-color: darkorange;
     font-weight: bold;
 }
+
 /* Editor */
 .tab-editor {
     border: 2px dashed darkorange;
