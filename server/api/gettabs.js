@@ -3,6 +3,7 @@ import db from "./db"
 
 const router = Router()
 
+
 // Homemade sorting function
 var sortResults = function(results) {
     let sortedTabs = {};

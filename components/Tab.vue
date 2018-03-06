@@ -119,7 +119,7 @@ li > a {
     cursor:pointer;
     display: inline-block;
     font: normal normal 400 1.2em/150% "Lato", sans-serif;
-    letter-spacing: .02em;
+    letter-spacing: .03em;
     text-decoration: none;
     transition: all ease-out .1s;
 }

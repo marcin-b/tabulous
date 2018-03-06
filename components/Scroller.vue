@@ -35,7 +35,6 @@
             Top
         </button><br>
 
-
     </div>
 
 </template>
@@ -93,6 +92,8 @@ export default {
         startScroll() {
             this.scrolling = !this.scrolling;
             requestAnimationFrame(this.scroller)
+            if (!this.scrolling) {
+            }
         },
         stopScroll() {
             this.scrolling = false;
