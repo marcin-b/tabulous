@@ -78,7 +78,6 @@ export default {
                     requestAnimationFrame(this.scroller)
                     this.step = 0;
                 } else {
-
                     console.log("step", this.step);
                     requestAnimationFrame(this.scroller)
                 }
@@ -90,9 +89,11 @@ export default {
             }
         },
         startScroll() {
-            this.scrolling = !this.scrolling;
-            requestAnimationFrame(this.scroller)
             if (!this.scrolling) {
+                this.scrolling = true;
+                requestAnimationFrame(this.scroller)
+            } else {
+                this.scrolling = false;
             }
         },
         stopScroll() {

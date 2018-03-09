@@ -1,6 +1,8 @@
 <template>
     <section>
 
+        <my-header/>
+
         <Nav/>
 
         <button v-if="!show" @click="show = !show" id="addtab">

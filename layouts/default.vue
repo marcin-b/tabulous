@@ -1,6 +1,6 @@
 <template>
     <div>
-        <my-header/>
+
 
         <nuxt/>
 
@@ -9,7 +9,8 @@
 </template>
 
 <script>
-import axios from '~/plugins/axios'
+
+
 import MyFooter from '~/components/Footer.vue'
 import MyHeader from '~/components/Header.vue'
 import Nav from '~/components/Nav.vue'
@@ -25,7 +26,7 @@ export default {
         MyFooter
     },
     mounted () {
-        
+
     }
 }
 </script>

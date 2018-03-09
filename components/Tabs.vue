@@ -28,6 +28,7 @@
 </template>
 
 <script>
+
 import axios from '~/plugins/axios'
 import Tab from "~/components/Tab.vue"
 
@@ -63,7 +64,6 @@ export default {
     align-items: center;
     background-color: #222;
     color: #eee;
-
 }
 .abc {
 

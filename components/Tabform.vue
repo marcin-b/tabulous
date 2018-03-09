@@ -64,14 +64,12 @@ export default {
 .form > input {
     border: 1px solid black;
     font: normal 1.2em/150% "Muli", sans-serif;
-    padding-left: .8em;
+    padding-left: .5em;
     margin-bottom: 1em;
     height: 2em;
     width: 250px;
 }
-.form > input:focus, .form > textarea:focus, select:focus, #tabinput:focus {
-    border: 1px solid darkorange;
-}
+
 .options {
     display: flex;
     margin-bottom: 10px;

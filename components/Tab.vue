@@ -141,7 +141,7 @@ li > span {
 
 }
 .pre-cont {
-    border: 2px dashed darkorange;
+    border: 2px dashed #999;
     position: absolute;
     clear: both;
     height: auto;
@@ -194,7 +194,7 @@ pre {
 
 /* Editor */
 .tab-editor {
-    border: 2px dashed darkorange;
+    border: 2px dashed #999;
     font-weight: normal;
     display: block;
     background-color: #222;

@@ -21,23 +21,23 @@ header {
     flex-wrap: wrap;
     justify-content: space-around;
     margin: 0;
-    padding: 0;
     padding: 0 1em;
+    width: 100%;
     z-index: 5;
 }
 header > * {
     z-index: 5;
 }
-header span {
+/* header span, #logo {
+    align-self: flex-end;
     box-sizing: border-box;
     font-family: "Rock Salt", script;
     font-size: 3em;
     font-weight: 400;
     display: block;
     line-height: 200%;
-    align-self: flex-end;
     text-shadow: 1px 2px 3px #000;
-}
+} */
 .search {
     display: flex;
     align-items: center;
@@ -55,13 +55,13 @@ header input:focus {
     border: 1px solid darkorange;
 }
 header button {
+    background-color: transparent;
+    border: 1px solid darkorange;
+    cursor: pointer;
+    height: 2.6em;
     margin: 0 .3em;
     padding: .2em .3em;
-    cursor: pointer;
-    background-color: transparent;
-    height: 2.6em;
     width: 2.7em;
-    border: 1px solid darkorange;
 }
 header button:hover {
     background-color: darkorange;

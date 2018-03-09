@@ -70,9 +70,6 @@ html, body
 #__nuxt {
     padding-bottom: 3em;
 }
-a {
-    color: black;
-}
 a:hover, a:focus,
 {
     color: darkorange;
@@ -80,10 +77,27 @@ a:hover, a:focus,
 textarea, input, button, select
 {
     outline: none;
+    background-color: #eee;
 }
+
 .logo {
     width: 100%;
     height: auto;
     max-width: 400px;
     max-height: 289px;
+}
+#logo {
+    align-self: flex-end;
+    box-sizing: border-box;
+    color: darkorange;
+    font-family: "Rock Salt", script;
+    font-size: 3em;
+    font-weight: 400;
+    display: block;
+    line-height: 200%;
+    text-shadow: 1px 2px 3px #000;
+}
+/* Froms and inputs */
+.form > input:focus, .form > textarea:focus, select:focus, #tabinput:focus {
+    border: 1px solid darkorange;
 }
