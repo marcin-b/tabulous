@@ -28,7 +28,8 @@ app.use(cookieSession({
 }));
 
 // Must be set after session and parsing
-app.use(csrf());
+app.use(csrf({ cookie: true }));
+var csrfProtection = csrf({ cookie: true })
 
 // Import API Routes
 app.use('/api', api)

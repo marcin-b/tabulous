@@ -1,11 +1,16 @@
 <template>
     <header>
         <span id="logo">Tabulous</span>
+
         <div class="search">
             <input type="text" name="search" value="">
             <button type="buttton" name="submit" value="">
                 <img src="~/assets/img/null.png" alt="">
             </button>
+        </div>
+
+        <div class="">
+            <nuxt-link to="/welcome">Log in</nuxt-link>
         </div>
 
     </header>
@@ -28,16 +33,11 @@ header {
 header > * {
     z-index: 5;
 }
-/* header span, #logo {
-    align-self: flex-end;
-    box-sizing: border-box;
-    font-family: "Rock Salt", script;
-    font-size: 3em;
-    font-weight: 400;
-    display: block;
-    line-height: 200%;
-    text-shadow: 1px 2px 3px #000;
-} */
+header > div > a {
+    color: #eee;
+    text-decoration: underline darkorange;
+    font: normal 400 1.2em/130% "Lato", sans-serif;
+}
 .search {
     display: flex;
     align-items: center;

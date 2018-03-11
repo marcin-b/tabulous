@@ -14,7 +14,10 @@
         </button>
 
         <transition name="slide-fade">
-            <Tabform v-show="show" :tabformShown="this.show" />
+            <Tabform
+            v-show="show"
+            @hide="hideForm"
+            :tabformShown="this.show" />
         </transition>
 
         <Tabs/>
@@ -47,6 +50,9 @@ export default {
         }
     },
     methods: {
+        hideForm(){
+            this.show = false;
+        }
     },
     head() {
         return {
@@ -68,7 +74,7 @@ section {
     border: 1px solid #eee;
     cursor: pointer;
     display: inline-block;
-    font: normal 1.5em/150% "Muli", sans-serif;
+    font: normal 1.4em/150% "Muli", sans-serif;
     text-rendering: optimizeLegibility;
     margin: .5em 0 .5em;
     padding: 0 1em;

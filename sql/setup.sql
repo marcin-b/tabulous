@@ -9,12 +9,10 @@ CREATE TABLE tabs (
 );
 CREATE TABLE users (
     id SERIAL primary key,
-    first VARCHAR(50) not null,
-    last VARCHAR(50) not null,
+    username VARCHAR(50) not null,
     email VARCHAR(50) not null unique,
     hashedpass VARCHAR(255) not null,
-    img VARCHAR(255) DEFAULT '/assets/defaultavatar.png',
-    bio TEXT,
+    img VARCHAR(255) DEFAULT '~/assets/defaultavatar.png',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

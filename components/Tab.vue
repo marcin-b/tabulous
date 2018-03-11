@@ -32,7 +32,11 @@
 
         <!-- Editor -->
         <transition name="fade">
-
+            <Editor
+                @close="showEditor = false"
+                v-if="showEditor"
+                :tab="tab"/>
+            <!--
             <div v-if="showEditor" class="tab-editor">
 
                 <button @click="toggleEditor" type="button" id="close-editor">
@@ -47,9 +51,6 @@
                     <input v-model="updatedTab.haslyrics" class="checkbox" type="checkbox">With Lyrics?
                 </div>
 
-                <button @click="updateTab" type="button" id="update-tab">
-                    Update
-                </button>
 
                 Title <input v-model="updatedTab.title" type="text" id="title" >
                 Artist <input v-model="updatedTab.artist" type="text" id="artist">
@@ -58,7 +59,12 @@
                     {{ updatedTab.tab }}
                 </textarea>
 
+                <button @click="updateTab" type="button" id="update-tab">
+                    Update
+                </button>
+
             </div>
+             -->
         </transition>
 
     </li>
@@ -68,10 +74,11 @@
 <script>
 import axios from '~/plugins/axios'
 import Scroller from '~/components/Scroller.vue'
+import Editor from '~/components/Editor.vue'
 
 
 export default {
-    components: { Scroller },
+    components: { Scroller, Editor },
     name: "Tab",
     props: [ "tab" ],
     data () {
@@ -86,9 +93,7 @@ export default {
                 tab: this.tab.tab,
                 id: this.tab.id
             },
-
         }
-
     },
 
     methods: {
@@ -106,8 +111,8 @@ export default {
                     this.toggleEditor();
                 })
         },
-
     },
+
 }
 </script>
 
@@ -118,7 +123,7 @@ li > a {
     color: #eee;
     cursor:pointer;
     display: inline-block;
-    font: normal normal 400 1.2em/150% "Lato", sans-serif;
+    font: normal normal 400 1em/150% "Lato", sans-serif;
     letter-spacing: .03em;
     text-decoration: none;
     transition: all ease-out .1s;
@@ -141,24 +146,24 @@ li > span {
 
 }
 .pre-cont {
-    border: 2px dashed #999;
+    /* border: 2px dashed #999; */
     position: absolute;
-    clear: both;
     height: auto;
-    padding: 1em;
+    padding: .5em;
     display: flex;
     background-color: #222;
     overflow: visible;
 }
 pre {
-    background-color: #eee;
+    background-color: #ddd;
     border: 1px solid #aaa;
-    box-shadow: inset 0px 2px 5px 0px #222;;
-    color: #222;
-    font: normal .9em "Inconsolata", monospace;
+    box-shadow: inset 0px 2px 5px 0px #222;
+    color: #111;
+    font: normal .95em "Inconsolata", monospace;
     letter-spacing: -.5px;
-    padding: 1.2em;
+    padding: .8em;
     /* position: absolute; */
+    text-shadow: 0px 1px 0px #fff;
     width: 700px;
     white-space: pre-wrap;
     z-index: 1;
@@ -174,77 +179,12 @@ pre {
     position: absolute;
     left: -4em;
 }
-#close-editor {
-    position: absolute;
-    left: -8em;
-    top: -2em;
-}
-#update-tab {
-    color: darkorange;
-    position: absolute;
-    left: -6em;
-    top: 0;
-}
+
 #update-tab:hover, #update-tab:focus {
     color: #000;
     background-color: darkorange;
     border-color: darkorange;
     font-weight: bold;
-}
-
-/* Editor */
-.tab-editor {
-    border: 2px dashed #999;
-    font-weight: normal;
-    display: block;
-    background-color: #222;
-    padding: 1em;
-    position: absolute;
-    margin-bottom: 1em;
-    z-index: 1;
-}
-.tab-editor > textarea {
-    border: 1px solid black;
-    color: black;
-    font: normal normal .9em/100% "Inconsolata", monospace;
-    display: block;
-    height: 400px;
-    /* position: absolute; */
-    padding: .5em;
-    width: 650px;
-    white-space: pre;
-}
-input {
-    border: 1px solid black;
-    font: normal 1em/150% "Muli", sans-serif;
-    display: block;
-    padding-left: .7em;
-    margin-bottom: .5em;
-    width: 220px;
-}
-input:focus, textarea:focus, select:focus {
-    border: 1px solid darkorange;
-}
-.checkbox {
-    height: 18px;
-    width: 18px;
-    margin-bottom: 5px;
-    margin-left: .8em;
-    vertical-align: middle;
-}
-button {
-    background-color: #222;
-    color: #eee;
-    border: 1px solid #eee;
-    cursor: pointer;
-    font: normal 1em/130% "Muli", sans-serif;
-    text-rendering: optimizeLegibility;
-    margin: .5em;
-    padding: 0 .5em;
-    box-shadow: 1px 2px 3px #000;
-}
-button:hover {
-    color: darkorange;
 }
 
 /* Animations */

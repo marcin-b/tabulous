@@ -6,8 +6,8 @@ const router = Router()
 // POST new Tab to database
 router.post("/addtab", (req, res, next) => {
     console.log("Inside POST");
-    const { title, artist, type, hasLyrics, tab } = req.body
-    const params = [ title, artist, type, hasLyrics, tab ]
+    const { title, artist, type, haslyrics, tab } = req.body
+    const params = [ title, artist, type, haslyrics, tab ]
     const q = `
         INSERT INTO tabs
         (title, artist, type, haslyrics, tab)

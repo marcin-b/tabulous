@@ -17,11 +17,11 @@
 
         <!-- Speed Indicator -->
         <input
-        type="number"
-        v-model="scrollSpeed"
-        step="2"
-        min="2"
-        max="10">
+            type="number"
+            v-model="scrollSpeed"
+            step="1"
+            min="1"
+            max="10">
 
         <button @click="increaseSpeed" id="inc">
             +
@@ -48,7 +48,7 @@ export default {
     data () {
         return {
             currY: 0,
-            scrollSpeed: 6,
+            scrollSpeed: 4,
             scrolling: false,
             step: 0,
         }
@@ -63,6 +63,11 @@ export default {
             } else if (e.which === 17) {
                 e.preventDefault()
                 this.startScroll();
+            } else if (e.which === 13) {
+                if(document.getElementsByTagName("pre").length > 0) {
+                    console.log("TAG:", Math.round(document.getElementsByTagName("pre")[0].getBoundingClientRect().y));
+                    window.scroll(0, Math.round(document.getElementsByTagName("pre")[0].getBoundingClientRect().y) - 40)
+                }
             }
         })
     },
@@ -101,12 +106,12 @@ export default {
         },
         increaseSpeed() {
             if (this.scrollSpeed < 10) {
-                this.scrollSpeed += 2
+                this.scrollSpeed += 1
             }
         },
         decreaseSpeed() {
-            if (this.scrollSpeed > 2) {
-                this.scrollSpeed -= 2
+            if (this.scrollSpeed > 1) {
+                this.scrollSpeed -= 1
             }
         },
         scrollTop(e) {
@@ -139,7 +144,7 @@ input {
     font: normal .95em/130% "Muli", sans-serif;
     text-align: center;
     padding-left: 1em;
-    width: 3em;
+    width: 3.3em;
 }
 button {
     background-color: #222;

@@ -1,6 +1,6 @@
-const bcrypt = require("bcryptjs");
+import * as bcrypt from "bcrypt"
 
-exports.checkPassword = (textEnteredInLoginForm, hashedPasswordFromDatabase) => {
+var checkPassword = (textEnteredInLoginForm, hashedPasswordFromDatabase) => {
     return new Promise(function(resolve, reject) {
         bcrypt.compare(textEnteredInLoginForm, hashedPasswordFromDatabase, function(err, doesMatch) {
             if (err) {
@@ -11,7 +11,7 @@ exports.checkPassword = (textEnteredInLoginForm, hashedPasswordFromDatabase) => 
         });
     });
 }
-exports.hashPassword = (plainTextPassword) => {
+var hashPassword = (plainTextPassword) => {
     return new Promise(function(resolve, reject) {
         bcrypt.genSalt(function(err, salt) {
             if (err) {
@@ -26,3 +26,5 @@ exports.hashPassword = (plainTextPassword) => {
         });
     });
 }
+
+export { hashPassword, checkPassword }

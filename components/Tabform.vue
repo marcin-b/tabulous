@@ -1,5 +1,5 @@
 <template lang="html">
-    <form class="form" v-on:submit="">
+    <form class="form" @submit.prevent="tabAdd">
 		<div class="options">
 			<select v-model="newTab.type" id="type" class="type" name="type">
 				<option selected value="guitar">Guitar</option>
@@ -11,7 +11,7 @@
 		<input v-model="newTab.title" type="text" id="title" placeholder="Song Title" autofocus>
 		<input v-model="newTab.artist" type="text" id="artist" placeholder="Artist">
 		<textarea v-model="newTab.tab" type="text" id="tabinput" name="tab" value=""></textarea>
-		<input id="submit-btn" type="submit" @click="tabAdd"  value="Submit">
+		<button id="submit-btn" type="submit">Submit</button>
 	</form>
 </template>
 
@@ -34,18 +34,28 @@ export default {
     },
     methods: {
         tabAdd() {
+            console.log(this.newTab);
             axios.post("/api/addtab", this.newTab)
                 .then(({ data }) => {
-                    console.log("resp data:", data);
-
+                    console.log("Server resp to Tab POST: ", data);
+                    this.$emit("hide")
                 })
-                .catch(err => "Problem adding Tab: ", err)
+                .catch(err => console.log("Problem adding Tab: ", err))
         }
-    }
+    },
+    created() {
+        axios.get('/api/getcsrftoken')
+            .then((response) => {
+                console.log("token resp", response.data)
+                axios.defaults.headers.common['X-CSRF-TOKEN'] = response.data.csrfToken
+                // this.token = response.data.csrfToken
+            })
+            .catch(err => console.log("Error getting Token: ", err))
+    },
 }
 </script>
 
-<style lang="css">
+<style scoped lang="css">
 .form {
     align-items: center;
     border: 2px dashed darkorange;
@@ -53,7 +63,7 @@ export default {
     color: #eee;
     display: flex;
     flex-direction: column;
-    font: normal 1em/150% "Muli", sans-serif;
+    font: normal 1em/133% "Muli", sans-serif;
     margin: .8em 0 1em;
     position: absolute;
     padding: 1em;
@@ -70,15 +80,15 @@ export default {
     width: 250px;
 }
 
-.options {
-    display: flex;
-    margin-bottom: 10px;
-    align-items: flex-start;
-}
 select {
     border: 1px solid black;
     padding: 0 .8em;
     font: normal 1em/100% "Muli", sans-serif;
+}
+.options {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: flex-start;
 }
 .checkbox {
     height: 18px;

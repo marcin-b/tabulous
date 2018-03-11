@@ -18,7 +18,11 @@
             class="abc">
                 <span>{{letter}}</span>
                 <ul>
-                    <Tab name="Tab" v-for="(tab, index) in tabs" :key="index" :tab="tab"/>
+                    <Tab
+                        name="Tab" 
+                        v-for="(tab, index) in tabs"
+                        :key="index"
+                        :tab="tab"/>
                 </ul>
             </li>
         </ul>
