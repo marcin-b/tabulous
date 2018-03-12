@@ -37,7 +37,6 @@ export default {
     props: [ "tab" ],
     data() {
         return {
-            sortedTabs: [{}],
             updatedTab: {
                 title: this.tab.title,
                 artist: this.tab.artist,
@@ -53,6 +52,7 @@ export default {
             axios.post("/api/update-tab", this.updatedTab)
                 .then(({data}) => {
                     console.log("update result", data);
+                    this.$emit("update", this.updatedTab)
                     this.closeEditor()
                 })
         },
@@ -142,5 +142,11 @@ button:hover {
     left: -6em;
     top: 0; */
     transform-origin: center;
+}
+#update-tab:hover, #update-tab:focus {
+    color: #000;
+    background-color: darkorange;
+    border-color: darkorange;
+    font-weight: bold;
 }
 </style>

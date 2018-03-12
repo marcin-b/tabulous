@@ -4,7 +4,7 @@
         @submit.prevent="submitReg"
         class="form">
 
-        <h1>Sign Up</h1>
+        <h2>Sign Up</h2>
 
         <input v-model="user.name" type="text" placeholder="Username">
         <input v-model="user.email" type="text" placeholder="email@example.com">

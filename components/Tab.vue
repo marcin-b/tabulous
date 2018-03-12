@@ -33,38 +33,10 @@
         <!-- Editor -->
         <transition name="fade">
             <Editor
+                @update="updateTab"
                 @close="showEditor = false"
                 v-if="showEditor"
-                :tab="tab"/>
-            <!--
-            <div v-if="showEditor" class="tab-editor">
-
-                <button @click="toggleEditor" type="button" id="close-editor">
-                    Close Editor
-                </button>
-
-                <div class="options">
-                    <select v-model="updatedTab.type" id="type" class="type" name="type">
-                        <option selected value="guitar">Guitar</option>
-                        <option value="bass">Bass</option>
-                    </select>
-                    <input v-model="updatedTab.haslyrics" class="checkbox" type="checkbox">With Lyrics?
-                </div>
-
-
-                Title <input v-model="updatedTab.title" type="text" id="title" >
-                Artist <input v-model="updatedTab.artist" type="text" id="artist">
-
-                <textarea v-model="updatedTab.tab" name="tab">
-                    {{ updatedTab.tab }}
-                </textarea>
-
-                <button @click="updateTab" type="button" id="update-tab">
-                    Update
-                </button>
-
-            </div>
-             -->
+                :tab="updatedTab"/>
         </transition>
 
     </li>
@@ -104,13 +76,10 @@ export default {
             this.showEditor = !this.showEditor
             this.toggleTab()
         },
-        updateTab() {
-            axios.post("/api/update-tab", this.updatedTab)
-                .then(({data}) => {
-                    console.log("update result", data);
-                    this.toggleEditor();
-                })
+        updateTab(update) {
+            this.updatedTab = update
         },
+
     },
 
 }
@@ -168,6 +137,23 @@ pre {
     white-space: pre-wrap;
     z-index: 1;
 }
+button {
+    background-color: #222;
+    color: #eee;
+    border: 1px solid #eee;
+    cursor: pointer;
+    font: normal 1em/130% "Muli", sans-serif;
+    text-rendering: optimizeLegibility;
+    margin: .5em;
+    padding: 0 .5em;
+    box-shadow: 1px 2px 3px #000;
+    transition: transform ease .1s;
+    transform-origin: right;
+}
+button:hover {
+    color: darkorange;
+    transform: scale(1.3, 1.3);
+}
 /* Contol Buttons */
 #close-tab {
     position: absolute;
@@ -178,13 +164,6 @@ pre {
 #open-editor {
     position: absolute;
     left: -4em;
-}
-
-#update-tab:hover, #update-tab:focus {
-    color: #000;
-    background-color: darkorange;
-    border-color: darkorange;
-    font-weight: bold;
 }
 
 /* Animations */

@@ -69,8 +69,8 @@ section {
     align-items: center;
 }
 #addtab {
-    background-color: #222;
-    color: darkorange;
+    background-color: #eee;
+    color: #000;
     border: 1px solid #eee;
     cursor: pointer;
     display: inline-block;

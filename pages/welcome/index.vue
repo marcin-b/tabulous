@@ -68,32 +68,28 @@ export default {
     align-items: center;
     background: url(~/assets/img/imagebw.jpg);
     /* background: url(~/assets/img/stock2.jpg); */
-    display: flex;
     background-size: cover;
     background-position:0 0;
+    display: flex;
     flex-flow: column wrap;
     justify-content: center;
 }
 .intro-cont {
     display: flex;
     flex-flow: row wrap-reverse;
+    align-items: center;
     justify-content: center;
     /* position: relative; */
-    margin: 0 2em 2em;
+    margin: 0 .5em 2em;
 }
 #big-logo {
-    /* align-self: center; */
-    /* background: rgba(255, 255, 255, .3); */
     color: darkorange;
     display: block;
     font: normal normal 3.4em/200% "Rock Salt", script;
-    /* text-align: center; */
-    text-shadow: 1px 5px 0px #000;
+    text-shadow: 1px 4px 0px #000;
     text-align: center;
-    width: 80vw;
-    max-width: 666px;
 }
-h1 {
+h2 {
     color: #fff;
     display: inline-block;
     font: normal bold 2em/150% "Muli", sans-serif;
@@ -101,12 +97,13 @@ h1 {
     margin: 0 0 .8em;
     text-shadow: 1px 3px 0px #000;
 }
-.swapper {
-    color: #0cf;
-    color: darkorange;
-    cursor: pointer;
-    font: normal 1em/150% "Muli", sans-serif;
-
+.flipper {
+    align-self: flex-end;
+    display: flex;
+    align-items: center;
+    height: 380px;
+    margin-bottom: 1em;
+    perspective: 800px;
 }
 .form {
     align-items: center;
@@ -116,14 +113,13 @@ h1 {
     display: flex;
     flex-direction: column;
     font: normal 1em/150% "Muli", sans-serif;
-    margin: .8em 2em 1em;
+    margin-left: 2em ;
     padding: .6em 1em 1em;
     z-index: 2;
 }
 .form > input {
     border: 1px solid #222;
     box-shadow: 1px 2px 3px rgba(0,0,0,.7);
-    /* box-shadow: inset 0px 1px 3px #222; */
     font: normal 1.2em/150% "Muli", sans-serif;
     padding-left: .5em;
     margin-bottom: 1em;
@@ -140,15 +136,21 @@ h1 {
     margin: 0 0 1em;
     padding: 0 .8em;
     box-shadow: 1px 2px 3px rgba(0,0,0,.7);
+    transition: transform ease .1s;
+}
+.form > button:hover {
+    transform: scale(1.2, 1.2) ;
+    color: white;
+    background: #222;
+}
+.swapper {
+    color: #0cf;
+    color: darkorange;
+    cursor: pointer;
+    font: normal 1em/150% "Muli", sans-serif;
+
 }
 /* Animation */
-.flipper {
-    /* margin-left: 4em; */
-    display: flex;
-    align-items: center;
-    perspective: 800px;
-    height: 440px;
-}
 .flip-enter-active {
     transition: all .4s ease;
 }

@@ -19,7 +19,7 @@
                 <span>{{letter}}</span>
                 <ul>
                     <Tab
-                        name="Tab" 
+                        name="Tab"
                         v-for="(tab, index) in tabs"
                         :key="index"
                         :tab="tab"/>
@@ -74,13 +74,13 @@ export default {
 }
 /* List Letter Elements */
 .abc > span {
-    /* border-bottom: 1px solid white; */
-    color: darkorange;
+    border-bottom: 1px solid #eee;
+    /* color: darkorange; */
     display: block;
     font-size: 1.3em;
     padding: 1em 0 0;
     text-align: left;
-    text-shadow: 1px 2px 3px #000;
+    text-shadow: 1px 3px 1px #000;
 }
 .loader-cont {
     font-weight: 400;

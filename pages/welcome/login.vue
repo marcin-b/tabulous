@@ -2,7 +2,7 @@
 
     <form @submit.prevent="submitLog" class="form">
 
-        <h1>Login</h1>
+        <h2>Login</h2>
 
         <input type="text" name="" placeholder="Username">
         <input type="password" name="" placeholder="password">

@@ -1,16 +1,30 @@
 
 <template lang="html">
-    <!-- <div class="intro-cont"> -->
 
-        <p>
-        When you play music with friends, jam out with colleagues or try to impress that girl/boy you like.
-        Trying to remember songs you once learned is not always easy, especially if you are an old chunk of coal that knows hundreds of songs.<br/>
-        That's what Tabulous is for.<br/>
-        Collect tabs, chords and lyrics for your favorite songs in one place that coincidentally is fresh to death and fun to use.<br>
-        To save your personal songbook you need to sign up but you can browse the tab collection <transition mode="out-in"><nuxt-link mode="out-" to="/">here</nuxt-link></transition>.
+    <div class="feat">
 
-        </p>
-    <!-- </div> -->
+
+
+            <h1>Your own Tab song<wbr>book.</h1>
+
+            <p>Trying to remember songs you once learned is not always easy, especially if you're an old chunk of coal that knows hundreds of songs.<br/>
+            You don't want to waste time when playing with friends, jamming out with colleagues or trying to impress that girl/boy you like.
+            That's what Tabulous is for.
+            </p>
+
+            <ul>
+                <li>&#x1F4D6 Collect chords / tabs / lyrics</li>
+                <li>&#x1F44D Share your songbook</li>
+                <li>&#x1F3B8 Play</li>
+                <li>&#x1F601 Enjoy</li>
+            </ul>
+
+            <p>Finally there is a place for that and it's wicked fresh.<br>
+            To save your personal songbook you need to sign up but you can browse the tab collection <transition mode="out-in"><nuxt-link to="/">here</nuxt-link></transition>.
+            </p>
+
+    </div>
+
 </template>
 
 <script>
@@ -20,26 +34,59 @@ export default {
 
 <style lang="css">
 
-p {
-    align-self: center;
-    background: rgba(255, 255, 255, .7);
-    color: #222;
-    font: normal 400 1.1em/130% "Lato", sans-serif;
+.feat {
+    color: #000;
+    font: normal 400 130% "Muli", sans-serif;
+    display: flex;
+    align-items: center;
+    flex-flow: column nowrap;
+    justify-content: center;
+    /* padding: 0 0 1em; */
+    /* text-shadow: 1px 2px 0px #000; */
+}
+h1 {
+    background-color: rgba(0, 0, 0, .3);
+    color: #fff;
+    display: inline-block;
+    font: normal bold 1.4em/150% "Muli", sans-serif;
     letter-spacing: 1px;
-    max-width: 666px;
-    padding: 0 1.5em;
+    padding: .8em 0;
+    text-shadow: 1px 3px 0px #000;
+    text-align: center;
+    width: 100%;
+}
+.feat > ul {
+    background-color: rgba(0, 0, 0, .3);
+    padding: 1em 3.3em;
+    width: 100%;
+}
+.feat > ul > li {
+    color: #fff;
+    background:;
+    font: normal bold 1.1em/150% "Muli", sans-serif;
+    letter-spacing: 1px;
+    padding: .6em 0;
+    text-shadow: 1px 2px 0px #000;
+}
+.feat > ul > li::first-letter {
+    font-size: 1.5em;
+    padding-right: .6em;
+}
+p {
+    background: rgba(255, 255, 255, .7);
+    font: normal .9em/130% "Inconsolata", monospace;
+    align-self: center;
+    max-width: 580px;
+    padding: 1em 2em;
     text-shadow: 0px 1px 1px #fff;
-    text-rendering: optimizeLegibility;
     white-space: pre-line;
-    width: 80vw;
-},
+    }
 p > a {
-    color: #eee;
+    color: darkorange;
     background: #222;
     /* text-decoration: underline wavy darkorange; */
     padding: 0 .2em;
     text-decoration: none;
     text-shadow: 1px 1px 1px #000;
 }
-
 </style>

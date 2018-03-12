@@ -19,7 +19,9 @@
 <style>
 header {
     align-items: center;
-    background-color: #222;
+    background:url(~/assets/img/imagebw.jpg);
+    background-size: cover;
+    background-position:0 -300px;
     color: darkorange;
     display: flex;
     flex-direction: row;
@@ -37,6 +39,7 @@ header > div > a {
     color: #eee;
     text-decoration: underline darkorange;
     font: normal 400 1.2em/130% "Lato", sans-serif;
+    text-shadow: 1px 1px 0px #000;
 }
 .search {
     display: flex;
@@ -56,7 +59,7 @@ header input:focus {
 }
 header button {
     background-color: transparent;
-    border: 1px solid darkorange;
+    border: 1px solid #eee;
     cursor: pointer;
     height: 2.6em;
     margin: 0 .3em;
@@ -64,7 +67,7 @@ header button {
     width: 2.7em;
 }
 header button:hover {
-    background-color: darkorange;
+    background-color: rgba(0, 0, 0, .5);
 
 }
 header button img {

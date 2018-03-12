@@ -37,7 +37,10 @@ export default {
 
 <style lang="css">
 nav {
-    background-color: #eee;
+    background:url(~/assets/img/imagebw.jpg);
+    background-size: cover;
+    background-position: 0 calc((300px + 96px) * -1);
+    background-color: rgba(255, 255, 255, .5);
     flex-wrap: wrap;
     display: flex;
     justify-content: center;
@@ -48,17 +51,18 @@ nav {
 }
 nav > a {
     display: block;
-    color: #222;
+    color: #eee;
     font-family: 'Lato';
     font-weight: bold;
-    font-size: 1.8em;
+    font-size: 1.7em;
     line-height: 120%;
     text-decoration: none;
     padding: 0 .25em;
     transition: transform ease-out .1s;
+    text-shadow: 1px 2px 0px #000;
 }
 nav > a:hover {
-    background-color: #222;
+    background-color: rgba(0, 0, 0, .8);
     color: darkorange;
     transform: scale(1.5, 1.5);
     text-shadow: 0px 2px 1px #000;
