@@ -10,37 +10,37 @@ router.post("/signup", (req, res) => {
     console.log("Inside Post reg", req.body, req.session);
 
     // Deconstruct req.body
-    const { first, last, email, password } = req.body;
+    const { name, email, password } = req.body;
     hashPassword(password)
         .then(hashedPassword => {
             console.log("hash pass", hashedPassword);
-        //     // Insert user data into DB
-        //     const q = `INSERT INTO users
-        //                 (first, last, email, hashedpass)
-        //                 VALUES
-        //                 ($1, $2, $3, $4)
-        //                 RETURNING *`;
-        //     const params = [ first, last, email, hashedPassword ];
-        //
-        //     db.query(q, params)
-        //         .then(results => {
-        //             console.log("USER CREATION SUCCESSFUL", results.rows);
-        //
-        //             // Create user session
-        //             req.session.user = {
-        //                 id: results.rows[0].id,
-        //                 email,
-        //                 username
-        //
-        //             };
-        //             console.log("REGISTERED", req.session);
-        //             res.json({ successful: true });
-        //         })
-        //         .catch(err => {
-        //             console.log("REG ERROR: ", err);
-        //             res.json({ error: "Email is already registered" })
-        //         })
-        res.json({ post: "was inside" })
+            // Insert user data into DB
+            const params = [ name, email, hashedPassword ];
+            const q = `
+                INSERT INTO users
+                (username, email, hashedpass)
+                VALUES
+                ($1, $2, $3)
+                RETURNING *
+                `;
+            db.query(q, params)
+                .then(result => {
+                    console.log("User creation Done", result);
+
+                    // Create user session
+                    req.session.user = {
+                        id: result[0].id,
+                        email,
+                        name
+
+                    };
+                    console.log("REGISTERED", req.session);
+                    res.json({ successful: true });
+                })
+                .catch(err => {
+                    console.log("REG ERROR: ", err);
+                    res.json({ error: err })
+                })
         })
 
 

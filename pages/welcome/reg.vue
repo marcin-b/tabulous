@@ -6,9 +6,21 @@
 
         <h2>Sign Up</h2>
 
-        <input v-model="user.name" type="text" placeholder="Username">
-        <input v-model="user.email" type="text" placeholder="email@example.com">
-        <input v-model="user.password" type="password" placeholder="Password">
+        <input
+            v-model="user.name"
+            type="text"
+            placeholder="Username"
+            required />
+        <input
+            v-model="user.email"
+            type="email"
+            placeholder="email@example.com"
+            required />
+        <input
+            v-model="user.password"
+            type="password"
+            placeholder="Password"
+            required />
         <button type="submit" name="button">Submit</button>
 
         If you already signed up <span
@@ -24,9 +36,10 @@
 import axios from "~/plugins/axios"
 
 export default {
-    data () {
+    data() {
         return {
             user: {},
+            errorMsg: ""
         }
     },
     created() {
@@ -42,15 +55,16 @@ export default {
     methods: {
         swapRegLog() {
             this.$emit("swap", true)
-
         },
         submitReg() {
-
-            console.log("SUB", this.token);
-
+            console.log("Sign up data sent");
             axios.post("api/signup", this.user)
                 .then(({data}) => {
-                    console.log("resp Data", data);
+                    if(data.error.code == 23505) {
+                        this.errorMsg = "This email is already registered"
+                    }
+                    location.replace("/")
+                    console.log("resp Data ", location);
                 })
 
         }

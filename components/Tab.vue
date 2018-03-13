@@ -29,12 +29,11 @@
             </div>
         </transition>
 
-
         <!-- Editor -->
         <transition name="fade">
             <Editor
                 @update="updateTab"
-                @close="showEditor = false"
+                @close="toggleEditor"
                 v-if="showEditor"
                 :tab="updatedTab"/>
         </transition>
@@ -92,16 +91,16 @@ li > a {
     color: #eee;
     cursor:pointer;
     display: inline-block;
-    font: normal normal 400 1em/150% "Lato", sans-serif;
+    font: normal normal 400 1.1em/150% "Lato", sans-serif;
     letter-spacing: .03em;
-    text-decoration: none;
-    transition: all ease-out .1s;
+    transition: transform ease .1s;
+    transform-origin: left;
 }
 li > a:hover {
-    /* color: darkorange; */
-    text-shadow: 1px 2px 3px #000;
-    transform: scale(1.3, 1.3);
-    /* transform: translateY(-2px); */
+    text-shadow: 1px 2px 2px #000;
+    text-decoration: underline darkorange;
+    transform: scale(1.1, 1.1);
+
 }
 li > span {
     font-weight: normal;
@@ -112,26 +111,26 @@ li > span {
 /* Actual Tab Pre Element */
 .pre-tab-container {
     position: relative;
-
+    left: -30%;
 }
 .pre-cont {
-    /* border: 2px dashed #999; */
-    position: absolute;
-    height: auto;
-    padding: .5em;
-    display: flex;
     background-color: #222;
+    display: flex;
+    height: auto;
     overflow: visible;
+    padding: .5em;
+    position: absolute;
+    /* left: 100px; */
 }
 pre {
-    background-color: #ddd;
+    background-color: #eee;
+    background-image: url(~/assets/img/rice-paper.png);
     border: 1px solid #aaa;
     box-shadow: inset 0px 2px 5px 0px #222;
-    color: #111;
-    font: normal .95em "Inconsolata", monospace;
-    letter-spacing: -.5px;
+    color: #000;
+    font: normal normal .95em/110% "Inconsolata", monospace;
+    letter-spacing: -.4px;
     padding: .8em;
-    /* position: absolute; */
     text-shadow: 0px 1px 0px #fff;
     width: 700px;
     white-space: pre-wrap;
@@ -148,7 +147,7 @@ button {
     padding: 0 .5em;
     box-shadow: 1px 2px 3px #000;
     transition: transform ease .1s;
-    transform-origin: right;
+
 }
 button:hover {
     color: darkorange;
@@ -156,14 +155,19 @@ button:hover {
 }
 /* Contol Buttons */
 #close-tab {
+    background-color: #eee;
+    color: #222;
     position: absolute;
-    left: -6.7em;
-    top: -2em;
+    /* left: -.5em; */
+    top: -1.9em;
+    z-index: 6;
 }
 
 #open-editor {
     position: absolute;
-    left: -4em;
+    right: -50%;
+    top: 1em;
+    z-index: 6;
 }
 
 /* Animations */

@@ -69,9 +69,9 @@ section {
     align-items: center;
 }
 #addtab {
-    background-color: #eee;
-    color: #000;
-    border: 1px solid #eee;
+    background-color: #222;
+    color: #eee;
+    border: 1px solid darkorange;
     cursor: pointer;
     display: inline-block;
     font: normal 1.4em/150% "Muli", sans-serif;

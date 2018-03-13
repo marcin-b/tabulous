@@ -47,6 +47,9 @@ export default {
 
         }
     },
+    mounted() {
+        console.log("reg? ", this.registered);
+    },
     methods: {
         swapper(val) {
             // console.log("THE VAL", val);
@@ -60,8 +63,6 @@ export default {
     }
 }
 </script>
-
-
 
 <style lang="css">
 .welc-container {
@@ -147,18 +148,16 @@ h2 {
     color: #0cf;
     color: darkorange;
     cursor: pointer;
-    font: normal 1em/150% "Muli", sans-serif;
-
+    font: normal bold 1em/150% "Muli", sans-serif;
+    text-shadow: 1px 1px 0px #000;
 }
 /* Animation */
 .flip-enter-active {
     transition: all .4s ease;
 }
-
 .flip-leave-active {
     transition: all .2s ease-out;
 }
-
 .flip-enter {
     transform-origin: left;
     transform: rotateY(95deg);

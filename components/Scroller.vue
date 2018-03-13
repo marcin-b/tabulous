@@ -1,41 +1,45 @@
 <template lang="html">
 
-    <div
-    class="scroller"
-    :class="{ positioner: isActive }">
+    <div class="scroll-cont">
 
-        <button
+        <div
+            class="scroller"
+            :class="{ positioner: isActive }">
+
+            <button
             @click="startScroll"
             :class="{ scrolling: scrolling }"
             id="start-scroll">
             Scroll
-        </button>
+            </button>
 
-        <button @click="decreaseSpeed" type="button" id="dec">
+            <button @click="decreaseSpeed" type="button" id="dec">
             -
-        </button>
+            </button>
 
-        <!-- Speed Indicator -->
-        <input
+            <!-- Speed Indicator -->
+            <input
             type="number"
             v-model="scrollSpeed"
             step="1"
             min="1"
             max="10">
 
-        <button @click="increaseSpeed" id="inc">
+            <button @click="increaseSpeed" id="inc">
             +
-        </button>
+            </button>
 
-        <button @click="stopScroll" type="button" id="stop-scroll">
+            <button @click="stopScroll" type="button" id="stop-scroll">
             Stop
-        </button>
+            </button>
 
-        <button @click="scrollTop($event)" type="button" id="scroll-top">
+            <button @click="scrollTop($event)" type="button" id="scroll-top">
             Top
-        </button><br>
+            </button><br>
 
+        </div>
     </div>
+
 
 </template>
 
@@ -125,14 +129,14 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.positioner {
-    /* position: relative;
-    top: -100%; */
+.scroll-cont {
+    position: relative;
+    left: 170px;
 }
 .scroller {
     position: fixed;
     top: 90vh;
-    left: 40%;
+    /* left: 25%; */
     z-index: 5;
 }
 /* Contol Buttons */

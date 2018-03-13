@@ -23,10 +23,11 @@
 import axios from "~/plugins/axios"
 
 export default {
+    name: "Login",
     data () {
         return {
             user: {},
-
+            errorMsg: "",
         }
     },
     methods: {

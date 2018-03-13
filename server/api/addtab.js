@@ -4,7 +4,7 @@ import db from "./db"
 const router = Router()
 
 // POST new Tab to database
-router.post("/addtab", (req, res, next) => {
+router.post("/addtab", (req, res) => {
     console.log("Inside POST");
     const { title, artist, type, haslyrics, tab } = req.body
     const params = [ title, artist, type, haslyrics, tab ]
@@ -22,7 +22,7 @@ router.post("/addtab", (req, res, next) => {
 })
 
 // Update exisiting Tab
-router.post("/update-tab", (req, res, next) => {
+router.post("/update-tab", (req, res) => {
     console.log("Inside update");
 const { title, artist, type, haslyrics, tab, id } = req.body
     console.log("tab id & tab", id, tab);
@@ -41,4 +41,23 @@ const { title, artist, type, haslyrics, tab, id } = req.body
         .catch(err => res.json({ response: "Error while updating: " + err }))
 })
 
+// Delete Tab
+router.delete("/delete-tab", (req, res) => {
+    console.log("Inside Delete:", req.body);
+    let q = `
+        DELETE FROM tabs
+        WHERE id = $1
+    `
+    // db.query(q, req.body.id)
+    //     .then(() => {
+    //         res.json({
+    //             result: "Delete DONE"
+    //         })
+    //     })
+    //     .catch(err => {
+    //         res.json({
+    //             result: "Deleting error: " + err
+    //         })
+    //     })
+})
 export default router

@@ -10,13 +10,32 @@
         </div>
 
         <div class="">
-            <nuxt-link to="/welcome">Log in</nuxt-link>
+            <nuxt-link to="/welcome">
+                Login <wbr>/ Sign up
+            </nuxt-link>
+
         </div>
 
     </header>
 </template>
 
-<style>
+<script>
+import Login from "~/pages//welcome/login.vue"
+
+export default {
+    data() {
+        return {
+
+        }
+    },
+    methods: {
+
+    }
+}
+
+</script>
+
+<style scoped>
 header {
     align-items: center;
     background:url(~/assets/img/imagebw.jpg);
@@ -76,5 +95,4 @@ header button img {
     height: 100%;
     transform: rotateY(180deg)
 }
-
 </style>

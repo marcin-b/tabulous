@@ -74,7 +74,7 @@ export default {
 }
 /* List Letter Elements */
 .abc > span {
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #666;
     /* color: darkorange; */
     display: block;
     font-size: 1.3em;

@@ -1,31 +1,40 @@
 <template lang="html">
+    <div class="ed-container">
 
-    <form @submit.prevent="updateTab" class="tab-editor">
+        <form @submit.prevent="updateTab" class="tab-editor">
 
-        <button @click="closeEditor" type="button" id="close-editor">
-            Close Editor
-        </button>
+            <button @click="closeEditor" type="button" id="close-editor">
+                Close Editor
+            </button>
 
-        <div class="options">
-            <select v-model="updatedTab.type" id="type" class="type" name="type">
-                <option selected value="guitar">Guitar</option>
-                <option value="bass">Bass</option>
-            </select>
-            <input v-model="updatedTab.haslyrics" class="checkbox" type="checkbox">With Lyrics?
-        </div>
 
-        Title <input v-model="updatedTab.title" type="text" id="title" >
-        Artist <input v-model="updatedTab.artist" type="text" id="artist">
+            <div class="options">
+                <select v-model="updatedTab.type" id="type" class="type" name="type">
+                    <option selected value="guitar">Guitar</option>
+                    <option value="bass">Bass</option>
+                </select>
+                <input v-model="updatedTab.haslyrics" class="checkbox" type="checkbox">With Lyrics?
+            </div>
 
-        <textarea v-model="updatedTab.tab" name="tab">
-            {{ updatedTab.tab }}
-        </textarea>
+            Title <input v-model="updatedTab.title" type="text" id="title" >
+            Artist <input v-model="updatedTab.artist" type="text" id="artist">
 
-        <button type="submit" id="update-tab">
-            Update
-        </button>
+            <button type="submit" id="update-tab">
+                Save changes
+            </button>
 
-    </form>
+
+            <textarea v-model="updatedTab.tab" name="tab">
+                {{ updatedTab.tab }}
+            </textarea>
+
+            <button @click="deleteTab" type="button" id="delete-tab">
+                Delete Tab
+            </button>
+
+        </form>
+
+    </div>
 
 </template>
 
@@ -59,19 +68,32 @@ export default {
         closeEditor() {
             this.$emit("close")
         },
+        deleteTab() {
+            console.log("TAB ID", this.updatedTab.id);
+            axios.delete("/api/delete-tab", this.updatedTab.id)
+                .then(({data}) => {
+                    console.log("update result", data);
+                    // this.$emit("update", this.updatedTab)
+                    // this.closeEditor()
+                })
+        }
     },
 }
 </script>
 
 <style scoped lang="css">
+.ed-container {
+    position: relative;
+    left: -30%;
+}
 .tab-editor {
-    border: 2px dashed #999;
-    font-weight: normal;
-    display: block;
     background-color: #222;
+    border: 2px dashed #999;
+    display: block;
+    font-weight: normal;
+    margin: .3em 0 1em;
     padding: 1em;
     position: absolute;
-    margin-bottom: 1em;
     z-index: 1;
 }
 .tab-editor > textarea {
@@ -79,8 +101,7 @@ export default {
     color: black;
     font: normal normal .9em/100% "Inconsolata", monospace;
     display: block;
-    height: 400px;
-    /* position: absolute; */
+    height: 380px;
     padding: .5em;
     width: 650px;
     white-space: pre;
@@ -131,9 +152,11 @@ button:hover {
     transform: scale(1.3, 1.3);
 }
 #close-editor {
+    background: #eee;
+    color: #222;
     position: absolute;
-    left: -8em;
-    top: -2em;
+    left: -.5em;
+    top: -2.3em;
 }
 #update-tab {
     color: darkorange;
@@ -142,6 +165,11 @@ button:hover {
     left: -6em;
     top: 0; */
     transform-origin: center;
+}
+#delete-tab {
+    /* position: absolute;
+    top: 0em;
+    left: -7.5em; */
 }
 #update-tab:hover, #update-tab:focus {
     color: #000;

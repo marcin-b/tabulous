@@ -33,17 +33,6 @@ export default {
 </script>
 
 <style lang="css">
-
-.feat {
-    color: #000;
-    font: normal 400 130% "Muli", sans-serif;
-    display: flex;
-    align-items: center;
-    flex-flow: column nowrap;
-    justify-content: center;
-    /* padding: 0 0 1em; */
-    /* text-shadow: 1px 2px 0px #000; */
-}
 h1 {
     background-color: rgba(0, 0, 0, .3);
     color: #fff;
@@ -55,6 +44,16 @@ h1 {
     text-align: center;
     width: 100%;
 }
+
+.feat {
+    font: normal 400 130% "Muli", sans-serif;
+    display: flex;
+    align-items: center;
+    flex-flow: column nowrap;
+    justify-content: center;
+    /* padding: 0 0 1em; */
+    /* text-shadow: 1px 2px 0px #000; */
+}
 .feat > ul {
     background-color: rgba(0, 0, 0, .3);
     padding: 1em 3.3em;
@@ -63,7 +62,7 @@ h1 {
 .feat > ul > li {
     color: #fff;
     background:;
-    font: normal bold 1.1em/150% "Muli", sans-serif;
+    font: normal bold 1em/150% "Muli", sans-serif;
     letter-spacing: 1px;
     padding: .6em 0;
     text-shadow: 1px 2px 0px #000;
@@ -73,14 +72,15 @@ h1 {
     padding-right: .6em;
 }
 p {
-    background: rgba(255, 255, 255, .7);
-    font: normal .9em/130% "Inconsolata", monospace;
+    background: rgba(255, 255, 255, .8);
+    color: #000;
+    font: normal .88em/120% "Inconsolata", monospace;
     align-self: center;
     max-width: 580px;
     padding: 1em 2em;
     text-shadow: 0px 1px 1px #fff;
     white-space: pre-line;
-    }
+}
 p > a {
     color: darkorange;
     background: #222;
