@@ -16,11 +16,12 @@
         <transition name="slide-fade">
             <Tabform
             v-show="show"
+            @tabadded="updateTabs"
             @hide="hideForm"
             :tabformShown="this.show" />
         </transition>
 
-        <Tabs/>
+        <Tabs :update="performUpdate"/>
 
     </section>
 </template>
@@ -44,14 +45,19 @@ export default {
     },
     data() {
         return {
+            performUpdate: false,
             show: false,
             tabFormShown: false,
             sortedTabs: [{}]
         }
     },
     methods: {
-        hideForm(){
+        hideForm() {
             this.show = false;
+        },
+        updateTabs() {
+            console.log("inside update")
+            this.performUpdate = true
         }
     },
     head() {

@@ -48,16 +48,17 @@ router.delete("/delete-tab", (req, res) => {
         DELETE FROM tabs
         WHERE id = $1
     `
-    // db.query(q, req.body.id)
-    //     .then(() => {
-    //         res.json({
-    //             result: "Delete DONE"
-    //         })
-    //     })
-    //     .catch(err => {
-    //         res.json({
-    //             result: "Deleting error: " + err
-    //         })
-    //     })
+    // res.json({ resp: "Delete Resp"})
+    db.query(q, req.body.id)
+        .then(() => {
+            res.json({
+                result: "Delete DONE"
+            })
+        })
+        .catch(err => {
+            res.json({
+                result: err
+            })
+        })
 })
 export default router

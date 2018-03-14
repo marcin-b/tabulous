@@ -39,6 +39,7 @@ export default {
                 .then(({ data }) => {
                     console.log("Server resp to Tab POST: ", data);
                     this.$emit("hide")
+                    this.$emit("tabadded")
                 })
                 .catch(err => console.log("Problem adding Tab: ", err))
         }
@@ -58,7 +59,7 @@ export default {
 <style scoped lang="css">
 .form {
     align-items: center;
-    border: 2px dashed darkorange;
+    border: 2px dashed #999;
     background-color: #222;
     color: #eee;
     display: flex;

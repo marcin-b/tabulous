@@ -15,3 +15,6 @@ build
 
 # Secrets and Keys
 secrets.json
+
+# DB Setup
+sql

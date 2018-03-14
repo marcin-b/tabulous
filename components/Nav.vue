@@ -45,6 +45,7 @@ nav {
     display: flex;
     justify-content: center;
     margin-bottom: .5em;
+    padding-bottom: .5em;
     text-align: center;
     width: 100%;
     z-index: 5;

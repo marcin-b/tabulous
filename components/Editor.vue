@@ -3,30 +3,39 @@
 
         <form @submit.prevent="updateTab" class="tab-editor">
 
-            <button @click="closeEditor" type="button" id="close-editor">
-                Close Editor
-            </button>
+            <div class="meta-cont">
 
+                <div class="small-cont">
+                    Title <input v-model="updatedTab.title" type="text" id="title" required />
+                </div>
+                <div class="small-cont">
+                    Artist <input v-model="updatedTab.artist" type="text" id="artist" required />
+                </div>
 
-            <div class="options">
-                <select v-model="updatedTab.type" id="type" class="type" name="type">
-                    <option selected value="guitar">Guitar</option>
-                    <option value="bass">Bass</option>
-                </select>
-                <input v-model="updatedTab.haslyrics" class="checkbox" type="checkbox">With Lyrics?
+                <div class="options">
+                    <div class="check-cont">
+                        <input v-model="updatedTab.haslyrics" class="checkbox" type="checkbox" />
+                        With Lyrics?
+                    </div>
+                    <select v-model="updatedTab.type" id="type" class="type" name="type">
+                        <option selected value="guitar">Guitar</option>
+                        <option value="bass">Bass</option>
+                    </select>
+                </div>
+
             </div>
 
-            Title <input v-model="updatedTab.title" type="text" id="title" >
-            Artist <input v-model="updatedTab.artist" type="text" id="artist">
+            <textarea v-model="updatedTab.tab" name="tab">
+                {{ updatedTab.tab }}
+            </textarea>
 
             <button type="submit" id="update-tab">
                 Save changes
             </button>
 
-
-            <textarea v-model="updatedTab.tab" name="tab">
-                {{ updatedTab.tab }}
-            </textarea>
+            <button @click="closeEditor" type="button" id="close-editor">
+                Close Editor
+            </button>
 
             <button @click="deleteTab" type="button" id="delete-tab">
                 Delete Tab
@@ -57,6 +66,9 @@ export default {
         }
     },
     methods: {
+        closeEditor() {
+            this.$emit("close")
+        },
         updateTab() {
             axios.post("/api/update-tab", this.updatedTab)
                 .then(({data}) => {
@@ -65,17 +77,17 @@ export default {
                     this.closeEditor()
                 })
         },
-        closeEditor() {
-            this.$emit("close")
-        },
         deleteTab() {
-            console.log("TAB ID", this.updatedTab.id);
-            axios.delete("/api/delete-tab", this.updatedTab.id)
+            // Confirm before delete
+            if (confirm("Are you sure you want to delete the Tab?")) {
+                console.log("TAB ID", this.updatedTab.id);
+                axios.delete("/api/delete-tab", {data: {id: this.updatedTab.id}})
                 .then(({data}) => {
                     console.log("update result", data);
-                    // this.$emit("update", this.updatedTab)
-                    // this.closeEditor()
+                    this.closeEditor()
+                    this.$emit("deleted")
                 })
+            }
         }
     },
 }
@@ -84,28 +96,27 @@ export default {
 <style scoped lang="css">
 .ed-container {
     position: relative;
-    left: -30%;
+    left: -23%;
 }
 .tab-editor {
     background-color: #222;
     border: 2px dashed #999;
     display: block;
     font-weight: normal;
+    font-size: 1em;
     margin: .3em 0 1em;
-    padding: 1em;
+    padding: 1em .5em;
     position: absolute;
     z-index: 1;
 }
-.tab-editor > textarea {
-    border: 1px solid black;
-    color: black;
-    font: normal normal .9em/100% "Inconsolata", monospace;
-    display: block;
-    height: 380px;
-    padding: .5em;
-    width: 650px;
-    white-space: pre;
+.meta-cont {
+    display: flex;
+    justify-content: space-around;
 }
+.small-cont {
+    display: inline-block;
+}
+
 input {
     border: 1px solid black;
     font: normal 1em/150% "Muli", sans-serif;
@@ -117,35 +128,46 @@ input {
 input:focus, textarea:focus, select:focus {
     border: 1px solid darkorange;
 }
-select {
+.tab-editor > textarea {
     border: 1px solid black;
-    padding: 0 .8em;
-    font: normal 1em/100% "Muli", sans-serif;
+    color: black;
+    font: normal normal .9em/100% "Inconsolata", monospace;
+    display: block;
+    height: 350px;
+    padding: .5em;
+    margin: .5em 0;
+    width: 650px;
+    white-space: pre;
 }
 .options {
-    display: flex;
     margin-bottom: 10px;
-    align-items: flex-start;
+}
+select {
+    border: 1px solid black;
+    font: normal 1em/100% "Muli", sans-serif;
+    padding: 0 .8em;
+}
+.check-cont {
+    display: flex;
+    font-size: .9em;
 }
 .checkbox {
     height: 18px;
     width: 18px;
-    margin-bottom: 5px;
-    margin-left: .8em;
-    vertical-align: middle;
+    margin: 5px;
 }
 button {
     background-color: #222;
     color: #eee;
     border: 1px solid #eee;
     cursor: pointer;
-    font: normal 1em/130% "Muli", sans-serif;
+    font: normal 1em/140% "Muli", sans-serif;
     text-rendering: optimizeLegibility;
-    margin: .5em;
-    padding: 0 .5em;
+    margin: .3em .6em;
+    padding: 0 .6em;
     box-shadow: 1px 2px 3px #000;
     transition: transform ease .1s;
-    transform-origin: right;
+
 }
 button:hover {
     color: darkorange;
@@ -154,13 +176,15 @@ button:hover {
 #close-editor {
     background: #eee;
     color: #222;
-    position: absolute;
+    /* position: absolute;
     left: -.5em;
-    top: -2.3em;
+    top: -2.5em; */
 }
 #update-tab {
-    color: darkorange;
-    font-size: 1.2em;
+    border-color: darkorange;
+    background: darkorange;
+    color: #000;
+    font-size: 1em;
     /* position: absolute;
     left: -6em;
     top: 0; */
@@ -175,6 +199,6 @@ button:hover {
     color: #000;
     background-color: darkorange;
     border-color: darkorange;
-    font-weight: bold;
+    /* font-weight: bold; */
 }
 </style>

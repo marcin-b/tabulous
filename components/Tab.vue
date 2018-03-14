@@ -33,6 +33,7 @@
         <transition name="fade">
             <Editor
                 @update="updateTab"
+                @deleted="tabDelete"
                 @close="toggleEditor"
                 v-if="showEditor"
                 :tab="updatedTab"/>
@@ -78,7 +79,11 @@ export default {
         updateTab(update) {
             this.updatedTab = update
         },
-
+        tabDelete() {
+            console.log("@ tab delete");
+            this.$emit("tabdeleted")
+            this.toggleTab
+        }
     },
 
 }
@@ -111,7 +116,7 @@ li > span {
 /* Actual Tab Pre Element */
 .pre-tab-container {
     position: relative;
-    left: -30%;
+    left: -28%;
 }
 .pre-cont {
     background-color: #222;

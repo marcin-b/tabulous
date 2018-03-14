@@ -12,18 +12,20 @@
 
         </div>
         <ul v-else>
-            <li v-for="(tabs, letter) in sortedTabs"
-            :key="letter"
-            v-bind:id="letter"
-            class="abc">
-                <span>{{letter}}</span>
-                <ul>
-                    <Tab
-                        name="Tab"
-                        v-for="(tab, index) in tabs"
-                        :key="index"
-                        :tab="tab"/>
-                </ul>
+            <li
+                v-for="(tabs, letter) in sortedTabs"
+                :key="letter"
+                v-bind:id="letter"
+                class="abc">
+                    <span>{{letter}}</span>
+                    <ul>
+                        <Tab
+                            @tabdeleted="updateAfterDelete"
+                            name="Tab"
+                            v-for="(tab, index) in tabs"
+                            :key="index"
+                            :tab="tab"/>
+                    </ul>
             </li>
         </ul>
 
@@ -37,6 +39,7 @@ import axios from '~/plugins/axios'
 import Tab from "~/components/Tab.vue"
 
 export default {
+    props: ["update"],
     components: { Tab },
     data() {
         return {
@@ -44,17 +47,32 @@ export default {
             sortedTabs: [{}],
         }
     },
-    mounted() {
-        axios.get("/api/tabs")
+    watch: {
+        update() {
+            this.tabsLoaded = false
+            console.log("@TABS update");
+            this.getTabs()
+        }
+    },
+    created() {
+        this.getTabs()
+    },
+    methods: {
+        getTabs() {
+            axios.get("/api/tabs")
             .then(({data}) => {
                 this.sortedTabs = data
                 this.tabsLoaded = true;
-                console.log("tabs:", this.sortedTabs);
+
+                console.log("Tab GET DONE");
             })
             .catch(err => console.log("Error getting tabs:", err))
-    },
-    methods: {
-
+        },
+        updateAfterDelete() {
+            this.tabsLoaded = false
+            console.log("@TABS delete update")
+            this.getTabs()
+        }
     }
 }
 </script>

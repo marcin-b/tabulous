@@ -28,6 +28,7 @@
             class="swapper">
             Log in
         </span>
+        <span v-if="error">Cannot sign up without a <span class="error">{{errorMsg}}</span></span>
     </form>
 
 </template>
@@ -39,7 +40,8 @@ export default {
     data() {
         return {
             user: {},
-            errorMsg: ""
+            errorMsg: "",
+            error: false,
         }
     },
     created() {
@@ -61,9 +63,14 @@ export default {
             axios.post("api/signup", this.user)
                 .then(({data}) => {
                     if(data.error.code == 23505) {
+                        this.error = true;
                         this.errorMsg = "This email is already registered"
+                    } else if (data.error.code == 23502) {
+                        console.log("err data", data);
+                        this.error = true;
+                        this.errorMsg = data.error.column
                     }
-                    location.replace("/")
+                    // location.replace("/")
                     console.log("resp Data ", location);
                 })
 
@@ -76,6 +83,8 @@ export default {
 
 <style lang="css">
 
-
+.error {
+    color: red;
+}
 
 </style>

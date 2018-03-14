@@ -16,11 +16,15 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
+-- Comands to alters bd state
 ALTER TABLE tabs ADD type VARCHAR(10) not null;
 ALTER TABLE tabs ADD UNIQUE (tab);
 
 ALTER TABLE tabs ALTER tab TYPE MEDIUMTEXT;
 
+DROP TABLE users;
+
 -- Delete rows
 DELETE FROM users
-WHERE id = $1
+WHERE id = $1;

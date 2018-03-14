@@ -114,7 +114,7 @@ h2 {
     display: flex;
     flex-direction: column;
     font: normal 1em/150% "Muli", sans-serif;
-    margin-left: 2em ;
+    margin: 0 2em;
     padding: .6em 1em 1em;
     z-index: 2;
 }
@@ -142,7 +142,7 @@ h2 {
 .form > button:hover {
     transform: scale(1.2, 1.2) ;
     color: white;
-    background: #222;
+    background: rgba(0, 0, 0, .5);
 }
 .swapper {
     color: #0cf;
