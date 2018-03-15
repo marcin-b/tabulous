@@ -4,8 +4,15 @@
 
         <h2>Login</h2>
 
-        <input type="text" name="" placeholder="Username">
-        <input type="password" name="" placeholder="password">
+        <input
+            v-model="user.email"
+            type="email"
+            placeholder="email" />
+        <input
+            v-model="user.password"
+            type="password"
+            placeholder="password">
+
         <button type="submit" name="button">Login</button>
 
         If you are not registered
@@ -14,6 +21,8 @@
             class="swapper">
             Sign Up
         </span>
+
+        <span v-if="error" class="error">{{errorMsg}}</span>
 
     </form>
 
@@ -27,6 +36,7 @@ export default {
     data () {
         return {
             user: {},
+            error: false,
             errorMsg: "",
         }
     },
@@ -37,34 +47,41 @@ export default {
         },
         submitLog() {
 
-            console.log("SUB", this.token);
-
-            axios.post("api/login", this.user)
+            axios.post("/api/login", this.user)
                 .then(({data}) => {
-                    console.log("resp Data", data);
+                    console.log("Login resp Data", data);
+                    if (data.error) { // Wrong Email
+                        this.error = true
+                        this.errorMsg = data.error
+                    } else if (!data.successful) { // Wrong PW
+                        this.error = true
+                        this.errorMsg = "Wrong password."
+                    } else { // All Right
+                        let pass = { login: true }
+                        this.$router.replace({path:"/", params: {test: true}})
+                        console.log("inside Log redir", pass)
+                    }
+
                 })
-                .catch(err => console.log("Login Error: ", err))
+                .catch(err => {
+                    console.log("Login Error: ", err)
+                })
 
         }
     },
-    // created() {
-    //     axios.get('/api/getcsrftoken')
-    //     .then((response) => {
-    //         console.log("token resp", response.data)
-    //         axios.defaults.headers.common['X-CSRF-TOKEN'] = response.data.csrfToken
-    //         // this.token = response.data.csrfToken
-    //     }, (err) => {
-    //         console.log("Error getting Token: ", err)
-    //     })
-    // },
-
 }
 </script>
 
 <style lang="css">
-a {
-    color: #eee;
+input + .err-indicator {
+    border: 1px solid red;
 }
-
-
+.error {
+    font-size: 1em;
+    border: 1px solid red;
+    padding: 0 .5em;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    width: 250px;
+}
 </style>

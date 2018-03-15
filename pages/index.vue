@@ -4,7 +4,9 @@
         <my-header/>
 
         <Nav/>
-
+        <button @click="showProp" type="button" name="button">
+            PROPLEM
+        </button>
         <button v-if="!show" @click="show = !show" id="addtab">
             Add new Tab
         </button>
@@ -43,6 +45,12 @@ export default {
         Tabs,
         MyFooter
     },
+    props: ["test"],
+    watch: {
+        test(val) {
+            this.test = val
+        }
+    },
     data() {
         return {
             performUpdate: false,
@@ -58,6 +66,9 @@ export default {
         updateTabs() {
             console.log("inside update")
             this.performUpdate = true
+        },
+        showProp() {
+            console.log("PROPLEMS?", this.test);
         }
     },
     head() {
@@ -65,6 +76,10 @@ export default {
             title: 'Tabulous'
         }
     },
+    mounted() {
+        // console.log("ckeck login: ", this.pass);
+
+    }
 }
 </script>
 

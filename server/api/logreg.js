@@ -62,12 +62,55 @@ router.post("/signup", (req, res) => {
         })
 
     }
-
-
 })
 
 router.post("/login", (req, res) => {
     console.log("Inside Login POST", req.body);
-    res.json({ msg: "been inside Login" })
+
+    // Destructure req.body
+    const { email, password } = req.body;
+
+    // Query DB
+
+    const q = `SELECT * FROM users WHERE email = $1`
+    db.query(q, email)
+        .then(result => {
+            console.log("Login Query res: ", result[0]);
+            // Destructure result
+            const { id, username, img, hashedpass } = result[0]
+            console.log("destructr: ", id, username, img, hashedpass);
+            checkPassword(password, hashedpass)
+                .then(doesMatch => {
+                    if (doesMatch) {
+                        console.log("gutes PW? ", doesMatch);
+                        // Create User Session
+                        req.session.user = {
+                            name: username,
+                            email,
+                            id,
+                            img,
+                        }
+                        res.json({ successful: true })
+                    } else {
+                    res.json({ successful: false })
+                    }
+                })
+        })
+        .catch(err => {
+            console.log("Login error:", err);
+            res.json({ error: "No such Email registered." })
+
+        })
 })
+
+// router.get('*', function(req, res) {
+//     if(!req.session.user) {
+//         console.log("no Session user");
+//         res.redirect("/welcome")
+//     } else {
+//         console.log("session", req.session.user);
+//         res.redirect("/")
+//     }
+// });
+
 export default router

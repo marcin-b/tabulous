@@ -4,7 +4,15 @@
         <a @click="toggleTab" :class="{ activeclass: isActive}">
             {{ updatedTab.title }} - {{ updatedTab.artist }}
         </a>
-        <span v-if="updatedTab.haslyrics">has lyrics</span>
+        <span>
+            <span class="accent">{{ updatedTab.type }}</span>
+
+            <span v-if="updatedTab.haslyrics">
+                |
+                <span class="accent">lyrics</span>
+            </span>
+
+        </span>
 
         <!-- Tab Block -->
         <transition name="slide">
@@ -105,12 +113,14 @@ li > a:hover {
     text-shadow: 1px 2px 2px #000;
     text-decoration: underline darkorange;
     transform: scale(1.1, 1.1);
-
 }
 li > span {
     font-weight: normal;
     margin-left: 1em;
     font-size: .5em;
+
+}
+.accent {
     color: darkorange;
 }
 /* Actual Tab Pre Element */
@@ -170,7 +180,7 @@ button:hover {
 
 #open-editor {
     position: absolute;
-    right: -50%;
+    right: -45%;
     top: 1em;
     z-index: 6;
 }

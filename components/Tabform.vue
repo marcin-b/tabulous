@@ -3,6 +3,7 @@
 		<div class="options">
 			<select v-model="newTab.type" id="type" class="type" name="type">
 				<option selected value="guitar">Guitar</option>
+				<option value="chords">Chords</option>
 				<option value="bass">Bass</option>
 			</select>
 			<input v-model="newTab.haslyrics" class="checkbox" type="checkbox">With Lyrics?

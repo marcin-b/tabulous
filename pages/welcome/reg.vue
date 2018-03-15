@@ -7,16 +7,19 @@
         <h2>Sign Up</h2>
 
         <input
+            id="username"
             v-model="user.name"
             type="text"
             placeholder="Username"
             required />
         <input
+            id="email"
             v-model="user.email"
             type="email"
             placeholder="email@example.com"
             required />
         <input
+            id="password"
             v-model="user.password"
             type="password"
             placeholder="Password"
@@ -28,7 +31,7 @@
             class="swapper">
             Log in
         </span>
-        <span v-if="error">Cannot sign up without a <span class="error">{{errorMsg}}</span></span>
+        <span v-if="error" class="error">{{errorMsg}}</span>
     </form>
 
 </template>
@@ -60,15 +63,17 @@ export default {
         },
         submitReg() {
             console.log("Sign up data sent");
-            axios.post("api/signup", this.user)
+            axios.post("/api/signup", this.user)
                 .then(({data}) => {
                     if(data.error.code == 23505) {
+                        document.getElementById("email").classList.add("err-indicator")
                         this.error = true;
-                        this.errorMsg = "This email is already registered"
+                        this.errorMsg = "This email is already registered."
                     } else if (data.error.code == 23502) {
+                        document.getElementById(data.error.column).classList.add("err-indicator")
                         console.log("err data", data);
                         this.error = true;
-                        this.errorMsg = data.error.column
+                        this.errorMsg = "Cannot sign up without a " + data.error.column + "."
                     }
                     // location.replace("/")
                     console.log("resp Data ", location);
@@ -82,9 +87,16 @@ export default {
 </script>
 
 <style lang="css">
-
+input + .err-indicator {
+    border: 1px solid red;
+}
 .error {
-    color: red;
+    font-size: .9em;
+    border: 1px solid red;
+    padding: 0 .5em;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    width: 250px;
 }
 
 </style>

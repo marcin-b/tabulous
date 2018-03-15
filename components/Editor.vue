@@ -19,6 +19,7 @@
                     </div>
                     <select v-model="updatedTab.type" id="type" class="type" name="type">
                         <option selected value="guitar">Guitar</option>
+                        <option value="chords">Chords</option>
                         <option value="bass">Bass</option>
                     </select>
                 </div>
