@@ -97,7 +97,7 @@ export default {
 <style scoped lang="css">
 .ed-container {
     position: relative;
-    left: -23%;
+    left: -21%;
 }
 .tab-editor {
     background-color: #222;

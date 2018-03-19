@@ -43,30 +43,23 @@ export default {
     methods: {
         swapRegLog() {
             this.$emit("swap", false)
-
         },
         submitLog() {
+            try {
+                this.$store.dispatch("login", { user: this.user })
+            } catch (e) {
+                console.log("Log Err: ", e)
+                this.errorMsg = e.message
+            }
 
-            axios.post("/api/login", this.user)
-                .then(({data}) => {
-                    console.log("Login resp Data", data);
-                    if (data.error) { // Wrong Email
-                        this.error = true
-                        this.errorMsg = data.error
-                    } else if (!data.successful) { // Wrong PW
-                        this.error = true
-                        this.errorMsg = "Wrong password."
-                    } else { // All Right
-                        let pass = { login: true }
-                        this.$router.replace({path:"/", params: {test: true}})
-                        console.log("inside Log redir", pass)
-                    }
-
-                })
-                .catch(err => {
-                    console.log("Login Error: ", err)
-                })
-
+            // this.$store.dispatch("login", { user: this.user })
+            // .then((resp) => {
+            //     console.log("logreg", resp);
+            // })
+            // .catch(e => {
+            //     console.log("Log Err: ", e)
+            //     this.errorMsg = e.message
+            // })
         }
     },
 }

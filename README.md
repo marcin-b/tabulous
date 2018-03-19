@@ -1,6 +1,6 @@
-# finalx
+# Tabulous
 
-> he final Project)
+> My final project.
 
 ## Build Setup
 

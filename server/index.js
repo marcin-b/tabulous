@@ -10,10 +10,22 @@ import * as csrf from "csurf"
 import api from './api'
 
 const app = express()
+const router = express.Router()
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
 
 app.set('port', port)
+
+// Transform req & res to have the same API as express
+// So we can use res.status() & res.json()
+
+router.use((req, res, next) => {
+    Object.setPrototypeOf(req, app.request)
+    Object.setPrototypeOf(res, app.response)
+    req.res = res
+    res.req = req
+    next()
+})
 
 // Parsing
 app.use(bodyParser.json());
@@ -34,6 +46,7 @@ var csrfProtection = csrf({ cookie: true })
 
 // Import API Routes
 app.use('/api', api)
+
 
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')

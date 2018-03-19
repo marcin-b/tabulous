@@ -7,11 +7,11 @@
         <button @click="showProp" type="button" name="button">
             PROPLEM
         </button>
-        <button v-if="!show" @click="show = !show" id="addtab">
+        <button v-if="!show && $store.state.authUser" @click="show = !show" id="addtab">
             Add new Tab
         </button>
 
-        <button v-else="show" @click="show = !show" id="addtab">
+        <button v-else-if="show" @click="show = !show" id="addtab">
             Close
         </button>
 
@@ -46,13 +46,17 @@ export default {
         MyFooter
     },
     props: ["test"],
-    watch: {
-        test(val) {
-            this.test = val
-        }
-    },
+    // watch: {
+    //     test(val) {
+    //         this.test = val
+    //     }
+    // },
     data() {
         return {
+
+            // context,
+            // checkReq: (this.$nuxt.req ? "server" : "client"),
+            // authUser: store.authUser,
             performUpdate: false,
             show: false,
             tabFormShown: false,
@@ -68,13 +72,16 @@ export default {
             this.performUpdate = true
         },
         showProp() {
-            console.log("PROPLEMS?", this.test);
+            console.log("PROPLEMS?", this.$router);
         }
     },
     head() {
         return {
             title: 'Tabulous'
         }
+    },
+    created() {
+        
     },
     mounted() {
         // console.log("ckeck login: ", this.pass);

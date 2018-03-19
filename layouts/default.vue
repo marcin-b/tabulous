@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div @login="showUserInfo">
 
 
         <nuxt/>
@@ -25,8 +25,19 @@ export default {
         Tabs,
         MyFooter
     },
-    mounted () {
+    data() {
+        return {
+            user: {
+            }
+        }
+    },
+    mounted() {
 
+    },
+    methods: {
+        showUserInfo() {
+            console.log("User: ", this.user);
+        }
     }
 }
 </script>

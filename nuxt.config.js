@@ -1,4 +1,9 @@
 module.exports = {
+    router: {
+        routes: [
+            { path: "*", props: true }
+        ]
+    },
   /*
   ** Headers of the page
   */

@@ -22,7 +22,11 @@
                     Close Tab
                 </button>
 
-                <button @click="toggleEditor" type="button" id="open-editor">
+                <button
+                    <!-- v-if="tab.creator_id == $store.state.authUser.id"  -->
+                    @click="toggleEditor"
+                    type="button"
+                    id="open-editor">
                     Edit
                 </button>
 
@@ -71,7 +75,8 @@ export default {
                 type: this.tab.type,
                 haslyrics: this.tab.haslyrics,
                 tab: this.tab.tab,
-                id: this.tab.id
+                id: this.tab.id,
+                creator_id: this.tab.creator_id
             },
         }
     },
@@ -126,7 +131,7 @@ li > span {
 /* Actual Tab Pre Element */
 .pre-tab-container {
     position: relative;
-    left: -28%;
+    left: -26%;
 }
 .pre-cont {
     background-color: #222;
@@ -146,7 +151,9 @@ pre {
     font: normal normal .95em/110% "Inconsolata", monospace;
     letter-spacing: -.4px;
     padding: .8em;
+    margin-bottom: 3em;
     text-shadow: 0px 1px 0px #fff;
+    text-rendering: optimizeLegibility;
     width: 700px;
     white-space: pre-wrap;
     z-index: 1;

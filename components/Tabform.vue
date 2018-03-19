@@ -29,7 +29,8 @@ export default {
                 artist: "",
                 type: "guitar",
                 haslyrics: false,
-                tab: ""
+                tab: "",
+                // creatorId: this.$store.state.authUser.id || ""
             }
         }
     },
@@ -41,11 +42,19 @@ export default {
                     console.log("Server resp to Tab POST: ", data);
                     this.$emit("hide")
                     this.$emit("tabadded")
+                    // empty all fields
+                    this.newTab = {
+                        title: "",
+                        artist: "",
+                        type: "guitar",
+                        haslyrics: false,
+                        tab: ""
+                    }
                 })
                 .catch(err => console.log("Problem adding Tab: ", err))
         }
     },
-    created() {
+    mounted() {
         axios.get('/api/getcsrftoken')
             .then((response) => {
                 console.log("token resp", response.data)
@@ -57,7 +66,7 @@ export default {
 }
 </script>
 
-<style scoped lang="css">
+<style scoped>
 .form {
     align-items: center;
     border: 2px dashed #999;

@@ -62,23 +62,35 @@ export default {
             this.$emit("swap", true)
         },
         submitReg() {
-            console.log("Sign up data sent");
-            axios.post("/api/signup", this.user)
-                .then(({data}) => {
-                    if(data.error.code == 23505) {
-                        document.getElementById("email").classList.add("err-indicator")
-                        this.error = true;
-                        this.errorMsg = "This email is already registered."
-                    } else if (data.error.code == 23502) {
-                        document.getElementById(data.error.column).classList.add("err-indicator")
-                        console.log("err data", data);
-                        this.error = true;
-                        this.errorMsg = "Cannot sign up without a " + data.error.column + "."
-                    }
-                    // location.replace("/")
-                    console.log("resp Data ", location);
-                })
-
+            this.$store.dispatch("signup", {
+                user: this.user
+            })
+            .then(() => {
+                console.log("Signup DONE");
+                console.log("after Signup State: ", this.$store.state);
+            })
+            .catch(err => console.log("Log Err: ", err))
+        //     console.log("Sign up data sent");
+        //     axios.post("/api/signup", this.user)
+        //         .then(({data}) => {
+        //             if (!data.error) {
+        //                 console.log("Registration DONE");
+        //                 this.$router.replace("/")
+        //             } else if (data.error.code == 23505) {
+        //                 document.getElementById("email").classList.add("err-indicator")
+        //                 this.error = true;
+        //                 this.errorMsg = "This email is already registered."
+        //             } else if (data.error.code == 23502) {
+        //                 document.getElementById(data.error.column).classList.add("err-indicator")
+        //                 console.log("err data", data);
+        //                 this.error = true;
+        //                 this.errorMsg = "Cannot sign up without a " + data.error.column + "."
+        //             }
+        //             // location.replace("/")
+        //
+        //             console.log("resp Data ", location);
+        //         })
+        //
         }
     },
 

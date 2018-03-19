@@ -10,9 +10,10 @@
         </div>
 
         <div class="">
-            <nuxt-link to="/welcome">
-                Login <wbr>/ Sign up
+            <nuxt-link v-if="!$store.state.authUser" to="/welcome">
+                Login / Sign up
             </nuxt-link>
+            <span v-else @click="logout">Logout</span>
 
         </div>
 
@@ -29,7 +30,10 @@ export default {
         }
     },
     methods: {
-
+        logout() {
+            this.$store.dispatch("logout")
+            console.log("Logged out!");
+        }
     }
 }
 
@@ -54,8 +58,9 @@ header {
 header > * {
     z-index: 5;
 }
-header > div > a {
+header > div > a, header > div > span {
     color: #eee;
+    cursor: pointer;
     text-decoration: underline darkorange;
     font: normal 400 1.2em/130% "Lato", sans-serif;
     text-shadow: 1px 1px 0px #000;
@@ -95,4 +100,5 @@ header button img {
     height: 100%;
     transform: rotateY(180deg)
 }
+
 </style>

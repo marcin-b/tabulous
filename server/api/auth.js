@@ -5,8 +5,9 @@ const router = Router()
 
 
 
-router.get("/", (res, req) => {
+router.get("/", (res, req, next) => {
     console.log("inside auth get");
+    next()
 })
 
 

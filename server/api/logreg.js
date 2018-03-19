@@ -46,14 +46,14 @@ router.post("/signup", (req, res) => {
                 console.log("User creation Done", result);
 
                 // Create user session
-                req.session.user = {
+                req.session.authUser = {
                     id: result[0].id,
                     email,
-                    name
-
+                    username: name,
+                    img: result[0].img
                 };
                 console.log("REGISTERED", req.session);
-                res.json({ successful: true });
+                res.json(req.session.authUser);
             })
             .catch(err => {
                 console.log("REG ERROR: ", err);
@@ -75,36 +75,51 @@ router.post("/login", (req, res) => {
     const q = `SELECT * FROM users WHERE email = $1`
     db.query(q, email)
         .then(result => {
-            console.log("Login Query res: ", result[0]);
+            // console.log("Login Query res: ", result[0]);
             // Destructure result
             const { id, username, img, hashedpass } = result[0]
-            console.log("destructr: ", id, username, img, hashedpass);
+            // console.log("destructr: ", id, username, img, hashedpass);
             checkPassword(password, hashedpass)
                 .then(doesMatch => {
                     if (doesMatch) {
-                        console.log("gutes PW? ", doesMatch);
+                        console.log("gutes PW? ", doesMatch, req.url);
                         // Create User Session
-                        req.session.user = {
-                            name: username,
+                        req.session.authUser = {
+                            username,
                             email,
                             id,
                             img,
                         }
-                        res.json({ successful: true })
-                    } else {
-                    res.json({ successful: false })
+                        console.log("Login AUTH: ", req.session.authUser);
+                        res.json(req.session.authUser)
+                    }
+                    else {
+                        res.json({
+                            error: true,
+                            message: "Wrong password."
+                        })
                     }
                 })
+
         })
         .catch(err => {
-            console.log("Login error:", err);
-            res.json({ error: "No such Email registered." })
+            console.log("CHECK PASS", err);
+            res.status(401).json({
+                error: true,
+                message: "This email is not registered."
+            })
 
         })
 })
 
+router.post("/logout", (req, res) => {
+    console.log("LOGOUT SESSION BEFORE: ", req.session.authUser);
+    delete req.session.authUser
+    console.log("LOGOUT SESSION: ", req.session);
+    res.json({ successful: true })
+})
 // router.get('*', function(req, res) {
-//     if(!req.session.user) {
+//     if(!req.session.user && req.url != "/welcome") {
 //         console.log("no Session user");
 //         res.redirect("/welcome")
 //     } else {

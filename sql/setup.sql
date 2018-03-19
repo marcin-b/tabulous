@@ -28,3 +28,5 @@ DROP TABLE users;
 -- Delete rows
 DELETE FROM users
 WHERE id = $1;
+
+ALTER TABLE tabs ADD creator_id INTEGER not null DEFAULT 1;

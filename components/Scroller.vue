@@ -77,7 +77,7 @@ export default {
     },
     methods: {
         scroller() {
-            console.log("scrollY: ", this.currY, this.scrollSpeed, this.step);
+            // console.log("scrollY: ", this.currY, this.scrollSpeed, this.step);
             this.step += this.scrollSpeed
 
             if (this.currY + window.innerHeight <= document.body.scrollHeight && this.scrolling) {
@@ -87,7 +87,7 @@ export default {
                     requestAnimationFrame(this.scroller)
                     this.step = 0;
                 } else {
-                    console.log("step", this.step);
+                    // console.log("step", this.step);
                     requestAnimationFrame(this.scroller)
                 }
             } else {
@@ -98,7 +98,7 @@ export default {
             }
         },
         startScroll() {
-            if (!this.scrolling) {
+            if (!this.scrolling && document.querySelector("pre")) {
                 this.scrolling = true;
                 requestAnimationFrame(this.scroller)
             } else {
@@ -140,26 +140,25 @@ export default {
     z-index: 5;
 }
 /* Contol Buttons */
-input {
+input, button {
     background: #222;
-    border: 1px solid #eee;
-    box-shadow: 1px 2px 3px #222;
     color: #eee;
+    border: 1px solid #eee;
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, .7);
+
+}
+input {
     font: normal .95em/130% "Muli", sans-serif;
     text-align: center;
     padding-left: 1em;
     width: 3.3em;
 }
 button {
-    background-color: #222;
-    color: #eee;
-    border: 1px solid #eee;
     cursor: pointer;
     font: normal 1em/130% "Muli", sans-serif;
     text-rendering: optimizeLegibility;
     margin: .5em;
     padding: 0 .5em;
-    box-shadow: 1px 2px 3px #222;
     transition: transform ease-out .1s;
 }
 
