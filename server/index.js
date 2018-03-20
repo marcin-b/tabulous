@@ -3,7 +3,7 @@ import { Nuxt, Builder } from 'nuxt'
 import * as bodyParser from "body-parser"
 import * as secrets from "../secrets"
 import * as cookieParser from "cookie-parser"
-import * as cookieSession from "cookie-session"
+import * as session from "express-session"
 import * as csrf from "csurf"
 
 
@@ -19,6 +19,12 @@ app.set('port', port)
 // Transform req & res to have the same API as express
 // So we can use res.status() & res.json()
 
+
+// Parsing
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser())
+
 router.use((req, res, next) => {
     Object.setPrototypeOf(req, app.request)
     Object.setPrototypeOf(res, app.response)
@@ -27,21 +33,23 @@ router.use((req, res, next) => {
     next()
 })
 
-// Parsing
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser())
-
-
 // Cookies & Sessions
-app.use(cookieSession({
+app.use(session({
     secret: [process.env.SESSION_SECRET || secrets.sessSecret],
-    maxAge: 1000 * 60 * 60 * 24 * 14 // 2weeks
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 14 // 2weeks
+    }
 }));
 
 // Must be set after session and parsing
 app.use(csrf({ cookie: true }));
-var csrfProtection = csrf({ cookie: true })
+app.use((req, res, next) => {
+    res.cookie("mytoken", req.csrfToken())
+    next()
+})
+var csrfProtection = csrf()
 
 
 // Import API Routes

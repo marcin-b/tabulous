@@ -25,44 +25,49 @@ const store = () => new Vuex.Store({
             }
         },
 
-        signup({ commit }, { name, email, password }) {
-            let user = { name, email, password }
-            axios.post("/api/signup", this.user)
-            .then(({data}) => {
-                console.log("Signup Data: ", data);
-                this.$router.replace("/")
-                commit("SET_USER", authUser)
+        signup({ commit }, { user }) {
+
+            return new Promise((resolve, reject) => {
+                axios.post("/api/signup", user)
+                .then(({data}) => {
+                    if (data.error) {
+                        return reject(data)
+                    }
+                    console.log("Login Successful: ", data);
+                    commit("SET_USER", data)
+                    resolve(data)
+                })
             })
-            .catch(error => {
-                console.log("Signup Error: ", error)
-            })
+
+            // axios.post("/api/signup", user)
+            // .then(({data}) => {
+            //     console.log("Signup Data: ", data);
+            //     commit("SET_USER", data)
+            //     this.$router.replace("/")
+            // })
+            // .catch(error => {
+            //     console.log("Signup Error: ", error)
+            // })
         },
 
         login({ commit }, { user }) {
-            axios.post("/api/login", user)
-            .then(({data}) => {
-                console.log("Login response: ", data);
-                if (!data.error) {
-                    this.$router.replace("/")
+            // Promisify to catch errors
+            return new Promise((resolve, reject) => {
+                axios.post("/api/login", user)
+                .then(({data}) => {
+                    if (data.error) {
+                        return reject(data)
+                    }
+                    console.log("Login Successful: ", data);
                     commit("SET_USER", data)
-                    return data
-                } else {
-                    throw new Error(data.message)
-                    return data
-                }
-            })
-            .then((authUser) => console.log("TEST", authUser))
-            .catch(error => {
-
-                console.log(error)
-                return error
-                // throw new Error(error)
+                    resolve(data)
+                })
             })
         },
 
         logout({ commit }) {
             this.$router.push("/welcome")
-            axios.post("/api/logout")
+            axios.get("/api/logout")
             .then(() => commit("SET_USER", null))
 
         }

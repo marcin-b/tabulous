@@ -23,7 +23,7 @@
                 </button>
 
                 <button
-                    <!-- v-if="tab.creator_id == $store.state.authUser.id"  -->
+                    v-if="$store.state.authUser && updatedTab.creator_id == $store.state.authUser.id"
                     @click="toggleEditor"
                     type="button"
                     id="open-editor">
@@ -76,7 +76,7 @@ export default {
                 haslyrics: this.tab.haslyrics,
                 tab: this.tab.tab,
                 id: this.tab.id,
-                creator_id: this.tab.creator_id
+                "creator_id": this.tab.creator_id
             },
         }
     },

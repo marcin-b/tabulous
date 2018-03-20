@@ -45,21 +45,14 @@ export default {
             this.$emit("swap", false)
         },
         submitLog() {
-            try {
-                this.$store.dispatch("login", { user: this.user })
-            } catch (e) {
-                console.log("Log Err: ", e)
-                this.errorMsg = e.message
-            }
 
-            // this.$store.dispatch("login", { user: this.user })
-            // .then((resp) => {
-            //     console.log("logreg", resp);
-            // })
-            // .catch(e => {
-            //     console.log("Log Err: ", e)
-            //     this.errorMsg = e.message
-            // })
+            this.$store.dispatch("login", { user: this.user })
+            .then(resp => this.$router.replace("/"))
+            .catch(e => {
+                this.error = e.error
+                this.errorMsg = e.message
+                console.log("login NIE udany", e.message)
+            })
         }
     },
 }

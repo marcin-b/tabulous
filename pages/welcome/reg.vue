@@ -11,19 +11,19 @@
             v-model="user.name"
             type="text"
             placeholder="Username"
-            required />
+             />
         <input
             id="email"
             v-model="user.email"
             type="email"
             placeholder="email@example.com"
-            required />
+             />
         <input
             id="password"
             v-model="user.password"
             type="password"
             placeholder="Password"
-            required />
+             />
         <button type="submit" name="button">Submit</button>
 
         If you already signed up <span
@@ -62,35 +62,33 @@ export default {
             this.$emit("swap", true)
         },
         submitReg() {
-            this.$store.dispatch("signup", {
-                user: this.user
-            })
+            // Credential check for lack of Support for "required"
+            if (!this.user.name) {
+                this.error = true
+                this.errorMsg = "Please enter a username."
+            } else if (!this.user.email) {
+                this.error = true
+                this.errorMsg = "Please enter an email."
+            } else if (!this.user.password) {
+                this.error = true
+                this.errorMsg = "Please enter a password."
+            } else {
+
+            }
+
+            this.$store.dispatch("signup", { user: this.user })
             .then(() => {
-                console.log("Signup DONE");
-                console.log("after Signup State: ", this.$store.state);
+                this.$router.replace("/")
+                console.log("Signup DONE",)
+                this.user = {}
             })
-            .catch(err => console.log("Log Err: ", err))
-        //     console.log("Sign up data sent");
-        //     axios.post("/api/signup", this.user)
-        //         .then(({data}) => {
-        //             if (!data.error) {
-        //                 console.log("Registration DONE");
-        //                 this.$router.replace("/")
-        //             } else if (data.error.code == 23505) {
-        //                 document.getElementById("email").classList.add("err-indicator")
-        //                 this.error = true;
-        //                 this.errorMsg = "This email is already registered."
-        //             } else if (data.error.code == 23502) {
-        //                 document.getElementById(data.error.column).classList.add("err-indicator")
-        //                 console.log("err data", data);
-        //                 this.error = true;
-        //                 this.errorMsg = "Cannot sign up without a " + data.error.column + "."
-        //             }
-        //             // location.replace("/")
-        //
-        //             console.log("resp Data ", location);
-        //         })
-        //
+            .catch(({error}) => {
+                this.error = true
+                if (error.code == 23505) {
+                    this.errorMsg = "This email is already signed up"
+                }
+                console.log("Signup NIE udany", error)
+            })
         }
     },
 

@@ -29,7 +29,7 @@ var sortResults = function(results) {
 // GET all Tabs from Database
 router.get("/tabs", (req, res, next) => {
 
-    console.log("Inside GET tabs");
+    console.log("Inside GET tabs", req.session);
     db.query(`SELECT * FROM tabs`)
         .then(results => {
 
@@ -39,7 +39,10 @@ router.get("/tabs", (req, res, next) => {
             })
             res.json(sortResults(results))
         })
-        .catch(err => res.json({ response: "Error: " + err }))
+        .catch(err => res.json({
+            error: true,
+            message: err
+        }))
 })
 
 // GET single tab

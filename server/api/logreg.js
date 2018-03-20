@@ -12,56 +12,41 @@ router.post("/signup", (req, res) => {
     // Deconstruct req.body
     const { name, email, password } = req.body;
 
-    // Check for password if browser doesn't support "required" atrr.
-    if (!password) {
-        const data = {
-            // data: {
-                error: {
-                    code: 23502,
-                    column: "password"
-                // }
-            }
-        }
-        console.log("Inside no pass ", data);
-        res.json(data)
-    } else {
-        hashPassword(password)
-        .then(hashedPassword => {
-            console.log("hash pass", hashedPassword);
+    hashPassword(password)
+    .then(hashedPassword => {
+        console.log("hash pass", hashedPassword);
 
-            // Insert user data into DB
+        // Insert user data into DB
 
-            // Parameters
-            const params = [ name, email, hashedPassword ];
-            // Query
-            const q = `
-            INSERT INTO users
-            (username, email, hashedpass)
-            VALUES
-            ($1, $2, $3)
-            RETURNING *
-            `;
-            db.query(q, params)
-            .then(result => {
-                console.log("User creation Done", result);
+        // Parameters
+        const params = [ name, email, hashedPassword ];
+        // Query
+        const q = `
+        INSERT INTO users
+        (username, email, hashedpass)
+        VALUES
+        ($1, $2, $3)
+        RETURNING *
+        `;
+        db.query(q, params)
+        .then(result => {
+            console.log("User creation Done", result);
 
-                // Create user session
-                req.session.authUser = {
-                    id: result[0].id,
-                    email,
-                    username: name,
-                    img: result[0].img
-                };
-                console.log("REGISTERED", req.session);
-                res.json(req.session.authUser);
-            })
-            .catch(err => {
-                console.log("REG ERROR: ", err);
-                res.json({ error: err })
-            })
+            // Create user session
+            req.session.authUser = {
+                id: result[0].id,
+                email,
+                username: name,
+                img: result[0].img
+            };
+            console.log("REGISTERED", req.session);
+            res.json(req.session.authUser);
         })
-
-    }
+        .catch(err => {
+            console.log("REG ERROR: ", err);
+            res.json({ error: err })
+        })
+    })
 })
 
 router.post("/login", (req, res) => {
@@ -104,7 +89,7 @@ router.post("/login", (req, res) => {
         })
         .catch(err => {
             console.log("CHECK PASS", err);
-            res.status(401).json({
+            res.json({
                 error: true,
                 message: "This email is not registered."
             })
@@ -112,7 +97,7 @@ router.post("/login", (req, res) => {
         })
 })
 
-router.post("/logout", (req, res) => {
+router.get("/logout", (req, res) => {
     console.log("LOGOUT SESSION BEFORE: ", req.session.authUser);
     delete req.session.authUser
     console.log("LOGOUT SESSION: ", req.session);
