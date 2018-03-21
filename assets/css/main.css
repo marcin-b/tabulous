@@ -74,7 +74,25 @@ textarea, input, button, select
     outline: none;
     background-color: #eee;
 }
-
+h1 {
+    background-color: rgba(0, 0, 0, 0);
+    color: #fff;
+    display: inline-block;
+    font: normal bold 2em/150% "Muli", sans-serif;
+    letter-spacing: 1px;
+    padding: .5em 0;
+    text-shadow: 1px 3px 0px #000;
+    text-align: center;
+    width: 100%;
+}
+h2 {
+    color: #fff;
+    display: inline-block;
+    font: normal bold 1.6em/150% "Muli", sans-serif;
+    letter-spacing: 1px;
+    margin: 0 0 .8em;
+    text-shadow: 1px 3px 0px #000;
+}
 .logo {
     width: 100%;
     height: auto;

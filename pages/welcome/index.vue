@@ -88,13 +88,9 @@ export default {
     text-shadow: 1px 4px 0px #000;
     text-align: center;
 }
-form > h2 {
-    color: #fff;
-    display: inline-block;
-    font: normal bold 2em/150% "Muli", sans-serif;
-    letter-spacing: 1px;
-    margin: 0 0 .8em;
-    text-shadow: 1px 3px 0px #000;
+.feat > h1 {
+    background-color: rgba(0, 0, 0, .3);
+    font-size: 1.6em;
 }
 .flipper {
     align-self: flex-end;

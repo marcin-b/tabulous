@@ -33,17 +33,6 @@ export default {
 </script>
 
 <style lang="css">
-h1 {
-    background-color: rgba(0, 0, 0, .3);
-    color: #fff;
-    display: inline-block;
-    font: normal bold 1.4em/150% "Muli", sans-serif;
-    letter-spacing: 1px;
-    padding: .8em 0;
-    text-shadow: 1px 3px 0px #000;
-    text-align: center;
-    width: 100%;
-}
 
 .feat {
     font: normal 400 130% "Muli", sans-serif;

@@ -1,15 +1,15 @@
 <template>
 
     <div class="nav-cont">
-        <div class="user-nav">
-            <nuxt-link to="/profile">
+        <div v-if="$store.state.authUser" class="user-nav">
+            <nuxt-link :to="'/profile'">
                 Profile
             </nuxt-link>
-            <nuxt-link to="/my-songbooks">
+            <nuxt-link :to="'/profile/songbooks'">
                 My Songbooks
             </nuxt-link>
         </div>
-        <nav>
+        <nav v-if="$route.path != '/profile/songbooks' && $route.path != '/profile'">
             <a href="#A">A</a>
             <a href="#B">B</a>
             <a href="#C">C</a>
@@ -43,6 +43,11 @@
 
 <script>
 export default {
+    data() {
+        return {
+            test: false,
+        }
+    }
 }
 </script>
 
