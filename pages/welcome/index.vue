@@ -88,7 +88,7 @@ export default {
     text-shadow: 1px 4px 0px #000;
     text-align: center;
 }
-h2 {
+form > h2 {
     color: #fff;
     display: inline-block;
     font: normal bold 2em/150% "Muli", sans-serif;

@@ -1,9 +1,9 @@
 <template lang="html">
 
     <li>
-        <a @click="toggleTab" :class="{ activeclass: isActive}">
+        <h2 @click="toggleTab" :class="{ activeclass: isActive}">
             {{ updatedTab.title }} - {{ updatedTab.artist }}
-        </a>
+        </h2>
         <span>
             <span class="accent">{{ updatedTab.type }}</span>
 
@@ -102,28 +102,43 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style scoped>
 
 /* Single Tab Item */
-li > a {
+li {
+    /* display: flex;
+    align-content: flex-end;
+    justify-content: space-between; */
+    border-bottom: 1px dashed #444;
+    position: relative;
+}
+li > h2 {
     color: #eee;
     cursor:pointer;
     display: inline-block;
-    font: normal normal 400 1.1em/150% "Lato", sans-serif;
+    font: normal 400 1.4em/150% "Lato", sans-serif;
     letter-spacing: .03em;
+    margin: 0;
+    transform: scale(.9, .9);
     transition: transform ease .1s;
     transform-origin: left;
+    z-index: 1;
 }
-li > a:hover {
+li > h2:hover {
     text-shadow: 1px 2px 2px #000;
     text-decoration: underline darkorange;
-    transform: scale(1.1, 1.1);
+    transform: scale(1, 1);
 }
 li > span {
-    font-weight: normal;
-    margin-left: 1em;
-    font-size: .5em;
+    font: normal  400 .6em/200% "Lato", sans-serif;
+    align-self: flex-end;
+    padding-bottom: 2px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    /* float: right; */
 
+    z-index: 1;
 }
 .accent {
     color: darkorange;
@@ -131,7 +146,9 @@ li > span {
 /* Actual Tab Pre Element */
 .pre-tab-container {
     position: relative;
+    align-self: flex-start;
     left: -26%;
+    z-index: 3;
 }
 .pre-cont {
     background-color: #222;
@@ -148,15 +165,14 @@ pre {
     border: 1px solid #aaa;
     box-shadow: inset 0px 2px 5px 0px #222;
     color: #000;
-    font: normal normal .95em/110% "Inconsolata", monospace;
+    font: normal normal 1.1em/110% "Inconsolata", monospace;
     letter-spacing: -.4px;
-    padding: .8em;
+    padding: 1em 1.5em;
     margin-bottom: 3em;
     text-shadow: 0px 1px 0px #fff;
     text-rendering: optimizeLegibility;
     width: 700px;
     white-space: pre-wrap;
-    z-index: 1;
 }
 button {
     background-color: #222;
@@ -181,7 +197,7 @@ button:hover {
     color: #222;
     position: absolute;
     /* left: -.5em; */
-    top: -1.9em;
+    top: -2.2em;
     z-index: 6;
 }
 

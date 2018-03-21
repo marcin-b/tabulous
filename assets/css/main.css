@@ -85,11 +85,8 @@ textarea, input, button, select
     align-self: flex-end;
     box-sizing: border-box;
     color: darkorange;
-    font-family: "Rock Salt", script;
-    font-size: 3em;
-    font-weight: 400;
+    font: normal normal 2.5em/150% "Rock Salt", script;
     display: block;
-    line-height: 200%;
     text-shadow: 1px 3px 0px #000;
 }
 /* Froms and inputs */

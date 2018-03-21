@@ -78,9 +78,9 @@ export default {
 </script>
 
 
-<style lang="css">
+<style scoped>
 .tab-container {
-    font: normal bold 1.2em/150% "Muli", sans-serif;
+    /* font: normal bold 1.2em/150% "Muli", sans-serif; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -93,15 +93,16 @@ export default {
 /* List Letter Elements */
 .abc > span {
     border-bottom: 1px solid #666;
-    /* color: darkorange; */
+    /* border-bottom: 1px solid rgba(255, 165, 0, .1); */
+    color: darkorange;
     display: block;
-    font-size: 1.3em;
+    font: normal 400 1.2em/150% "Muli", sans-serif;
     padding: 1em 0 0;
     text-align: left;
-    text-shadow: 1px 3px 1px #000;
+    /* text-shadow: 1px 3px 1px #000; */
 }
 .loader-cont {
-    font-weight: 400;
+    font: normal normal 1.2em/150% "Muli", sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;

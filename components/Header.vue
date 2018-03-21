@@ -10,9 +10,13 @@
         </div>
 
         <div class="">
-            <nuxt-link v-if="!$store.state.authUser" to="/welcome">
+
+            <nuxt-link
+                v-if="!$store.state.authUser"
+                to="/welcome">
                 Login / Sign up
             </nuxt-link>
+
             <span v-else @click="logout">Logout</span>
 
         </div>
@@ -44,7 +48,7 @@ header {
     align-items: center;
     background:url(~/assets/img/imagebw.jpg);
     background-size: cover;
-    background-position:0 -300px;
+    background-position:0 -50px;
     color: darkorange;
     display: flex;
     flex-direction: row;
@@ -58,7 +62,8 @@ header {
 header > * {
     z-index: 5;
 }
-header > div > a, header > div > span {
+
+ div > a, div > span {
     color: #eee;
     cursor: pointer;
     text-decoration: underline darkorange;
