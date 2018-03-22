@@ -38,16 +38,6 @@ const store = () => new Vuex.Store({
                     resolve(data)
                 })
             })
-
-            // axios.post("/api/signup", user)
-            // .then(({data}) => {
-            //     console.log("Signup Data: ", data);
-            //     commit("SET_USER", data)
-            //     this.$router.replace("/")
-            // })
-            // .catch(error => {
-            //     console.log("Signup Error: ", error)
-            // })
         },
 
         login({ commit }, { user }) {

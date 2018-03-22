@@ -104,11 +104,11 @@ export default {
     border: 2px dashed #999;
     display: block;
     font-weight: normal;
-    font-size: 1em;
+    font-size: 1.1em;
     margin: .3em 0 1em;
-    padding: 1em .5em;
+    padding: .5em .5em 1em;
     position: absolute;
-    z-index: 1;
+    z-index: 3;
 }
 .meta-cont {
     display: flex;
@@ -123,7 +123,7 @@ input {
     font: normal 1em/150% "Muli", sans-serif;
     display: block;
     padding-left: .5em;
-    margin-bottom: .5em;
+    margin-top: .5em;
     width: 220px;
 }
 input:focus, textarea:focus, select:focus {
@@ -151,6 +151,8 @@ select {
 .check-cont {
     display: flex;
     font-size: .9em;
+    align-items: center;
+    /* margin-bottom: .5em; */
 }
 .checkbox {
     height: 18px;

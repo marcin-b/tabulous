@@ -56,13 +56,13 @@ export default {
     },
     head() {
         return {
-            title: "Tabulous"
+            title: "Welcome to Tabulous"
         }
     }
 }
 </script>
 
-<style lang="css">
+<style>
 .welc-container {
     align-items: center;
     background: url(~/assets/img/imagebw.jpg);
@@ -80,13 +80,6 @@ export default {
     justify-content: center;
     /* position: relative; */
     margin: 0 .5em 2em;
-}
-#big-logo {
-    color: darkorange;
-    display: block;
-    font: normal normal 3.4em/200% "Rock Salt", script;
-    text-shadow: 1px 4px 0px #000;
-    text-align: center;
 }
 .feat > h1 {
     background-color: rgba(0, 0, 0, .3);

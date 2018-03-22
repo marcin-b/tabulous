@@ -69,11 +69,23 @@ a:hover, a:focus,
 {
     color: darkorange;
 }
+/* Froms and inputs */
+form {
+    font-family: "Muli", "Lato", sans-serif;
+}
 textarea, input, button, select
 {
     outline: none;
     background-color: #eee;
 }
+textarea:focus, input:focus, select:focus
+{
+    outline: thin solid darkorange;
+}
+.form > input:focus, .form > textarea:focus, select:focus, #tabinput:focus {
+    outline: 1px solid darkorange;
+}
+
 h1 {
     background-color: rgba(0, 0, 0, 0);
     color: #fff;
@@ -99,6 +111,13 @@ h2 {
     max-width: 400px;
     max-height: 289px;
 }
+#big-logo {
+    color: darkorange;
+    display: block;
+    font: normal normal 3.4em/200% "Rock Salt", script;
+    text-shadow: 1px 4px 0px #000;
+    text-align: center;
+}
 #logo {
     align-self: flex-end;
     box-sizing: border-box;
@@ -107,7 +126,9 @@ h2 {
     display: block;
     text-shadow: 1px 3px 0px #000;
 }
-/* Froms and inputs */
-.form > input:focus, .form > textarea:focus, select:focus, #tabinput:focus {
-    border: 1px solid darkorange;
+.col-cont {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    /* justify-content: center; */
 }

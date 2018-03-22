@@ -4,6 +4,7 @@
         <my-header/>
 
         <Nav/>
+
         <nuxt-child/>
 
     </section>
@@ -17,6 +18,7 @@ import MyHeader from '~/components/Header.vue'
 import Nav from '~/components/Nav.vue'
 
 export default {
+    middleware: "auth",
     components: {
         MyHeader,
         Nav,
@@ -24,7 +26,7 @@ export default {
     },
     data() {
         return {
-            user: this.$store.state.authUser
+
         }
     },
     methods: {
@@ -32,7 +34,7 @@ export default {
     },
     head() {
         return {
-
+            // title: this.$store.authUser.username
         }
     },
 }

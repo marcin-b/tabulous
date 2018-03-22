@@ -1,13 +1,12 @@
 <template>
     <section id="profile">
-        <h1>Profile</h1>
-        <h2>this is the retarded child of PROFILE</h2>
-        <ul>
 
-            and what the fuck is this shit?
-            <li>dumb item 1</li>
-            <li>dumb item 2</li>
-            <li>NVM</li>
+        <h1>Profile</h1>
+        <img :src="user.img" alt="" />
+        <ul>
+            <li>dumb</li>
+            <li>list</li>
+            <li>items</li>
         </ul>
 
         <nuxt-child/>
@@ -16,20 +15,13 @@
 
 <script>
 
-import axios from '~/plugins/axios'
-import MyFooter from '~/components/Footer.vue'
-import MyHeader from '~/components/Header.vue'
-import Nav from '~/components/Nav.vue'
-
 export default {
     components: {
-        MyHeader,
-        Nav,
-        MyFooter
+
     },
     data() {
         return {
-
+            user: this.$store.state.authUser
         }
     },
     methods: {
@@ -49,6 +41,15 @@ section {
     flex-direction: column;
     align-items: center;
 }
-
+img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    filter: drop-shadow(2px 5px 5px #000);
+    margin: 2em 0;
+}
+ul {
+    font: 1.5em/150% "Muli", sans-serif;
+}
 
 </style>

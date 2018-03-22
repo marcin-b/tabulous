@@ -6,6 +6,7 @@ import * as csrf from "csurf"
 const router = Router()
 var csrfProtection = csrf({ cookie: true })
 
+
 // CSRF middleware
 router.get('/getcsrftoken', csrfProtection, function (req, res) {
     return res.json({ csrfToken: req.csrfToken() });

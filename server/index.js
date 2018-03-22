@@ -16,8 +16,6 @@ const port = process.env.PORT || 3000
 
 app.set('port', port)
 
-// Transform req & res to have the same API as express
-// So we can use res.status() & res.json()
 
 
 // Parsing
@@ -25,6 +23,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser())
 
+// Transform req & res to have the same API as express
+// So we can use res.status() & res.json()
 router.use((req, res, next) => {
     Object.setPrototypeOf(req, app.request)
     Object.setPrototypeOf(res, app.response)
@@ -49,12 +49,10 @@ app.use((req, res, next) => {
     res.cookie("mytoken", req.csrfToken())
     next()
 })
-var csrfProtection = csrf()
 
 
 // Import API Routes
 app.use('/api', api)
-
 
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')
@@ -71,6 +69,7 @@ if (config.dev) {
 
 // Give nuxt middleware to express
 app.use(nuxt.render)
+
 
 // Listen the server
 app.listen(port, host)

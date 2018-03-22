@@ -89,7 +89,7 @@ section {
     transition: transform ease .1s;
 }
 #addtab:hover {
-    transform: scale(1.3, 1.3);
+    transform: scale(1.1, 1.1);
     border: 1px solid darkorange;
     background-color: darkorange;
     color: #000;

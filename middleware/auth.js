@@ -1,8 +1,8 @@
-export default function ({ store, error }) {
+export default function ({ store, error, redirect }) {
     if (!store.state.authUser) {
         error({
-            message: 'You are not connected',
-            statusCode: 403
+            message: 'You need to be logged in to see that page',
+            statusCode: 401
         })
     }
 }

@@ -2,6 +2,12 @@
 
     <div class="nav-cont">
         <div v-if="$store.state.authUser" class="user-nav">
+
+            <span>Hi {{$store.state.authUser.username}} &#x1F918</span>
+
+            <nuxt-link :to="'/'">
+                Home
+            </nuxt-link>
             <nuxt-link :to="'/profile'">
                 Profile
             </nuxt-link>
@@ -51,7 +57,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style scoped>
 .nav-cont {
     width: 100%;
     background:url(~/assets/img/imagebw.jpg);
@@ -82,12 +88,18 @@ nav > a {
 nav > a:hover {
     background-color: rgba(0, 0, 0, .8);
     color: darkorange;
-    transform: scale(1.5, 1.5);
+    transform: scale(1.3, 1.3);
     text-shadow: 0px 2px 1px #000;
 
 }
+span {
+    color: #eee;
+    font: normal 400 1.2em/130% "Lato", sans-serif;
+    padding: .1em 1em;
+    text-shadow: 1px 1px 0px #000;
+}
 .user-nav {
-    background: rgba(0, 0, 0, .3);
+    background: rgba(0, 0, 0, .5);
     display: flex;
     justify-content: center;
     align-content: center;
