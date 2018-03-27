@@ -138,7 +138,7 @@ li > h2 {
     transform: scale(.9, .9);
     transition: transform ease .1s;
     transform-origin: left;
-    text-shadow: 0;
+    text-shadow: none;
     z-index: 1;
 }
 li > h2:hover {
@@ -271,12 +271,14 @@ button:hover {
 
 /* the adder */
 .slidein-leave-active, .slidein-enter-active {
-    transition: all ease .2s;
+    transform-origin: left;
+    transition: all ease .4s;
 }
 .slidein-enter {
-    transform: scale(0, 0);
+    transform: scale(0, 0) translateX(-400px);
+
 }
 .slidein-leave-to {
-    transform: scale(0, 0);
+    transform: scale(0, 0) translateX(-400px);
 }
 </style>

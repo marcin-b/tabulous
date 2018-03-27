@@ -1,7 +1,7 @@
 <template lang="html">
 
     <section>
-
+        <h3>Add to:</h3>
         <span
         v-for="(songbook, index) in songbooks"
         :key="index">
@@ -38,11 +38,25 @@ export default {
 section {
     background: #222;
     border: 2px solid darkorange;
+    /* justify-content: flex-start;
+    align-content: flex-start; */
+    align-items: flex-start;
     padding: 1em;
     position: absolute;
     left: .5em;
     top: .5em;
     z-index: 10;
+}
+h3 {
+    align-self: center;
+}
+span {
+    text-align: left;
+    font: normal 1em/150% "Muli", sans-serif;
+    padding: .2em 0;
+}
+span:hover {
+    color: darkorange;
 }
 
 </style>

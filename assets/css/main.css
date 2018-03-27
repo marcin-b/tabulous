@@ -106,7 +106,7 @@ h2 {
     text-shadow: 1px 3px 0px #000;
 }
 h3 {
-    font: normal 1em/130% "Muli", sans-serif;
+    font: normal bold 1.3em/130% "Muli", sans-serif;
 }
 .logo {
     width: 100%;
