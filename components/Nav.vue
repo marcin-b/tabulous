@@ -8,14 +8,16 @@
             <nuxt-link :to="'/'">
                 Home
             </nuxt-link>
+
             <nuxt-link :to="'/profile'">
                 Profile
             </nuxt-link>
+
             <nuxt-link :to="'/profile/songbooks'">
                 My Songbooks
             </nuxt-link>
         </div>
-        <nav v-if="$route.path != '/profile/songbooks' && $route.path != '/profile'">
+        <nav v-if="$route.matched[0].path != '/profile'">
             <a href="#A">A</a>
             <a href="#B">B</a>
             <a href="#C">C</a>
@@ -85,36 +87,37 @@ nav > a {
     transition: transform ease-out .1s;
     text-shadow: 1px 2px 0px #000;
 }
-nav > a:hover {
+nav > a:hover, nav > a:active, nav > a:focus {
     background-color: rgba(0, 0, 0, .8);
     color: darkorange;
     transform: scale(1.3, 1.3);
     text-shadow: 0px 2px 1px #000;
 
 }
-span {
-    color: #eee;
-    font: normal 400 1.2em/130% "Lato", sans-serif;
-    padding: .1em 1em;
-    text-shadow: 1px 1px 0px #000;
-}
 .user-nav {
-    background: rgba(0, 0, 0, .5);
+    background: rgba(0, 0, 0, .7);
     display: flex;
     justify-content: center;
     align-content: center;
     align-items: center;
     border-top: 1px solid rgba(255, 255, 255, 0.7);
     border-bottom: 1px solid rgba(255, 255, 255, 0.7);
-    /* padding: .1em 0; */
+    font: normal 400 1em/130% "Lato", sans-serif;
+
+}
+span {
+    text-shadow: 1px 1px 0px #000;
+    padding-right: 1em;
 }
 .user-nav > a {
     color: #eee;
     cursor: pointer;
     text-decoration: none;
-    text-decoration: underline darkorange;
-    font: normal 400 1.2em/130% "Lato", sans-serif;
     padding: .1em 1em;
     text-shadow: 1px 1px 0px #000;
+}
+.user-nav > a:hover, .user-nav > a:active, .user-nav > a:focus {
+    text-decoration: underline darkorange;
+    background: rgba(0, 0, 0, .7);
 }
 </style>

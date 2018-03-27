@@ -65,6 +65,10 @@ export default {
         this.yoff = document.querySelector("pre").getBoundingClientRect().top + 60
 
     },
+    mounted() {
+
+        this.yoff = document.getElementsByTagName("pre")[0].getBoundingClientRect().y
+    },
     created() {
         window.addEventListener("keyup", (e) => {
             if (e.which === 39) {
@@ -123,7 +127,9 @@ export default {
             }
         },
         scrollTop() {
-            window.scroll(0, Math.round(document.getElementsByTagName("pre")[0].getBoundingClientRect().y) - 40)
+            console.log("doc", this.$refs)
+            console.log(Math.round(document.getElementsByTagName("pre")[0].getBoundingClientRect().y));
+            window.scroll(0, document.getElementsByTagName("pre")[0].getBoundingClientRect().y - 80)
         }
     },
 

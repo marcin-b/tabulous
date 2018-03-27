@@ -7,12 +7,17 @@ Vue.use(Vuex)
 const store = () => new Vuex.Store({
 
     state: {
-        authUser: null
+        authUser: null,
+        registered: false,
     },
 
     mutations: {
-        SET_USER: function (state, user) {
+        SET_USER(state, user) {
             state.authUser = user
+        },
+        // for future login redirect
+        SHOW_LOG(state, isReg) {
+            state.registered = isReg
         }
     },
 

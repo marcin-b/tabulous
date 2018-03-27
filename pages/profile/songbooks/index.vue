@@ -1,66 +1,51 @@
 <template lang="html">
 
-    <section>
+<section>
+
+    <ul>
+        <li
+        v-for="(songbook, index) in songbooks"
+        :key="index">
+
+            <nuxt-link
+                :to="'/profile/songbooks/' + songbook.id">
+                {{songbook.name}}
+            </nuxt-link>
+        </li>
+    </ul>
 
 
-        <div class="">
-            <transition
-                mode="out-in"
-                name="slide-fade"
-                >
-
-                    <button
-                    v-if="!showInput"
-                    @click="toggleAdder"
-                    key="button"
-                    type="submit"
-                    id="add-sb">
-                    Create new Songbook
-                    </button>
-
-                <form
-                    v-else
-                    key="form"
-                    @submit.prevent="toggleAdder"
-                    class="">
-
-                    <input
-                    type="text"
-                    placeholder="My Songbook" />
-
-                    <button type="submit">+</button>
-
-                </form>
-            </transition>
-
-        </div>
-            <ul>
-                <li>one</li>
-                <li>two</li>
-                <li>three</li>
-            </ul>
-
-    </section>
+</section>
 
 </template>
 
 <script>
+import axios from "~/plugins/axios"
+
 export default {
+    props: ["addedSongbook"],
     data() {
         return {
-            showInput: false,
-
+            songbooks: []
         }
     },
     asyncData(context) {
-        return {
-
+        return axios.get("/api/songbooks")
+        .then(({data}) => {
+            console.log("get SB: ", data)
+            return {
+                songbooks: data
+            }
+        })
+        .catch(err => console.log("get SB err: ", err))
+    },
+    watch: {
+        addedSongbook(newSongbook, songbooks) {
+            this.songbooks.unshift(newSongbook)
         }
     },
     methods: {
-        toggleAdder() {
-            this.showInput = !this.showInput
-        }
+
     }
 }
 </script>
@@ -71,37 +56,9 @@ section {
     flex-direction: column;
     align-items: center;
 }
-button {
-    border: 1px solid darkorange;
-    color: black;
-    background: darkorange;
-    font: normal normal 1.3em/150% "Muli", sans-serif;
-    padding: 0.1em 1em;
-    transition: transform ease .1s;
-    z-index: 1
+a {
+    color: white;
+    text-decoration: none;
 }
-button:hover {
-    transform: scale(1.1, 1.1);
-}
-input {
-    border: 1px solid black;
-    font: normal normal 1.2em/180% "Muli", sans-serif;
-    width: 250px;
-    margin: 0 .2em;
-    padding: 0 .5em;
-    z-index: -1;
-}
-.slide-fade-enter-active {
-    transition: all .2s ease;
-}
-.slide-fade-leave-active {
-    transition: all .2s ease-out;
-}
-.slide-fade-enter {
-    transform: translateY(-50px);
-    opacity: 0;
-}
-.slide-fade-leave-to {
-    transform: translateY(-50px);
-}
+
 </style>

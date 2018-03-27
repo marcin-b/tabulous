@@ -88,6 +88,7 @@ export default {
                     this.closeEditor()
                     this.$emit("deleted")
                 })
+                .catch(err => console.log("delete error: "), err)
             }
         }
     },

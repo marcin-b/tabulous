@@ -131,8 +131,11 @@ export default {
     color: white;
     background: rgba(0, 0, 0, .5);
 }
+.form > button:focus, .form > button:active {
+    color: white;
+    background: rgba(0, 0, 0, .5);
+}
 .swapper {
-    color: #0cf;
     color: darkorange;
     cursor: pointer;
     font: normal bold 1em/150% "Muli", sans-serif;

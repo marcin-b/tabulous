@@ -1,4 +1,4 @@
-export default function ({ store, error, redirect }) {
+export default function ({ store, error }) {
     if (!store.state.authUser) {
         error({
             message: 'You need to be logged in to see that page',

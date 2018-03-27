@@ -7,23 +7,25 @@
         <h2>Sign Up</h2>
 
         <input
+            ref="username"
             id="username"
             v-model="user.name"
             type="text"
             placeholder="Username"
-             />
+            required
+            autofocus/>
         <input
             id="email"
             v-model="user.email"
             type="email"
             placeholder="email@example.com"
-             />
+            required />
         <input
             id="password"
             v-model="user.password"
             type="password"
             placeholder="Password"
-             />
+            required />
         <button type="submit" name="button">Submit</button>
 
         If you already signed up <span
@@ -57,12 +59,17 @@ export default {
             console.log("Error getting Token: ", err)
         })
     },
+    mounted() {
+        this.$refs.username.focus()
+    },
     methods: {
         swapRegLog() {
             this.$emit("swap", true)
+            console.log("ref",this.$refs.email)
+
         },
         submitReg() {
-            // Credential check for lack of Support for "required"
+            // Credential check for lack of Support of "required"
             if (!this.user.name) {
                 this.error = true
                 this.errorMsg = "Please enter a username."
@@ -74,21 +81,21 @@ export default {
                 this.errorMsg = "Please enter a password."
             } else {
 
+                this.$store.dispatch("signup", { user: this.user })
+                .then(() => {
+                    this.$router.replace("/")
+                    console.log("Signup DONE",)
+                    this.user = {}
+                })
+                .catch(({error}) => {
+                    this.error = true
+                    if (error.code == 23505) {
+                        this.errorMsg = "This email is already signed up"
+                    }
+                    console.log("Signup NIE udany", error)
+                })
             }
 
-            this.$store.dispatch("signup", { user: this.user })
-            .then(() => {
-                this.$router.replace("/")
-                console.log("Signup DONE",)
-                this.user = {}
-            })
-            .catch(({error}) => {
-                this.error = true
-                if (error.code == 23505) {
-                    this.errorMsg = "This email is already signed up"
-                }
-                console.log("Signup NIE udany", error)
-            })
         }
     },
 

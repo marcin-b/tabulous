@@ -22,6 +22,15 @@
                     Close Tab
                 </button>
 
+                <button @click="toggleAdder" type="button" id="add-to-sb">
+                    Add to<br> Songbook<br>
+
+                </button>
+                <transition name="slidein">
+                    <Songbooks
+                        v-if="showAdder" />
+                </transition>
+
                 <button
                     v-if="$store.state.authUser && updatedTab.creator_id == $store.state.authUser.id"
                     @click="toggleEditor"
@@ -51,6 +60,7 @@
                 :tab="updatedTab"/>
         </transition>
 
+
     </li>
 
 </template>
@@ -59,14 +69,16 @@
 import axios from '~/plugins/axios'
 import Scroller from '~/components/Scroller.vue'
 import Editor from '~/components/Editor.vue'
+import Songbooks from '~/components/Songbooks.vue'
 
 
 export default {
-    components: { Scroller, Editor },
+    components: { Scroller, Editor, Songbooks },
     name: "Tab",
     props: [ "tab" ],
     data () {
         return {
+            showAdder: false,
             isActive: false,
             showEditor: false,
             updatedTab: {
@@ -96,7 +108,11 @@ export default {
             console.log("@ tab delete");
             this.$emit("tabdeleted")
             this.toggleTab
-        }
+        },
+        toggleAdder() {
+            this.showAdder = !this.showAdder
+            console.log("HERE", this.showAdder);
+        },
     },
 
 }
@@ -122,6 +138,7 @@ li > h2 {
     transform: scale(.9, .9);
     transition: transform ease .1s;
     transform-origin: left;
+    text-shadow: 0;
     z-index: 1;
 }
 li > h2:hover {
@@ -130,7 +147,7 @@ li > h2:hover {
     transform: scale(1, 1);
 }
 li > span {
-    font: normal  400 .6em/200% "Lato", sans-serif;
+    font: normal  400 .7em/200% "Lato", sans-serif;
     align-self: flex-end;
     padding-bottom: 2px;
     position: absolute;
@@ -196,11 +213,21 @@ button:hover {
     background-color: #eee;
     color: #222;
     position: absolute;
-    /* left: -.5em; */
+    right: -52%;
     top: -2.2em;
     z-index: 6;
 }
+#add-to-sb {
+    position: absolute;
+    left: 0;
+    top: -3em;
+    z-index: 6;
 
+}
+#add-to-sb:hover {
+    transform: none;
+    color: darkorange;
+}
 #open-editor {
     position: absolute;
     right: -45%;
@@ -237,8 +264,19 @@ button:hover {
 .fade-leave-to {
     transform: translateX(-100vw);
 }
-.activeclass {
 
+.activeclass {
     text-shadow: 1px 2px 3px #000;
+}
+
+/* the adder */
+.slidein-leave-active, .slidein-enter-active {
+    transition: all ease .2s;
+}
+.slidein-enter {
+    transform: scale(0, 0);
+}
+.slidein-leave-to {
+    transform: scale(0, 0);
 }
 </style>

@@ -5,13 +5,17 @@
         <h2>Login</h2>
 
         <input
+            ref="email"
             v-model="user.email"
             type="email"
-            placeholder="email" />
+            placeholder="email"
+            required
+            autofocus />
         <input
             v-model="user.password"
             type="password"
-            placeholder="password">
+            placeholder="password"
+            required />
 
         <button type="submit" name="button">Login</button>
 
@@ -31,11 +35,16 @@
 <script>
 import axios from "~/plugins/axios"
 
+// this.$refs.email.focus()
+
 export default {
     name: "Login",
     data () {
         return {
-            user: {},
+            user: {
+                // email: null,
+                // password: null
+            },
             error: false,
             errorMsg: "",
         }
@@ -43,18 +52,30 @@ export default {
     methods: {
         swapRegLog() {
             this.$emit("swap", false)
+            console.log("ref",this.$refs.email);
         },
         submitLog() {
-
-            this.$store.dispatch("login", { user: this.user })
-            .then(resp => this.$router.replace("/"))
-            .catch(e => {
-                this.error = e.error
-                this.errorMsg = e.message
-                console.log("login NIE udany", e.message)
-            })
+            // Credential check for lack of Support of "required"
+            if (!this.user.email) {
+                this.error = true
+                this.errorMsg = "Please enter an email."
+            } else if (!this.user.password) {
+                this.error = true
+                this.errorMsg = "Please enter a password."
+            } else {
+                this.$store.dispatch("login", { user: this.user })
+                .then(resp => this.$router.replace("/"))
+                .catch(e => {
+                    this.error = e.error
+                    this.errorMsg = e.message
+                    console.log("login NIE udany", e.message)
+                })
+            }
         }
     },
+    mounted() {
+        this.$refs.email.focus()
+    }
 }
 </script>
 

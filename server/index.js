@@ -25,18 +25,18 @@ app.use(cookieParser())
 
 // Transform req & res to have the same API as express
 // So we can use res.status() & res.json()
-router.use((req, res, next) => {
-    Object.setPrototypeOf(req, app.request)
-    Object.setPrototypeOf(res, app.response)
-    req.res = res
-    res.req = req
-    next()
-})
+// router.use((req, res, next) => {
+//     Object.setPrototypeOf(req, app.request)
+//     Object.setPrototypeOf(res, app.response)
+//     req.res = res
+//     res.req = req
+//     next()
+// })
 
 // Cookies & Sessions
 app.use(session({
     secret: [process.env.SESSION_SECRET || secrets.sessSecret],
-    resave: false,
+    resave: true,
     saveUninitialized: false,
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 14 // 2weeks

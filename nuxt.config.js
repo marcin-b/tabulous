@@ -1,9 +1,5 @@
 module.exports = {
-    router: {
-        routes: [
-            { path: "*", props: true }
-        ]
-    },
+
   /*
   ** Headers of the page
   */
@@ -34,15 +30,16 @@ module.exports = {
     /*
     ** Run ESLINT on save
     */
-    extend (config, ctx) {
-      if (ctx.isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
-      }
-    }
-  }
+    // extend (config, ctx) {
+    //   if (ctx.client) {
+    //     config.module.rules.push({
+    //       enforce: 'pre',
+    //       test: /\.(js|vue)$/,
+    //       loader: 'eslint-loader',
+    //       exclude: /(node_modules)/
+    //     })
+    //   }
+    // }
+    },
+
 }

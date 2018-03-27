@@ -63,12 +63,16 @@ header > * {
     z-index: 5;
 }
 
- div > a, div > span {
+div > a, div > span {
     color: #eee;
     cursor: pointer;
-    text-decoration: underline darkorange;
+    /* text-decoration: underline darkorange; */
+    text-decoration: none;
     font: normal 400 1.2em/130% "Lato", sans-serif;
     text-shadow: 1px 1px 0px #000;
+}
+div > a:hover, div > span:hover {
+    text-decoration: underline darkorange;
 }
 .search {
     display: flex;
@@ -76,15 +80,16 @@ header > * {
 }
 header input {
     font-family: Muli;
-    border: 1px solid;
+    /* border: 1px solid; */
+    border: 0;
     font-size: 1.2em;
     line-height: 100%;
     height: 1.8em;
     width: 180px;
     padding: 0 0 0 .5em;
 }
-header input:focus {
-    border: 1px solid darkorange;
+input:focus {
+    border: 0;
 }
 header button {
     background-color: transparent;
