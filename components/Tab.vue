@@ -22,13 +22,18 @@
                     Close Tab
                 </button>
 
-                <button @click="toggleAdder" type="button" id="add-to-sb">
+                <button
+                    v-if="$store.state.authUser"
+                    @click="toggleAdder"
+                    type="button"
+                    id="add-to-sb">
                     Add to<br> Songbook<br>
-
                 </button>
+
                 <transition name="slidein">
                     <Songbooks
-                        v-if="showAdder" />
+                        v-if="showAdder"
+                        :tabId="updatedTab.id" />
                 </transition>
 
                 <button

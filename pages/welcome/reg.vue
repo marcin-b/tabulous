@@ -65,9 +65,8 @@ export default {
     methods: {
         swapRegLog() {
             this.$emit("swap", true)
-            console.log("ref",this.$refs.email)
-
         },
+
         submitReg() {
             // Credential check for lack of Support of "required"
             if (!this.user.name) {

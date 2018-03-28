@@ -3,8 +3,10 @@
     <section>
         <h3>Add to:</h3>
         <span
-        v-for="(songbook, index) in songbooks"
-        :key="index">
+            @click="addTab(songbook.id)"
+            v-for="(songbook, index) in songbooks"
+            :class="{ chosensongbook: sbClicked }"
+            :key="index">
             {{songbook.name}}
         </span>
 
@@ -17,12 +19,14 @@ import axios from '~/plugins/axios'
 
 export default {
     name: "Songadder",
+    props: ["tabId"],
     data() {
         return {
-            songbooks: []
+            songbooks: [],
+            sbClicked: false,
         }
     },
-    created() {
+    beforeCreate() {
         axios.get("/api/songbooks")
         .then(({data}) => {
             console.log("get SB: ", data)
@@ -31,6 +35,23 @@ export default {
         })
         .catch(err => console.log("get SB err: ", err))
     },
+    methods: {
+        addTab(sbId) {
+            console.log("SB ID:", sbId);
+            let info = {
+                sbId,
+                tabId: this.tabId
+            }
+            axios.post("/api/add-tab-to-songbook", info)
+            .then(res => {
+                console.log("sb res: ", res);
+            })
+            .catch(err => console.log("ERR: ", err))
+        },
+        pickSongbook(sb){
+            this.sbClicked = !this.sbClicked
+        }
+    }
 }
 </script>
 
@@ -54,6 +75,7 @@ span {
     text-align: left;
     font: normal 1em/150% "Muli", sans-serif;
     padding: .2em 0;
+    cursor: pointer;
 }
 span:hover {
     color: darkorange;

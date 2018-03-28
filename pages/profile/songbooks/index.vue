@@ -3,11 +3,14 @@
 <section>
 
     <ul>
+        <li v-if="songbooks.length === 0">Create your first Songbook!</li>
         <li
+        v-else
         v-for="(songbook, index) in songbooks"
         :key="index">
 
             <nuxt-link
+                :tabs="songbook.tabs"
                 :to="'/profile/songbooks/' + songbook.id">
                 {{songbook.name}}
             </nuxt-link>
@@ -56,8 +59,9 @@ section {
     flex-direction: column;
     align-items: center;
 }
-a {
+li, a {
     color: white;
+    font: normal normal 1em/150% "Muli", sans-serif;
     text-decoration: none;
 }
 

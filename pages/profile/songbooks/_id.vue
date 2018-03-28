@@ -1,22 +1,45 @@
 <template lang="html">
-    <p>
+    <section>
+        <nuxt-link to="/profile/songbooks">
+            Back to your songbooks
+        </nuxt-link>
+        <h2>{{songbook.name}} id : {{$route.params.id}}</h2>
 
-        SOME RANDOM TEXT and the Songbook ID {{$route.params.id}}
-
+        <ul>
+            <li
+                v-for="(tab, index) in songbook.tabs"
+                :key="index" >
+                Tab id: {{tab}}
+            </li>
+        </ul>
         <button
         @click="deleteSb"
-        type="button"
-        >
+        type="button" >
             Delete
         </button>
 
-    </p>
+    </section>
 </template>
 
 <script>
 import axios from "~/plugins/axios"
 
 export default {
+    data() {
+        return {
+            songbook: {}
+        }
+    },
+    asyncData(context) {
+        return axios.get("/api/songbook/" + context.params.id)
+        .then(({data}) => {
+            console.log("get SB: ", data)
+            return {
+                songbook: data
+            }
+        })
+        .catch(err => console.log("get SB err: ", err))
+    },
     methods: {
         deleteSb() {
             // Confirm before delete

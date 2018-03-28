@@ -43,4 +43,11 @@ DELETE FROM users
 WHERE id = $1;
 
 -- Update row
-UPDATE users SET img = '/img/defaultavatar.png' WHERE id = 1;
+UPDATE users SET img = '/img/saitama.jpg' WHERE id = 2;
+
+-- ADD tabs to songbook array
+UPDATE songbooks SET tabs = tabs || $1
+WHERE id = $2;
+-- REMOVE tabs to songbook array
+UPDATE songbooks SET tabs = (tabs, $1)
+WHERE id = $2;
