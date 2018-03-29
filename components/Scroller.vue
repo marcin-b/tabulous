@@ -61,15 +61,7 @@ export default {
 
     },
     mounted() {
-        // determine initial Y offset of pre element + height for controls
-        this.yoff = document.querySelector("pre").getBoundingClientRect().top + 60
-
-    },
-    mounted() {
-
-        this.yoff = document.getElementsByTagName("pre")[0].getBoundingClientRect().y
-    },
-    created() {
+        this.yoff = document.querySelector("pre").getBoundingClientRect().y
         window.addEventListener("keyup", (e) => {
             if (e.which === 39) {
                 this.increaseSpeed()
@@ -88,7 +80,7 @@ export default {
             console.log("scrollY: ", this.currY)
             this.step += this.scrollSpeed
 
-            if (this.currY + window.innerHeight - this.yoff <=  document.querySelector("pre").clientHeight  && this.scrolling) {
+            if ((this.currY + this.yoff + 400) <=  (document.querySelector("pre").clientHeight)  && this.scrolling) {
                 if (this.step >= 10) {
                     this.currY = window.pageYOffset + 1;
                     window.scroll(0, this.currY);
@@ -138,15 +130,19 @@ export default {
 
 <style lang="css" scoped>
 .scroll-cont {
-    position: relative;
-    left: 170px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    /* position: relative; */
+    margin: 0 auto;
 }
 .scroller {
     display: flex;
     flex-flow: row;
     position: fixed;
     top: 90vh;
-    /* left: 25%; */
+
     z-index: 5;
 }
 /* Contol Buttons */

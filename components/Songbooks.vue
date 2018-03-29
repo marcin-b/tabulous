@@ -29,7 +29,7 @@ export default {
     beforeCreate() {
         axios.get("/api/songbooks")
         .then(({data}) => {
-            console.log("get SB: ", data)
+            console.log("get SBs: ", data)
             this.songbooks = data
 
         })

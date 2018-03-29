@@ -60,7 +60,7 @@ router.post("/login", (req, res) => {
     const q = `SELECT * FROM users WHERE email = $1`
     db.query(q, email)
         .then(result => {
-            console.log("Login Query res: ", result[0]);
+            console.log("Credential Check...");
             // Destructure result
             const { id, username, img, hashedpass } = result[0]
             // console.log("destructr: ", id, username, img, hashedpass);

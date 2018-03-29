@@ -46,13 +46,14 @@ router.get("/tabs", (req, res, next) => {
 })
 
 // GET single tab
-router.get("/tab/:id", (req, res, next) => {
+router.get("/tab/:id", (req, res) => {
 
-    console.log("Inside GET SINGLE TAB");
-    db.query(`SELECT * FROM tabs WHERE id = $1`, [ req.params.id ])
+    console.log("Inside GET SINGLE TAB", req.params.id);
+    db.query(`SELECT * FROM tabs WHERE id = $1`, req.params.id)
         .then(result => {
-            res.json(result)
+            console.log("tab get DONE");
+            res.json(result[0])
         })
-        .catch(err => res.json({ response: "Error: " + err }))
+        .catch(err => res.json({ Error: err }))
 })
 export default router

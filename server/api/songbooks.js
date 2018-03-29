@@ -17,8 +17,10 @@ router.post("/create-songbook", (req, res) => {
     `;
     db.query(q, params)
         .then((result) => {
-            console.log("create new songbook DONE", result);
+            console.log("create new songbook DONE", result[0]);
+
             res.json({newSongbook:result[0]})
+
         })
         .catch(err => {
             console.log("Error adding SB", err);
@@ -49,20 +51,55 @@ router.get("/songbooks", (req, res) => {
 
 // GET one songbook
 router.get("/songbook/:id", (req, res) => {
-    console.log("Req session at SB", req.session);
-    console.log("Auth User", req.session.authUser.id);
+
     const q = `
         SELECT * FROM songbooks
         WHERE id = $1
     `
     db.query(q, req.params.id)
     .then(songbook => {
-        console.log("GOT Ssongbooks:", songbook);
-        res.json( songbook[0] )
+
+        console.log("GOT Songbooks:", songbook[0]);
+
+        // Check if songbook has songs added
+        if (songbook[0].tabs) {
+
+            console.log("tab array", songbook[0].tabs);
+
+            var valueStr = ""
+            // Generate "$x" string to match length of tab array
+            songbook[0].tabs.forEach((tab, index) => {
+                if ((index+1) === songbook[0].tabs.length) {
+                    valueStr += "$" + (index+1)
+                } else {
+                    valueStr += "$" + (index+1) + ", "
+                }
+            })
+            console.log("tab vals: ", valueStr);
+
+            let getTab = `
+            SELECT title, artist, id, type, haslyrics FROM tabs
+            WHERE id IN (${valueStr})
+            `
+            db.query(getTab, songbook[0].tabs)
+            .then(tabs => {
+                console.log("tabs gotten: ", tabs);
+                res.json({
+                    songbook: songbook[0],
+                    tabs
+                })
+            })
+            .catch(err => res.json({ "Error geting tabs from SB": err }))
+
+        // If SB has no song retrun the SB
+        } else {
+            res.json({ songbook : songbook[0] })
+        }
+
     })
     .catch(err => {
-        console.log("Error getting BOoks", err);
-        res.json(err)
+        console.log("Error getting Books", err);
+        res.json({ Error: err })
     })
 })
 

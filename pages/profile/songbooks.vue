@@ -1,50 +1,53 @@
 <template>
 <section>
 
-    <h1>Your Songbooks</h1>
+    <div v-if="$route.path === '/profile/songbooks'">
 
-    <div class="persp">
+        <h1>Your Songbooks</h1>
 
-        <transition
+        <div class="persp">
+
+            <transition
             mode="out-in"
             name="sf"
             >
 
             <button
-                v-if="!showInput"
-                @click="toggleAdder"
-                key="add"
-                id="add-sb">
-                Create new Songbook
-            </button>
+            v-if="!showInput"
+            @click="toggleAdder"
+            key="add"
+            id="add-sb">
+            Create new Songbook
+        </button>
 
-            <form
-                v-else
-                key="form"
-                @submit.prevent="submitNewSb()"
-                class="">
+        <form
+        v-else
+        key="form"
+        @submit.prevent="submitNewSb()"
+        class="">
 
-                <div class="col-cont">
-                    <label>Give it a name</label>
+        <div class="col-cont">
+            <label>Give it a name</label>
 
-                    <div class="">
-                        <input
-                        autofocus
-                        v-model="newSongbook.name"
-                        type="text"
-                        placeholder="My Songbook"
-                        ref="name"
-                         />
+            <div class="">
+                <input
+                autofocus
+                v-model="newSongbook.name"
+                type="text"
+                placeholder="My Songbook"
+                ref="name"
+                />
 
-                        <button key="sub" type="submit">+</button>
-                    </div>
+                <button key="sub" type="submit">+</button>
+            </div>
 
-                </div>
+        </div>
 
-            </form>
+    </form>
 
-        </transition>
+</transition>
 
+</div>
     </div>
 
     <nuxt-child
@@ -86,6 +89,9 @@ export default {
 </script>
 
 <style scoped>
+section {
+    /* margin-top: 1em; */
+}
 .persp {
     perspective: 400px;
 }

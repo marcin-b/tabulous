@@ -99,6 +99,7 @@ export default {
 .ed-container {
     position: relative;
     left: -21%;
+    z-index: 3;
 }
 .tab-editor {
     background-color: #222;
@@ -109,7 +110,6 @@ export default {
     margin: .3em 0 1em;
     padding: .5em .5em 1em;
     position: absolute;
-    z-index: 3;
 }
 .meta-cont {
     display: flex;
@@ -195,9 +195,10 @@ button:hover {
     transform-origin: center;
 }
 #delete-tab {
-    /* position: absolute;
-    top: 0em;
-    left: -7.5em; */
+    color: red;
+    align-self: flex-end;
+    position: absolute;
+    right: 0;
 }
 #update-tab:hover, #update-tab:focus {
     color: #000;

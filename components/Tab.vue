@@ -168,9 +168,12 @@ li > span {
 /* Actual Tab Pre Element */
 .pre-tab-container {
     position: relative;
-    align-self: flex-start;
-    left: -26%;
+
     z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
 }
 .pre-cont {
     background-color: #222;
@@ -180,21 +183,6 @@ li > span {
     padding: .5em;
     position: absolute;
     /* left: 100px; */
-}
-pre {
-    background-color: #eee;
-    background-image: url(~/assets/img/rice-paper.png);
-    border: 1px solid #aaa;
-    box-shadow: inset 0px 2px 5px 0px #222;
-    color: #000;
-    font: normal normal 1.1em/110% "Inconsolata", monospace;
-    letter-spacing: -.4px;
-    padding: 1em 1.5em;
-    margin-bottom: 3em;
-    text-shadow: 0px 1px 0px #fff;
-    text-rendering: optimizeLegibility;
-    width: 700px;
-    white-space: pre-wrap;
 }
 button {
     background-color: #222;
@@ -218,13 +206,13 @@ button:hover {
     background-color: #eee;
     color: #222;
     position: absolute;
-    right: -52%;
+    right: -26%;
     top: -2.2em;
     z-index: 6;
 }
 #add-to-sb {
     position: absolute;
-    left: 0;
+    left: -26%;
     top: -3em;
     z-index: 6;
 
@@ -235,7 +223,7 @@ button:hover {
 }
 #open-editor {
     position: absolute;
-    right: -45%;
+    right: -20%;
     top: 1em;
     z-index: 6;
 }

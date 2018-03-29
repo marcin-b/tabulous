@@ -1,22 +1,55 @@
 <template lang="html">
     <section>
-        <nuxt-link to="/profile/songbooks">
-            Back to your songbooks
+        <nuxt-link to="/profile/songbooks" id="back-to">
+            <span class="accent"><-</span> back to your Songbooks
         </nuxt-link>
-        <h2>{{songbook.name}} id : {{$route.params.id}}</h2>
+        <h2>{{songbook.name}}</h2>
 
         <ul>
+            <li v-if="!tabs" id="get-started">
+                <i>
+                    No songs in this Songbook yet.
+                </i>
+                <nuxt-link to="/" id="starter">
+                    Let's change that!
+                </nuxt-link>
+
+            </li>
+
             <li
-                v-for="(tab, index) in songbook.tabs"
+                v-else
+                v-for="(tab, index) in tabs"
                 :key="index" >
-                Tab id: {{tab}}
+
+                <nuxt-link
+                    :key="index"
+                    :to="`/tab/${tab.id}`" >
+                {{tab.title}} - {{tab.artist}}
+                </nuxt-link>
+
+                <span>
+                    <span class="accent">{{ tab.type }}</span>
+
+                    <span v-if="tab.haslyrics">
+                        |
+                        <span class="accent">lyrics</span>
+                    </span>
+
+                </span>
+
             </li>
         </ul>
-        <button
-        @click="deleteSb"
-        type="button" >
+
+        <div>
+            <button
+            @click="deleteSb"
+            type="button"
+            id="delete-sb" >
             Delete
-        </button>
+            </button>
+            <span>this Songbook</span>
+
+        </div>
 
     </section>
 </template>
@@ -27,7 +60,8 @@ import axios from "~/plugins/axios"
 export default {
     data() {
         return {
-            songbook: {}
+            songbook: {},
+            tabs: []
         }
     },
     asyncData(context) {
@@ -35,11 +69,13 @@ export default {
         .then(({data}) => {
             console.log("get SB: ", data)
             return {
-                songbook: data
+                songbook: data.songbook,
+                tabs: data.tabs
             }
         })
         .catch(err => console.log("get SB err: ", err))
     },
+
     methods: {
         deleteSb() {
             // Confirm before delete
@@ -57,6 +93,80 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+#back-to {
+    outline: 5px dotted #444;
+    color: #eee;
+    display: block;
+    font: normal normal 1em/150% "Inconsolata", monospace;
+    text-decoration: none;
+    padding: 0 1em;
+    margin: 1em 0;
+    tansition: all ease .1s;
+}
+#back-to:hover, #back-to:active, #back-to:focus {
+    outline: 5px dotted #FF8C00;
+}
 
+ul {
+    margin-bottom: 2em;
+}
+li {
+    border-bottom: 1px dashed #444;
+    position: relative;
+}
+li > a {
+    color: #eee;
+    display: inline-block;
+    font: normal 400 1.4em/150% "Lato", sans-serif;
+    position: relative;
+    text-decoration: none;
+    letter-spacing: .03em;
+    margin: 0;
+    padding-right: 3.3em;
+    transition: transform ease .1s;
+    transform-origin: left;
+    transform: scale(.9, .9);
+    text-shadow: none;
+}
+li > a:hover {
+    text-shadow: 1px 2px 2px #000;
+    text-decoration: underline darkorange;
+    transform: scale(1, 1);
+}
+li > span {
+    font: normal  400 .7em/200% "Lato", sans-serif;
+    align-self: flex-end;
+    padding-bottom: 2px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+#get-started {
+    border: 0;
+}
+i {
+    display: block;
+}
+i, div > span {
+    font: normal normal 1em/150% "Inconsolata", monospace;
+}
+#starter {
+    text-decoration: underline darkorange;
+    margin: 1em 0;
+}
+.accent {
+    color: darkorange;
+}
+#delete-sb {
+
+    font: normal normal 1em/150% "Inconsolata", monospace;
+    background: none;
+    color: red;
+    border: 1px solid #eee;
+    padding: 0 1em;
+    margin-top: 1em;
+    margin-right: 1em;
+}
 </style>

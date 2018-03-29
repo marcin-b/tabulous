@@ -5,6 +5,8 @@
 
         <Nav/>
 
+        <Alphabet />
+
         <button v-if="!show && $store.state.authUser" @click="show = !show" id="addtab">
             Add new Tab
         </button>
@@ -32,11 +34,13 @@ import axios from '~/plugins/axios'
 import MyFooter from '~/components/Footer.vue'
 import MyHeader from '~/components/Header.vue'
 import Nav from '~/components/Nav.vue'
+import Alphabet from '~/components/Alphabet.vue'
 import Tabform from '~/components/Tabform.vue'
 import Tabs from '~/components/Tabs.vue'
 
 export default {
     components: {
+        Alphabet,
         MyHeader,
         Nav,
         Tabform,
