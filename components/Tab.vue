@@ -32,6 +32,7 @@
 
                 <transition name="slidein">
                     <Songbooks
+                        @hideAdder="toggleAdder"
                         v-if="showAdder"
                         :tabId="updatedTab.id" />
                 </transition>
@@ -162,13 +163,10 @@ li > span {
 
     z-index: 1;
 }
-.accent {
-    color: darkorange;
-}
+
 /* Actual Tab Pre Element */
 .pre-tab-container {
     position: relative;
-
     z-index: 3;
     display: flex;
     flex-direction: column;

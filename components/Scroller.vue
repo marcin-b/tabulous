@@ -77,10 +77,10 @@ export default {
     },
     methods: {
         scroller() {
-            console.log("scrollY: ", this.currY)
+            console.log("scrollY: ", this.yoff)
             this.step += this.scrollSpeed
-
-            if ((this.currY + this.yoff + 400) <=  (document.querySelector("pre").clientHeight)  && this.scrolling) {
+            // 60 compensates the bottom margin of <pre/>
+            if (this.currY - 60 <=  (document.querySelector("pre").clientHeight + this.yoff - window.innerHeight)  && this.scrolling) {
                 if (this.step >= 10) {
                     this.currY = window.pageYOffset + 1;
                     window.scroll(0, this.currY);

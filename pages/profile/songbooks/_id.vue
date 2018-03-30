@@ -94,6 +94,11 @@ export default {
 </script>
 
 <style scoped>
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 #back-to {
     outline: 5px dotted #444;
     color: #eee;
@@ -102,7 +107,7 @@ export default {
     text-decoration: none;
     padding: 0 1em;
     margin: 1em 0;
-    tansition: all ease .1s;
+    transition: all ease .2s;
 }
 #back-to:hover, #back-to:active, #back-to:focus {
     outline: 5px dotted #FF8C00;
@@ -153,6 +158,7 @@ i, div > span {
     font: normal normal 1em/150% "Inconsolata", monospace;
 }
 #starter {
+    transform-origin: center;
     text-decoration: underline darkorange;
     margin: 1em 0;
 }

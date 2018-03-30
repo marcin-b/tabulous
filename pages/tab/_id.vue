@@ -6,7 +6,7 @@
         <Nav/>
 
         <nuxt-link @click.native="$router.back()" to="/profile/songbooks" id="back-to">
-            <span class="accent"><-</span> back to your Songbook
+            <span class="accent"><-</span> Back
         </nuxt-link>
 
         <h2>{{tab.title}} - {{tab.artist}}</h2>
@@ -73,6 +73,7 @@ pre {
     text-decoration: none;
     padding: 0 1em;
     margin: 1em 0;
+    transition: all ease .2s;
 }
 #back-to:hover, #back-to:active, #back-to:focus {
     outline: 5px dotted #FF8C00;

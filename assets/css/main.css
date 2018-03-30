@@ -150,3 +150,6 @@ pre {
     width: 700px;
     white-space: pre-wrap;
 }
+.accent {
+    color: darkorange;
+}
