@@ -1,7 +1,9 @@
 <template>
 <section>
 
-    <div v-if="$route.path === '/profile/songbooks'">
+    <div
+        v-if="$route.path === '/profile/songbooks'"
+        class="col-cont">
 
         <h1>Your Songbooks</h1>
 
@@ -12,42 +14,42 @@
             name="sf"
             >
 
-            <button
-            v-if="!showInput"
-            @click="toggleAdder"
-            key="add"
-            id="add-sb">
-            Create new Songbook
-        </button>
+                <button
+                    v-if="!showInput"
+                    @click="toggleAdder"
+                    key="add"
+                    id="add-sb">
+                    Create new Songbook
+                </button>
 
-        <form
-        v-else
-        key="form"
-        @submit.prevent="submitNewSb()"
-        class="">
+                <form
+                    v-else
+                    key="form"
+                    @submit.prevent="submitNewSb()"
+                    class="">
 
-        <div class="col-cont">
-            <label>Give it a name</label>
+                    <div class="col-cont">
+                        <label>Give it a name</label>
 
-            <div class="">
-                <input
-                autofocus
-                v-model="newSongbook.name"
-                type="text"
-                placeholder="My Songbook"
-                ref="name"
-                />
+                        <div class="">
+                            <input
+                            autofocus
+                            v-model="newSongbook.name"
+                            type="text"
+                            placeholder="My Songbook"
+                            ref="name"
+                            />
 
-                <button key="sub" type="submit">+</button>
-            </div>
+                            <button key="sub" type="submit">+</button>
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </transition>
 
         </div>
-
-    </form>
-
-</transition>
-
-</div>
     </div>
 
     <nuxt-child
@@ -58,6 +60,11 @@
 <script>
 import axios from "~/plugins/axios"
 export default {
+    transition: {
+        name: "page",
+        mode: "out-in"
+
+    },
     data() {
         return {
             showInput: false,

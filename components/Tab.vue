@@ -38,7 +38,7 @@
                 </transition>
 
                 <button
-                    v-if="$store.state.authUser && updatedTab.creator_id == $store.state.authUser.id"
+                    v-if="$store.state.authUser && tab.creator_id == $store.state.authUser.id"
                     @click="toggleEditor"
                     type="button"
                     id="open-editor">

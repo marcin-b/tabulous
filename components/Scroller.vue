@@ -61,17 +61,25 @@ export default {
 
     },
     mounted() {
+        console.log("SCROLLER MOUNTED");
         this.yoff = document.querySelector("pre").getBoundingClientRect().y
+
         window.addEventListener("keyup", (e) => {
+            e.preventDefault()
+            e.stopPropagation()
             if (e.which === 39) {
                 this.increaseSpeed()
             } else if (e.which === 37) {
                 this.decreaseSpeed()
             } else if (e.which === 17) {
-                e.preventDefault()
+
                 this.startScroll();
+                // e.stopImmediatePropagation()
+                // e.stopImmediatePropagation()
             } else if (e.which === 13 && document.querySelector("pre")) {
+                console.log("enter");
                 this.scrollTop()
+
             }
         })
     },
@@ -99,7 +107,7 @@ export default {
         },
         startScroll() {
             if (!this.scrolling && document.querySelector("pre")) {
-                this.scrolling = true;
+                this.scrolling = !this.scrolling;
                 requestAnimationFrame(this.scroller)
             } else {
                 this.scrolling = false;
@@ -119,9 +127,9 @@ export default {
             }
         },
         scrollTop() {
-            console.log("doc", this.$refs)
-            console.log(Math.round(document.getElementsByTagName("pre")[0].getBoundingClientRect().y));
-            window.scroll(0, document.getElementsByTagName("pre")[0].getBoundingClientRect().y - 80)
+            this.yoff = document.querySelector("pre").getBoundingClientRect().y
+            // console.log("TESTING", Math.round(document.querySelector("pre").scrollHeight));
+            window.scroll(0, this.yoff - 80)
         }
     },
 
@@ -155,7 +163,7 @@ button, #speed-cont {
     flex-flow: column;
     align-items: center;
     cursor: pointer;
-    font: normal 1em/130% "Muli", sans-serif;
+    font: normal 1.2em/130% "Muli", sans-serif;
     text-rendering: optimizeLegibility;
     margin: .5em;
     padding: 0 .5em;

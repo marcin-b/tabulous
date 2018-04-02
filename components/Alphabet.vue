@@ -1,6 +1,6 @@
 <template>
 
-    <nav>
+    <nav :class="{ notlogged: !$store.state.authUser }">
         <a href="#A">A</a>
         <a href="#B">B</a>
         <a href="#C">C</a>
@@ -33,6 +33,10 @@
 
 <script>
 export default {
+    data() {
+        return {
+        }
+    }
 }
 </script>
 
@@ -66,5 +70,7 @@ nav > a:hover, nav > a:active, nav > a:focus {
     text-shadow: 0px 2px 1px #000;
 
 }
-
+.notlogged {
+    background-position: 0 calc((50px + 60px) * -1);
+}
 </style>

@@ -49,5 +49,5 @@ UPDATE users SET img = '/img/saitama.jpg' WHERE id = 2;
 UPDATE songbooks SET tabs = tabs || $1
 WHERE id = $2;
 -- REMOVE tabs to songbook array
-UPDATE songbooks SET tabs = (tabs, $1)
+UPDATE songbooks SET tabs = array_remove(tabs, $1)
 WHERE id = $2;

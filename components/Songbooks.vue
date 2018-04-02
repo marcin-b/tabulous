@@ -67,7 +67,7 @@ export default {
                 console.log("sb res: ", res);
                 // emmit hide event
                 this.sbClicked = !this.sbClicked
-                setTimeout(this.hide, 1000)
+                setTimeout(this.hide, 800)
             })
             .catch(err => console.log("ERR: ", err))
         },

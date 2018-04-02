@@ -50,13 +50,12 @@ router.post("/signup", (req, res) => {
 })
 
 router.post("/login", (req, res) => {
-    console.log("Inside Login POST", req.body);
+    console.log("Login POST for user", req.body.email);
 
     // Destructure req.body
     const { email, password } = req.body;
 
     // Query DB
-
     const q = `SELECT * FROM users WHERE email = $1`
     db.query(q, email)
         .then(result => {
@@ -67,13 +66,13 @@ router.post("/login", (req, res) => {
             checkPassword(password, hashedpass)
                 .then(doesMatch => {
                     if (doesMatch) {
-                        console.log("gutes PW? ", doesMatch, req.url);
+                        console.log("Correct Password? ", doesMatch);
                         // Create User Session
                         req.session.authUser = {
                             username,
                             email,
                             id,
-                            img,
+                            img
                         }
                         console.log("Login AUTH: ", req.session.authUser);
                         res.json(req.session.authUser)
@@ -104,14 +103,5 @@ router.get("/logout", (req, res) => {
     console.log("LOGOUT SESSION: ", req.session);
     res.json({ successful: true })
 })
-// router.get('*', function(req, res) {
-//     if(!req.session.user && req.url != "/welcome") {
-//         console.log("no Session user");
-//         res.redirect("/welcome")
-//     } else {
-//         console.log("session", req.session.user);
-//         res.redirect("/")
-//     }
-// });
 
 export default router

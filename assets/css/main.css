@@ -153,3 +153,15 @@ pre {
 .accent {
     color: darkorange;
 }
+/* Page transitions */
+/* default */
+.page-enter-active, .page-leave-active {
+    transition: all ease .5s;
+
+}
+.page-enter {
+    opacity: 0
+}
+.page-leave {
+    opacity: 0
+}

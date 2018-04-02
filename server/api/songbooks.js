@@ -32,20 +32,19 @@ router.post("/create-songbook", (req, res) => {
 
 // Get Songbooks
 router.get("/songbooks", (req, res) => {
-    console.log("Req session at SB", req.session);
-    console.log("Auth User", req.session.authUser.id);
+    console.log("Geto SBs of User with id: ", req.session.authUser.id);
     const q = `
         SELECT * FROM songbooks
         WHERE owner_id = $1
     `
     db.query(q, req.session.authUser.id)
     .then(songbooks => {
-        console.log("GOT Ssongbooks:", songbooks);
+        console.log("GOT Songbooks:", songbooks);
         res.json( songbooks )
     })
     .catch(err => {
-        console.log("Error getting BOoks", err);
-        res.json(err)
+        console.log("Error getting SBs", err);
+        res.json({ error: err })
     })
 })
 
@@ -62,12 +61,10 @@ router.get("/songbook/:id", (req, res) => {
         console.log("GOT Songbooks:", songbook[0]);
 
         // Check if songbook has songs added
-        if (songbook[0].tabs) {
+        if (songbook[0].tabs && songbook[0].tabs.length > 0) {
 
-            console.log("tab array", songbook[0].tabs);
-
-            var valueStr = ""
             // Generate "$x" string to match length of tab array
+            var valueStr = ""
             songbook[0].tabs.forEach((tab, index) => {
                 if ((index+1) === songbook[0].tabs.length) {
                     valueStr += "$" + (index+1)
@@ -75,15 +72,14 @@ router.get("/songbook/:id", (req, res) => {
                     valueStr += "$" + (index+1) + ", "
                 }
             })
-            console.log("tab vals: ", valueStr);
-
+            console.log("value string", valueStr);
             let getTab = `
             SELECT title, artist, id, type, haslyrics FROM tabs
             WHERE id IN (${valueStr})
             `
             db.query(getTab, songbook[0].tabs)
             .then(tabs => {
-                console.log("tabs gotten: ", tabs);
+                console.log("tabs gotten");
                 res.json({
                     songbook: songbook[0],
                     tabs
@@ -99,7 +95,7 @@ router.get("/songbook/:id", (req, res) => {
     })
     .catch(err => {
         console.log("Error getting Books", err);
-        res.json({ Error: err })
+        res.json({ error: err })
     })
 })
 
@@ -137,6 +133,25 @@ router.post("/add-tab-to-songbook", (req, res) => {
     .then(resp => {
         console.log("Resp? ", resp);
         res.json({ resp: "Tab was added" })
+
+    })
+    .catch(err => res.json({ Error: err }))
+
+})
+
+// Delete tab from Songbooks
+router.post("/delete-song-from-songbook", (req, res) => {
+    console.log("inside deleteing tab: ", req.body);
+    const { tabId, sbId } = req.body
+    const params = [ tabId, sbId ]
+    const q = `
+        UPDATE songbooks SET tabs = array_remove(tabs, $1)
+        WHERE id = $2;
+    `
+    db.query(q, params)
+    .then(resp => {
+        console.log("Resp? ", resp);
+        res.json({ resp: "Tab was Deleted" })
 
     })
     .catch(err => res.json({ Error: err }))

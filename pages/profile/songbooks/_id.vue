@@ -6,7 +6,7 @@
         <h2>{{songbook.name}}</h2>
 
         <ul>
-            <li v-if="!tabs" id="get-started">
+            <li v-if="!tabs || tabs.length === 0" id="get-started">
                 <i>
                     No songs in this Songbook yet.
                 </i>
@@ -17,11 +17,15 @@
             </li>
 
             <li
+
                 v-else
                 v-for="(tab, index) in tabs"
-                :key="index" >
+                :key="index"
+                @mouseover.stop="songHovered = index"
+                @mouseleave.stop="songHovered = false" >
 
                 <nuxt-link
+
                     :key="index"
                     :to="`/tab/${tab.id}`" >
                 {{tab.title}} - {{tab.artist}}
@@ -35,12 +39,21 @@
                         <span class="accent">lyrics</span>
                     </span>
 
+
+
+                </span>
+                <span
+                    @click="deleteTab(tab.id, index)"
+                    :class="{ hovered: songHovered }"
+                    v-if="songHovered === index && songbook.owner_id === $store.state.authUser.id"
+                    id="del-tab">
+                    X
                 </span>
 
             </li>
         </ul>
 
-        <div>
+        <div v-if="songbook.owner_id === $store.state.authUser.id">
             <button
             @click="deleteSb"
             type="button"
@@ -61,7 +74,8 @@ export default {
     data() {
         return {
             songbook: {},
-            tabs: []
+            tabs: [],
+            songHovered: false,
         }
     },
     asyncData(context) {
@@ -87,7 +101,24 @@ export default {
                     console.log("delete result", data)
 
                 })
+                .catch(err => console.log("Error deleting SB: ", err))
             }
+        },
+        deleteTab(tabId, index) {
+            let info = {
+                tabId,
+                sbId: this.$route.params.id
+            }
+            console.log("tab id: ", info);
+            if (confirm("Are you sure you want to remove this Song?"))
+             {
+                axios.post("/api/delete-song-from-songbook/", info)
+                .then(({data}) => {
+                    this.tabs.splice(index, 1)
+                })
+                .catch(err => console.log("Error removing tab: ", err))
+            }
+
         }
     }
 }
@@ -119,7 +150,9 @@ ul {
 li {
     border-bottom: 1px dashed #444;
     position: relative;
+    padding-right: 2em;
 }
+
 li > a {
     color: #eee;
     display: inline-block;
@@ -144,7 +177,7 @@ li > span {
     align-self: flex-end;
     padding-bottom: 2px;
     position: absolute;
-    right: 0;
+    right: 2em;
     bottom: 0;
     z-index: 1;
 }
@@ -166,13 +199,21 @@ i, div > span {
     color: darkorange;
 }
 #delete-sb {
-
+    cursor: pointer;
+    color: red;
     font: normal normal 1em/150% "Inconsolata", monospace;
     background: none;
-    color: red;
     border: 1px solid #eee;
     padding: 0 1em;
     margin-top: 1em;
     margin-right: 1em;
+}
+#del-tab {
+    position: absolute;
+    right: .5em;
+    cursor: pointer;
+}
+.hovered {
+
 }
 </style>

@@ -25,7 +25,7 @@ router.post("/addtab", (req, res) => {
 router.post("/update-tab", (req, res) => {
     console.log("Inside update");
 const { title, artist, type, haslyrics, tab, id } = req.body
-    console.log("tab id & tab", id, tab);
+
     const params = [ title, artist, type, haslyrics, tab, id ]
     const q = `
         UPDATE tabs
@@ -34,11 +34,11 @@ const { title, artist, type, haslyrics, tab, id } = req.body
         WHERE id = $6
     `;
     db.query(q, params)
-        .then(result => {
-            console.log("Update Done: ", result);
-            res.json({ response: "Tab Update DONE" })
-        })
-        .catch(err => res.json({ response: "Error while updating: " + err }))
+    .then(result => {
+        console.log("Update DONE");
+        res.json({ response: "Tab Update DONE" })
+    })
+    .catch(err => res.json({ error: err }))
 })
 
 // Delete Tab
@@ -48,17 +48,17 @@ router.delete("/delete-tab", (req, res) => {
         DELETE FROM tabs
         WHERE id = $1
     `
-    // res.json({ resp: "Delete Resp"})
+
     db.query(q, req.body.id)
-        .then(() => {
-            res.json({
-                result: "Delete DONE"
-            })
+    .then(() => {
+        res.json({
+            result: "Delete DONE"
         })
-        .catch(err => {
-            res.json({
-                result: err
-            })
+    })
+    .catch(err => {
+        res.json({
+            result: err
         })
+    })
 })
 export default router
