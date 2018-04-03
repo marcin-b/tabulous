@@ -23,6 +23,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser())
 
+
 // Transform req & res to have the same API as express
 // So we can use res.status() & res.json()
 router.use((req, res, next) => {
@@ -32,6 +33,7 @@ router.use((req, res, next) => {
     res.req = req
     next()
 })
+
 
 // Cookies & Sessions
 app.use(session({

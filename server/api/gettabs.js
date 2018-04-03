@@ -45,6 +45,22 @@ router.get("/tabs", (req, res, next) => {
         }))
 })
 
+// Tab SEARCH
+router.get("/tab-search/:val", (req, res) => {
+
+    console.log("Inside Tab search:", req.params.val);
+    let q = `
+        SELECT id, title, artist, type, haslyrics FROM tabs
+        WHERE LOWER(title) LIKE $1||'%'
+        LIMIT 5
+    `
+    db.query(q, req.params.val.toLowerCase())
+        .then(results => {
+            res.json(results)
+        })
+        .catch(err => res.json({ error: err }))
+})
+
 // GET single tab
 router.get("/tab/:id", (req, res) => {
 
@@ -56,4 +72,5 @@ router.get("/tab/:id", (req, res) => {
         })
         .catch(err => res.json({ Error: err }))
 })
+
 export default router

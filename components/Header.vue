@@ -2,12 +2,7 @@
     <header>
         <span id="logo">Tabulous</span>
 
-        <div class="search">
-            <input type="text" name="search" value="">
-            <button type="buttton" name="submit" value="">
-                <img src="~/assets/img/null.png" alt="">
-            </button>
-        </div>
+        <Search />
 
         <div class="">
 
@@ -25,9 +20,10 @@
 </template>
 
 <script>
-import Login from "~/pages//welcome/login.vue"
+import Search from "~/components/Search.vue"
 
 export default {
+    components: { Search },
     data() {
         return {
 
