@@ -101,6 +101,7 @@ a, li {
     font: normal 1em/150% "Inconsolata", monospace;
     text-decoration: none;
     display: inline-block;
+    padding-left: .5em;
     width: 100%;
 }
 a:hover, a:focus, a:active {

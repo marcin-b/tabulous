@@ -52,6 +52,7 @@ router.get("/tab-search/:val", (req, res) => {
     let q = `
         SELECT id, title, artist, type, haslyrics FROM tabs
         WHERE LOWER(title) LIKE $1||'%'
+        ORDER BY title ASC
         LIMIT 5
     `
     db.query(q, req.params.val.toLowerCase())
