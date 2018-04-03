@@ -72,19 +72,17 @@ export default {
         },
         updateTab() {
             axios.post("/api/update-tab", this.updatedTab)
-                .then(({data}) => {
-                    console.log("update result", data);
-                    this.$emit("update", this.updatedTab)
-                    this.closeEditor()
-                })
+            .then(({data}) => {
+                console.log("update result", data);
+                this.$emit("update", this.updatedTab)
+                this.closeEditor()
+            })
         },
         deleteTab() {
             // Confirm before delete
             if (confirm("Are you sure you want to delete the Tab?")) {
-                console.log("TAB ID", this.updatedTab.id);
                 axios.delete("/api/delete-tab", {data: {id: this.updatedTab.id}})
                 .then(({data}) => {
-                    console.log("update result", data);
                     this.closeEditor()
                     this.$emit("deleted")
                 })

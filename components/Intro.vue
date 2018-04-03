@@ -3,25 +3,23 @@
 
     <div class="feat">
 
+        <h1>Your own Tab song<wbr>book.</h1>
 
+        <p>Trying to remember songs you once learned is not always easy, especially if you're an old chunk of coal that knows hundreds of songs.<br/>
+        You don't want to waste time when playing with friends, jamming out with colleagues or trying to impress that girl/boy you like.
+        That's what Tabulous is for.
+        </p>
 
-            <h1>Your own Tab song<wbr>book.</h1>
+        <ul>
+            <li>&#x1F4D6 Collect chords / tabs / lyrics</li>
+            <li>&#x1F44D Share your songbook</li>
+            <li>&#x1F3B8 Play</li>
+            <li>&#x1F601 Enjoy</li>
+        </ul>
 
-            <p>Trying to remember songs you once learned is not always easy, especially if you're an old chunk of coal that knows hundreds of songs.<br/>
-            You don't want to waste time when playing with friends, jamming out with colleagues or trying to impress that girl/boy you like.
-            That's what Tabulous is for.
-            </p>
-
-            <ul>
-                <li>&#x1F4D6 Collect chords / tabs / lyrics</li>
-                <li>&#x1F44D Share your songbook</li>
-                <li>&#x1F3B8 Play</li>
-                <li>&#x1F601 Enjoy</li>
-            </ul>
-
-            <p>Finally there is a place for that and it's wicked fresh.<br>
-            To save your personal songbook you need to sign up but you can browse the tab collection <transition mode="out-in"><nuxt-link to="/">here</nuxt-link></transition>.
-            </p>
+        <p>Finally there is a place for that and it's wicked fresh.<br>
+        To save your personal songbook you need to sign up but you can browse the tab collection <transition mode="out-in"><nuxt-link to="/">here</nuxt-link></transition>.
+        </p>
 
     </div>
 
@@ -40,8 +38,6 @@ export default {
     align-items: center;
     flex-flow: column nowrap;
     justify-content: center;
-    /* padding: 0 0 1em; */
-    /* text-shadow: 1px 2px 0px #000; */
 }
 .feat > ul {
     background-color: rgba(0, 0, 0, .3);
@@ -73,7 +69,6 @@ p {
 p > a {
     color: darkorange;
     background: #222;
-    /* text-decoration: underline wavy darkorange; */
     padding: 0 .2em;
     text-decoration: none;
     text-shadow: 1px 1px 1px #000;

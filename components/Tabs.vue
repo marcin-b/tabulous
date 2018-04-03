@@ -1,5 +1,8 @@
 <template lang="html">
+
     <div class="tab-container">
+
+        <!-- Loader -->
         <div
             v-if="!tabsLoaded"
             class="loader-cont">
@@ -11,6 +14,7 @@
             </div>
 
         </div>
+
         <ul v-else>
             <li
                 v-for="(tabs, letter) in sortedTabs"
@@ -29,13 +33,13 @@
             </li>
         </ul>
 
-
     </div>
 </template>
 
 <script>
 
 import axios from '~/plugins/axios'
+
 import Tab from "~/components/Tab.vue"
 
 export default {
@@ -50,7 +54,6 @@ export default {
     watch: {
         update() {
             this.tabsLoaded = false
-            console.log("@TABS update");
             this.getTabs()
         }
     },
@@ -63,14 +66,11 @@ export default {
             .then(({data}) => {
                 this.sortedTabs = data
                 this.tabsLoaded = true;
-
-                console.log("Tab GET DONE");
             })
             .catch(err => console.log("Error getting tabs:", err))
         },
         updateAfterDelete() {
             this.tabsLoaded = false
-            console.log("@TABS delete update")
             this.getTabs()
         }
     }
@@ -80,27 +80,23 @@ export default {
 
 <style scoped>
 .tab-container {
-    /* font: normal bold 1.2em/150% "Muli", sans-serif; */
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #222;
     color: #eee;
 }
-.abc {
 
-}
 /* List Letter Elements */
 .abc > span {
     border-bottom: 1px solid #666;
-    /* border-bottom: 1px solid rgba(255, 165, 0, .1); */
     color: darkorange;
     display: block;
     font: normal 400 1.2em/150% "Muli", sans-serif;
     padding: 1em 0 0;
     text-align: left;
-    /* text-shadow: 1px 3px 1px #000; */
 }
+/* LOADER */
 .loader-cont {
     font: normal normal 1.2em/150% "Muli", sans-serif;
     display: flex;

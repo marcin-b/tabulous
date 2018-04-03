@@ -5,10 +5,9 @@ const router = Router()
 
 // POST new Songbook
 router.post("/create-songbook", (req, res) => {
+
     const { ownerId, name } = req.body
-    console.log("Inside New songbook", ownerId);
     const params = [ ownerId, name ]
-    console.log("test:");
     const q = `
         INSERT INTO songbooks
         (owner_id, name)
@@ -17,33 +16,26 @@ router.post("/create-songbook", (req, res) => {
     `;
     db.query(q, params)
         .then((result) => {
-            console.log("create new songbook DONE", result[0]);
-
-            res.json({newSongbook:result[0]})
-
+            res.json({ newSongbook:result[0] })
         })
         .catch(err => {
-            console.log("Error adding SB", err);
             res.json({ err })
         })
-    // res.json({ got: "make" })
 })
 
 
 // Get Songbooks
 router.get("/songbooks", (req, res) => {
-    console.log("Geto SBs of User with id: ", req.session.authUser.id);
+
     const q = `
         SELECT * FROM songbooks
         WHERE owner_id = $1
     `
     db.query(q, req.session.authUser.id)
     .then(songbooks => {
-        console.log("GOT Songbooks:", songbooks);
         res.json( songbooks )
     })
     .catch(err => {
-        console.log("Error getting SBs", err);
         res.json({ error: err })
     })
 })
@@ -57,8 +49,6 @@ router.get("/songbook/:id", (req, res) => {
     `
     db.query(q, req.params.id)
     .then(songbook => {
-
-        console.log("GOT Songbooks:", songbook[0]);
 
         // Check if songbook has songs added
         if (songbook[0].tabs && songbook[0].tabs.length > 0) {
@@ -79,7 +69,6 @@ router.get("/songbook/:id", (req, res) => {
             `
             db.query(getTab, songbook[0].tabs)
             .then(tabs => {
-                console.log("tabs gotten");
                 res.json({
                     songbook: songbook[0],
                     tabs
@@ -94,35 +83,25 @@ router.get("/songbook/:id", (req, res) => {
 
     })
     .catch(err => {
-        console.log("Error getting Books", err);
         res.json({ error: err })
     })
 })
 
 // Delete Songbook
-router.delete("/delete-songbook/:id", (req, res) => {
-    console.log("check del: ", req.params.id);
+router.delete("/delete-songbook/:id", (req, res, next) => {
+
     const q = `
         DELETE FROM songbooks
         WHERE id = $1
     `
     db.query(q, req.params.id)
-    .then(() => {
-        res.json({
-            result: "Delete DONE"
-        })
-    })
-    .catch(err => {
-        res.json({
-            result: err
-        })
-    })
-
+    .then(() => next())
+    .catch(err => res.json({ error: err }))
 })
 
 // Add tab to Songbooks
 router.post("/add-tab-to-songbook", (req, res) => {
-    console.log("inside adding tab: ", req.body);
+
     const { tabId, sbId } = req.body
     const params = [ tabId, sbId ]
     const q = `
@@ -130,18 +109,13 @@ router.post("/add-tab-to-songbook", (req, res) => {
         WHERE id = $2;
     `
     db.query(q, params)
-    .then(resp => {
-        console.log("Resp? ", resp);
-        res.json({ resp: "Tab was added" })
-
-    })
-    .catch(err => res.json({ Error: err }))
-
+    .then(() => next())
+    .catch(err => res.json({ error: err }))
 })
 
 // Delete tab from Songbooks
-router.post("/delete-song-from-songbook", (req, res) => {
-    console.log("inside deleteing tab: ", req.body);
+router.post("/delete-song-from-songbook", (req, res, next) => {
+
     const { tabId, sbId } = req.body
     const params = [ tabId, sbId ]
     const q = `
@@ -149,12 +123,8 @@ router.post("/delete-song-from-songbook", (req, res) => {
         WHERE id = $2;
     `
     db.query(q, params)
-    .then(resp => {
-        console.log("Resp? ", resp);
-        res.json({ resp: "Tab was Deleted" })
-
-    })
-    .catch(err => res.json({ Error: err }))
+    .then(() => next())
+    .catch(err => res.json({ error: err }))
 
 })
 

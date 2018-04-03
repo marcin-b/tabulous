@@ -2,8 +2,9 @@
     <section id="profile">
 
         <h1>Profile</h1>
-        
+
         <img :src="user.img" :alt="user.username" />
+
         <ul>
             <li>dumb</li>
             <li>list</li>
@@ -17,16 +18,10 @@
 <script>
 
 export default {
-    components: {
-
-    },
     data() {
         return {
             user: this.$store.state.authUser
         }
-    },
-    methods: {
-
     },
     head() {
         return {

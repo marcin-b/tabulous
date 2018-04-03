@@ -54,7 +54,6 @@ export default {
         .then((response) => {
             console.log("token resp", response.data)
             axios.defaults.headers.common['X-CSRF-TOKEN'] = response.data.csrfToken
-            // this.token = response.data.csrfToken
         }, (err) => {
             console.log("Error getting Token: ", err)
         })
@@ -66,7 +65,6 @@ export default {
         swapRegLog() {
             this.$emit("swap", true)
         },
-
         submitReg() {
             // Credential check for lack of Support of "required"
             if (!this.user.name) {
@@ -91,10 +89,8 @@ export default {
                     if (error.code == 23505) {
                         this.errorMsg = "This email is already signed up"
                     }
-                    console.log("Signup NIE udany", error)
                 })
             }
-
         }
     },
 
@@ -114,5 +110,4 @@ input + .err-indicator {
     overflow-wrap: break-word;
     width: 250px;
 }
-
 </style>

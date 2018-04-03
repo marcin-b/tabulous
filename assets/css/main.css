@@ -157,7 +157,6 @@ pre {
 /* default */
 .page-enter-active, .page-leave-active {
     transition: all ease .5s;
-
 }
 .page-enter {
     opacity: 0

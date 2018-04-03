@@ -35,16 +35,11 @@
 <script>
 import axios from "~/plugins/axios"
 
-// this.$refs.email.focus()
-
 export default {
     name: "Login",
-    data () {
+    data() {
         return {
-            user: {
-                // email: null,
-                // password: null
-            },
+            user: {},
             error: false,
             errorMsg: "",
         }
@@ -64,11 +59,10 @@ export default {
                 this.errorMsg = "Please enter a password."
             } else {
                 this.$store.dispatch("login", { user: this.user })
-                .then(resp => this.$router.replace("/"))
+                .then(() => this.$router.replace("/"))
                 .catch(e => {
                     this.error = e.error
                     this.errorMsg = e.message
-                    console.log("login NIE udany", e.message)
                 })
             }
         }

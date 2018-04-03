@@ -1,5 +1,7 @@
 <template lang="html">
+
     <form class="form" @submit.prevent="tabAdd">
+
 		<div class="options">
 			<select v-model="newTab.type" id="type" class="type" name="type">
 				<option selected value="guitar">Guitar</option>
@@ -13,7 +15,9 @@
 		<input v-model="newTab.artist" type="text" id="artist" placeholder="Artist">
 		<textarea v-model="newTab.tab" type="text" id="tabinput" name="tab" value=""></textarea>
 		<button id="submit-btn" type="submit">Submit</button>
+
 	</form>
+
 </template>
 
 <script>
@@ -29,17 +33,14 @@ export default {
                 artist: "",
                 type: "guitar",
                 haslyrics: false,
-                tab: "",
-                // creatorId: this.$store.state.authUser.id || ""
+                tab: ""
             }
         }
     },
     methods: {
         tabAdd() {
-            console.log(this.newTab);
             axios.post("/api/addtab", this.newTab)
                 .then(({ data }) => {
-                    console.log("Server resp to Tab POST: ", data);
                     this.$emit("hide")
                     this.$emit("tabadded")
                     // empty all fields
@@ -59,7 +60,6 @@ export default {
             .then((response) => {
                 console.log("token resp", response.data)
                 axios.defaults.headers.common['X-CSRF-TOKEN'] = response.data.csrfToken
-                // this.token = response.data.csrfToken
             })
             .catch(err => console.log("Error getting Token: ", err))
     },
@@ -138,24 +138,17 @@ select {
     color: darkorange;
     transform: scale(1.3, 1.3);
 }
+
 /* Enter and leave animations can use different */
 /* durations and timing functions.              */
+
 .slide-fade-enter-active, .slide-fade-leave-active {
     transition: all ease .5s;
 }
-/* .slide-fade-leave-active {
-    transition: transform 2s ease-out;
-    transition: height 1s ease-out 1s;
-} */
-.slide-fade-enter
-/* .slide-fade-leave-active below version 2.1.8 */ {
-    /* transform: translateX(-100vw); */
+.slide-fade-enter {
     transform: translateX(100vw) scale(0 , 0);
-    /* opacity: 0; */
 }
 .slide-fade-leave-to {
-    /* transform: translateX(-100vw); */
     transform: scale(2,2) translateX(-100vw);
-    /* opacity: 0; */
 }
 </style>

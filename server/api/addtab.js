@@ -4,8 +4,8 @@ import db from "./db"
 const router = Router()
 
 // POST new Tab to database
-router.post("/addtab", (req, res) => {
-    console.log("Inside POST");
+router.post("/addtab", (req, res, next) => {
+
     const { title, artist, type, haslyrics, tab } = req.body
     const params = [ title, artist, type, haslyrics, tab ]
     const q = `
@@ -14,51 +14,38 @@ router.post("/addtab", (req, res) => {
         VALUES ($1, $2, $3, $4, $5)
     `;
     db.query(q, params)
-        .then(result => {
-            console.log("insert DONE", result);
-            res.json({ response: "Tab add DONE" })
-        })
-        .catch(err => res.json({ response: "Error: " + err }))
+        .then(() => next())
+        .catch(err => res.json({ error: err }))
 })
 
 // Update exisiting Tab
-router.post("/update-tab", (req, res) => {
-    console.log("Inside update");
-const { title, artist, type, haslyrics, tab, id } = req.body
+router.post("/update-tab", (req, res, next) => {
 
+    const { title, artist, type, haslyrics, tab, id } = req.body
     const params = [ title, artist, type, haslyrics, tab, id ]
     const q = `
         UPDATE tabs
         SET (title, artist, type, hasLyrics, tab)
         = ( $1, $2, $3, $4, $5 )
         WHERE id = $6
-    `;
+    `
+
     db.query(q, params)
-    .then(result => {
-        console.log("Update DONE");
-        res.json({ response: "Tab Update DONE" })
-    })
+    .then(result => next())
     .catch(err => res.json({ error: err }))
 })
 
 // Delete Tab
-router.delete("/delete-tab", (req, res) => {
-    console.log("Inside Delete:", req.body);
+router.delete("/delete-tab", (req, res, next) => {
+
     let q = `
         DELETE FROM tabs
         WHERE id = $1
     `
 
     db.query(q, req.body.id)
-    .then(() => {
-        res.json({
-            result: "Delete DONE"
-        })
-    })
-    .catch(err => {
-        res.json({
-            result: err
-        })
-    })
+    .then(() => next())
+    .catch(err => res.json({ error: err }))
 })
+
 export default router

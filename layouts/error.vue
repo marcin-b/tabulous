@@ -1,16 +1,22 @@
 <template>
+
     <section class="col-cont">
+
         <span id="big-logo">Tabulous</span>
-        <h1>
-            {{ error.statusCode }}
-        </h1>
-        <h2 class="info">
-            {{ error.message }}
-        </h2>
-        <nuxt-link class="button" to="/" v-if="error.statusCode === 404 || 401">
+
+        <h1>{{ error.statusCode }}</h1>
+
+        <h2 class="info">{{ error.message }}</h2>
+
+        <nuxt-link class="button" to="/welcome" v-if="error.statusCode === 401">
+            Login / Sign Up
+        </nuxt-link>
+        <nuxt-link class="button" to="/" v-else>
             Homepage
         </nuxt-link>
+
     </section>
+
 </template>
 <script>
 export default {
@@ -20,14 +26,12 @@ export default {
 
 <style scoped>
 
-.info
-{
+.info {
     font-weight: 300;
     color: #eee;
     margin: 0;
 }
-.button
-{
+.button {
     background: #eee;
     color: #222;
     margin-top: 50px;
@@ -37,7 +41,7 @@ export default {
 }
 .button:hover, .button:focus, .button:active {
     background: #222;
-    border: 1px solid #eee;
+    border: 2px dashed darkorange;
     color: #eee;
 }
 </style>

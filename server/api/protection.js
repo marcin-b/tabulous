@@ -8,7 +8,7 @@ var csrfProtection = csrf({ cookie: true })
 
 
 // CSRF middleware
-router.get('/getcsrftoken', csrfProtection, function (req, res) {
+router.get('/getcsrftoken', csrfProtection, (req, res) => {
     return res.json({ csrfToken: req.csrfToken() });
 });
 

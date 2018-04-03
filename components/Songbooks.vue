@@ -48,31 +48,26 @@ export default {
     beforeCreate() {
         axios.get("/api/songbooks")
         .then(({data}) => {
-            console.log("get SBs: ", data)
             this.songbooks = data
         })
-        .catch(err => console.log("get SB err: ", err))
+        .catch(err => console.log("Error getting SBs: ", err))
     },
     methods: {
         addTab(sbId) {
 
-
-            console.log("SB ID:", sbId);
             let info = {
                 sbId,
                 tabId: this.tabId
             }
             axios.post("/api/add-tab-to-songbook", info)
-            .then(res => {
-                console.log("sb res: ", res);
+            .then(() => {
                 // emmit hide event
                 this.sbClicked = !this.sbClicked
                 setTimeout(this.hide, 800)
             })
             .catch(err => console.log("ERR: ", err))
         },
-        hide(){
-            console.log("This took 1 second");
+        hide() {
             this.$emit("hideAdder")
         }
     }

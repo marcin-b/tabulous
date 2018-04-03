@@ -67,15 +67,16 @@ export default {
         window.addEventListener("keyup", (e) => {
             e.preventDefault()
             e.stopPropagation()
+
             if (e.which === 39) {
                 this.increaseSpeed()
+
             } else if (e.which === 37) {
                 this.decreaseSpeed()
-            } else if (e.which === 17) {
 
+            } else if (e.which === 17) {
                 this.startScroll();
-                // e.stopImmediatePropagation()
-                // e.stopImmediatePropagation()
+
             } else if (e.which === 13 && document.querySelector("pre")) {
                 console.log("enter");
                 this.scrollTop()
@@ -85,8 +86,8 @@ export default {
     },
     methods: {
         scroller() {
-            console.log("scrollY: ", this.yoff)
             this.step += this.scrollSpeed
+
             // 60 compensates the bottom margin of <pre/>
             if (this.currY - 60 <=  (document.querySelector("pre").clientHeight + this.yoff - window.innerHeight)  && this.scrolling) {
                 if (this.step >= 10) {
@@ -95,7 +96,6 @@ export default {
                     requestAnimationFrame(this.scroller)
                     this.step = 0;
                 } else {
-                    // console.log("step", this.step);
                     requestAnimationFrame(this.scroller)
                 }
             } else {
@@ -142,7 +142,6 @@ export default {
     flex-direction: column;
     align-items: center;
     align-self: center;
-    /* position: relative; */
     margin: 0 auto;
 }
 .scroller {
@@ -150,9 +149,9 @@ export default {
     flex-flow: row;
     position: fixed;
     top: 90vh;
-
     z-index: 5;
 }
+
 /* Contol Buttons */
 button, #speed-cont {
     color: #eee;
@@ -178,16 +177,12 @@ input {
     padding-left: 1em;
     width: 3.3em;
 }
-
 button:hover {
     transform: scale(1.4, 1.4);
     color: darkorange;
 }
 button > span {
     font-size: .5em;
-}
-#start-scroll:hover {
-    /* color: #000; */
 }
 .scrolling {
     background-color: darkorange;

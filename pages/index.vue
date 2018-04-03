@@ -31,6 +31,7 @@
 <script>
 
 import axios from '~/plugins/axios'
+
 import MyFooter from '~/components/Footer.vue'
 import MyHeader from '~/components/Header.vue'
 import Nav from '~/components/Nav.vue'
@@ -60,14 +61,8 @@ export default {
             this.show = false;
         },
         updateTabs() {
-            console.log("inside update")
             this.performUpdate = true
         },
-    },
-    head() {
-        return {
-            title: 'Tabulous'
-        }
     },
 }
 </script>

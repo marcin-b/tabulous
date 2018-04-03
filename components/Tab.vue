@@ -4,6 +4,7 @@
         <h2 @click="toggleTab" :class="{ activeclass: isActive}">
             {{ updatedTab.title }} - {{ updatedTab.artist }}
         </h2>
+
         <span>
             <span class="accent">{{ updatedTab.type }}</span>
 
@@ -73,10 +74,10 @@
 
 <script>
 import axios from '~/plugins/axios'
+
 import Scroller from '~/components/Scroller.vue'
 import Editor from '~/components/Editor.vue'
 import Songbooks from '~/components/Songbooks.vue'
-
 
 export default {
     components: { Scroller, Editor, Songbooks },
@@ -111,7 +112,6 @@ export default {
             this.updatedTab = update
         },
         tabDelete() {
-            console.log("@ tab delete");
             this.$emit("tabdeleted")
             this.toggleTab
         },
@@ -128,9 +128,6 @@ export default {
 
 /* Single Tab Item */
 li {
-    /* display: flex;
-    align-content: flex-end;
-    justify-content: space-between; */
     border-bottom: 1px dashed #444;
     position: relative;
 }
@@ -159,8 +156,6 @@ li > span {
     position: absolute;
     right: 0;
     bottom: 0;
-    /* float: right; */
-
     z-index: 1;
 }
 
@@ -180,7 +175,6 @@ li > span {
     overflow: visible;
     padding: .5em;
     position: absolute;
-    /* left: 100px; */
 }
 button {
     background-color: #222;
@@ -199,6 +193,7 @@ button:hover {
     color: darkorange;
     transform: scale(1.3, 1.3);
 }
+
 /* Contol Buttons */
 #close-tab {
     background-color: #eee;
@@ -232,17 +227,12 @@ button:hover {
 .slide-enter-active, .slide-leave-active {
     transition: all ease .5s;
 }
-/* .slide-fade-leave-active below version 2.1.8 */
-.slide-enter
-{
-    /* transform: translateX(-100vw); */
+
+.slide-enter {
     transform: translateX(100vw);
-    /* opacity: 0; */
 }
 .slide-leave-to {
-    /* transform: translateX(-100vw); */
     transform: translateX(-100vw);
-    /* opacity: 0; */
 }
 
 /* Editor */
@@ -255,7 +245,6 @@ button:hover {
 .fade-leave-to {
     transform: translateX(-100vw);
 }
-
 .activeclass {
     text-shadow: 1px 2px 3px #000;
 }
@@ -267,7 +256,6 @@ button:hover {
 }
 .slidein-enter {
     transform: scale(0, 0) translateX(-400px);
-
 }
 .slidein-leave-to {
     transform: scale(0, 0) translateX(-400px);

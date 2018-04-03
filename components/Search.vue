@@ -5,8 +5,7 @@
             <input
             @input="search"
             v-model="value"
-            type="text"
-            name="search" />
+            type="text" />
 
             <button type="buttton" name="submit" value="">
                 <img src="~/assets/img/null.png" alt="">
@@ -14,18 +13,19 @@
 
 
             <ul v-if="value">
+
                 <li v-if="results.length === 0">No results :(</li>
+
                 <li
-                v-for="(result, index) in results">
-                <nuxt-link :to="`/tab/${result.id}`">
-                    {{result.title}}
-                </nuxt-link>
-            </li>
-        </ul>
+                    v-for="(result, index) in results">
+                    <nuxt-link :to="`/tab/${result.id}`">
+                        {{result.title}}
+                    </nuxt-link>
+                </li>
+
+            </ul>
 
         </div>
-
-
     </section>
 
 </template>
@@ -98,6 +98,7 @@ ul {
 }
 a, li {
     color: #eee;
+    border-bottom: 1px dashed #444;
     font: normal 1em/150% "Inconsolata", monospace;
     text-decoration: none;
     display: inline-block;

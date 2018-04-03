@@ -1,4 +1,5 @@
 <template>
+
     <section>
 
         <my-header/>
@@ -8,6 +9,7 @@
         <nuxt-child/>
 
     </section>
+
 </template>
 
 <script>
@@ -24,19 +26,7 @@ export default {
         Nav,
         MyFooter
     },
-    data() {
-        return {
 
-        }
-    },
-    methods: {
-
-    },
-    head() {
-        return {
-            // title: this.$store.authUser.username
-        }
-    },
 }
 </script>
 
@@ -50,6 +40,4 @@ section > h1 {
     background: none;
     font-size: 2em;
 }
-
-
 </style>

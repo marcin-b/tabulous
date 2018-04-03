@@ -1,36 +1,37 @@
 <template lang="html">
 
-<section>
+    <section>
 
-    <ul>
+        <ul>
 
-        <li
-        v-if="songbooks"
-        v-for="(songbook, index) in songbooks"
-        :key="index">
+            <li
+            v-if="songbooks"
+            v-for="(songbook, index) in songbooks"
+            :key="index">
 
-            <nuxt-link
-                :tabs="songbook.tabs"
-                :to="'/profile/songbooks/' + songbook.id">
-                {{songbook.name}}
-            </nuxt-link>
+                <nuxt-link
+                    :tabs="songbook.tabs"
+                    :to="'/profile/songbooks/' + songbook.id">
+                    {{songbook.name}}
+                </nuxt-link>
 
-            <span v-if="songbook.tabs && songbook.tabs.length === 1" class="accent">
-                {{songbook.tabs.length}} song
-            </span>
-            <span v-else-if="songbook.tabs" class="accent">
-                {{songbook.tabs.length}} songs
-            </span>
-            <span v-else class="accent">
-                no songs
-            </span>
-        </li>
+                <span v-if="songbook.tabs && songbook.tabs.length === 1" class="accent">
+                    {{songbook.tabs.length}} song
+                </span>
+                <span v-else-if="songbook.tabs" class="accent">
+                    {{songbook.tabs.length}} songs
+                </span>
+                <span v-else class="accent">
+                    no songs
+                </span>
+            </li>
 
-        <li v-else>Create your first Songbook!</li>
-    </ul>
+            <li v-else>Create your first Songbook!</li>
+
+        </ul>
 
 
-</section>
+    </section>
 
 </template>
 
@@ -47,21 +48,15 @@ export default {
     asyncData(context) {
         return axios.get("/api/songbooks")
         .then(({data}) => {
-            console.log("get Songbook: ", data)
-            return {
-                songbooks: data
-            }
+            return { songbooks: data }
         })
-        .catch(err => console.log("get SB err: ", err))
+        .catch(err => console.log("Error getting SB: ", err))
     },
     watch: {
         addedSongbook(newSongbook, songbooks) {
             this.songbooks.unshift(newSongbook)
         }
     },
-    methods: {
-
-    }
 }
 </script>
 
@@ -70,9 +65,6 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-ul {
-
 }
 li {
     width: 400px;

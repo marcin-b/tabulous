@@ -41,12 +41,9 @@ export default {
     asyncData(context) {
         return axios.get("/api/tab/" + context.params.id)
         .then(({data}) => {
-            console.log("get TAB: ", data)
             return {
                 tab: data
             }
-            // this.tab = data
-
         })
         .catch(err => console.log("get Tab err: ", err))
     },

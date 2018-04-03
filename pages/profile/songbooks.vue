@@ -1,6 +1,6 @@
 <template>
-<section>
 
+<section>
     <div
         v-if="$route.path === '/profile/songbooks'"
         class="col-cont">
@@ -56,7 +56,9 @@
         :addedSongbook="addedSongbook" />
 
 </section>
+
 </template>
+
 <script>
 import axios from "~/plugins/axios"
 export default {
@@ -76,29 +78,21 @@ export default {
     },
     methods: {
         submitNewSb() {
-            console.log("SB", this.newSongbook);
             axios.post("/api/create-songbook", this.newSongbook)
             .then(({data}) => {
                 this.addedSongbook = data.newSongbook
-                console.log("resp:", data);
             })
             .catch(err => console.log("add sb error:", err))
             this.toggleAdder()
         },
         toggleAdder() {
             this.showInput = !this.showInput
-            console.log("refs: ", this.$refs);
-
         }
     },
-
 }
 </script>
 
 <style scoped>
-section {
-    /* margin-top: 1em; */
-}
 .persp {
     perspective: 400px;
 }
@@ -134,16 +128,14 @@ div.col-cont > label {
 
 /* transitions */
 
+/* Added :hover selector to avoid class conflict */
 .sf-enter-active, :hover.sf-enter-active {
-    /* transform-origin: left; */
     transition: all .2s ease-out;
 }
 .sf-leave-active, :hover.sf-leave-active {
-    /* transform-origin: right; */
     transition: all .2s ease-in;
 }
 .sf-enter, :hover.sf-enter {
-
     transform: rotateY(90deg) ;
     opacity: 0;
 }

@@ -40,17 +40,10 @@ export default {
         Login
     },
     data() {
-        return {
-            registered: false,
-
-        }
-    },
-    mounted() {
-        console.log("reg? ", this.registered);
+        return { registered: false }
     },
     methods: {
         swapper(val) {
-            // console.log("THE VAL", val);
             this.registered = val
         }
     },
@@ -66,7 +59,6 @@ export default {
 .welc-container {
     align-items: center;
     background: url(~/assets/img/imagebw.jpg);
-    /* background: url(~/assets/img/stock2.jpg); */
     background-size: cover;
     background-position:0 0;
     display: flex;
@@ -78,7 +70,6 @@ export default {
     flex-flow: row wrap-reverse;
     align-items: center;
     justify-content: center;
-    /* position: relative; */
     margin: 0 .5em 2em;
 }
 .feat > h1 {
@@ -141,6 +132,7 @@ export default {
     font: normal bold 1em/150% "Muli", sans-serif;
     text-shadow: 1px 1px 0px #000;
 }
+
 /* Animation */
 .flip-enter-active {
     transition: all .4s ease;
