@@ -3,6 +3,8 @@
     <section>
         <div class="search">
             <input
+            @focus="showResults = true"
+            @blur="showResults = false"
             @input="search"
             v-model="value"
             type="text" />
@@ -12,9 +14,9 @@
             </button>
 
 
-            <ul v-if="value">
+            <ul v-if="value && showResults">
 
-                <li v-if="results.length === 0">No results :(</li>
+                <li v-if="results.length === 0" class="nofound">No results :(</li>
 
                 <li
                     v-for="(result, index) in results">
@@ -38,16 +40,19 @@ export default {
         return {
             value: "",
             results: [],
-
+            showResults: false,
         }
     },
     methods: {
         search() {
-            axios.get("/api/tab-search/" + this.value)
-            .then(results => {
-                this.results = results.data
-            })
-            .catch(err => console.log("Search error: ", err))
+            if (this.value) {
+                axios.get("/api/tab-search/" + this.value)
+                .then(results => {
+                    this.results = results.data
+                })
+                .catch(err => console.log("Search error: ", err))
+
+            }
         }
     }
 }
@@ -58,6 +63,7 @@ export default {
     position: relative;
     display: flex;
     align-items: center;
+    z-index: 9;
 }
 input {
     font: normal 1.2em/100% "Muli", sans-serif;
@@ -67,6 +73,7 @@ input {
     padding: 0 0 0 .5em;
 }
 input:focus {
+    outline: 2px solid darkorange;
     border: 0;
 }
 button {
@@ -92,18 +99,21 @@ ul {
     width: 300px;
     background: #222;
     border: 2px dashed darkorange;
-    padding: 1em;
     position: absolute;
     top: 2.2em;
+    z-index: 5;
 }
 a, li {
     color: #eee;
-    border-bottom: 1px dashed #444;
     font: normal 1em/150% "Inconsolata", monospace;
     text-decoration: none;
     display: inline-block;
-    padding-left: .5em;
     width: 100%;
+}
+a, .nofound {
+    padding: .3em .5em;
+    border-bottom: 1px solid #444;
+    transition: all ease .1s;
 }
 a:hover, a:focus, a:active {
     background: #eee;

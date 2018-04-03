@@ -45,14 +45,13 @@ nav {
     background:url(~/assets/img/imagebw.jpg);
     background-size: cover;
     background-position: 0 calc((50px + 86px) * -1);
-
     flex-wrap: wrap;
     display: flex;
     justify-content: center;
     padding: .3em 0;
     text-align: center;
     width: 100%;
-    z-index: 5;
+    /* z-index: 5; */
 }
 nav > a {
     display: block;

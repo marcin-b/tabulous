@@ -39,9 +39,8 @@
                         <span class="accent">lyrics</span>
                     </span>
 
-
-
                 </span>
+                
                 <span
                     @click="deleteTab(tab.id, index)"
                     :class="{ hovered: songHovered }"
