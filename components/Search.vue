@@ -21,7 +21,7 @@
                 <li
                     v-for="(result, index) in results">
                     <nuxt-link :to="`/tab/${result.id}`">
-                        {{result.title}}
+                        {{result.title}} - {{result.artist}}
                     </nuxt-link>
                 </li>
 
@@ -46,8 +46,10 @@ export default {
     methods: {
         search() {
             if (this.value) {
+                console.log("val:", this.value);
                 axios.get("/api/tab-search/" + this.value)
                 .then(results => {
+                    console.log("results:", results);
                     this.results = results.data
                 })
                 .catch(err => console.log("Search error: ", err))
@@ -103,16 +105,21 @@ ul {
     top: 2.2em;
     z-index: 5;
 }
-a, li {
+li {
+    height: auto;
+}
+a, .nofound {
     color: #eee;
     font: normal 1em/150% "Inconsolata", monospace;
     text-decoration: none;
-    display: inline-block;
-    width: 100%;
-}
-a, .nofound {
+    display: block;
     padding: .3em .5em;
     border-bottom: 1px solid #444;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: top;
+    width: 100%;
     transition: all ease .1s;
 }
 a:hover, a:focus, a:active {

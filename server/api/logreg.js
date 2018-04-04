@@ -82,7 +82,7 @@ router.post("/login", (req, res) => {
 router.get("/logout", (req, res) => {
 
     delete req.session.authUser
-    res.json({ successful: true })
+    res.json({ success: true })
 })
 
 export default router

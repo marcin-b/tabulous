@@ -23,6 +23,7 @@
                     Close Tab
                 </button>
 
+                <!-- Add to Songbook Button -->
                 <button
                     v-if="$store.state.authUser"
                     @click="toggleAdder"
@@ -38,6 +39,7 @@
                         :tabId="updatedTab.id" />
                 </transition>
 
+                <!-- Editor -->
                 <button
                     v-if="$store.state.authUser && tab.creator_id == $store.state.authUser.id"
                     @click="toggleEditor"
@@ -256,8 +258,10 @@ button:hover {
 }
 .slidein-enter {
     transform: scale(0, 0) translateX(-400px);
+    opacity: 0.5;
 }
 .slidein-leave-to {
     transform: scale(0, 0) translateX(-400px);
+    opacity: 0.5;
 }
 </style>

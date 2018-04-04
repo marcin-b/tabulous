@@ -62,7 +62,6 @@ router.get("/songbook/:id", (req, res) => {
                     valueStr += "$" + (index+1) + ", "
                 }
             })
-            console.log("value string", valueStr);
             let getTab = `
             SELECT title, artist, id, type, haslyrics FROM tabs
             WHERE id IN (${valueStr})
@@ -95,7 +94,7 @@ router.delete("/delete-songbook/:id", (req, res, next) => {
         WHERE id = $1
     `
     db.query(q, req.params.id)
-    .then(() => next())
+    .then(() => res.json({ success: true }))
     .catch(err => res.json({ error: err }))
 })
 
@@ -109,12 +108,12 @@ router.post("/add-tab-to-songbook", (req, res) => {
         WHERE id = $2;
     `
     db.query(q, params)
-    .then(() => next())
+    .then(() => res.json({success: true}))
     .catch(err => res.json({ error: err }))
 })
 
 // Delete tab from Songbooks
-router.post("/delete-song-from-songbook", (req, res, next) => {
+router.post("/delete-song-from-songbook", (req, res) => {
 
     const { tabId, sbId } = req.body
     const params = [ tabId, sbId ]
@@ -123,7 +122,7 @@ router.post("/delete-song-from-songbook", (req, res, next) => {
         WHERE id = $2;
     `
     db.query(q, params)
-    .then(() => next())
+    .then(() => res.json({ success: true }))
     .catch(err => res.json({ error: err }))
 
 })

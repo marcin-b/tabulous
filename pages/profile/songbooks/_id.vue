@@ -40,7 +40,7 @@
                     </span>
 
                 </span>
-                
+
                 <span
                     @click="deleteTab(tab.id, index)"
                     :class="{ hovered: songHovered }"
@@ -96,7 +96,7 @@ export default {
 
                 axios.delete("/api/delete-songbook/" + this.$route.params.id)
                 .then(({data}) => {
-                    this.$nuxt.$router.replace("/profile/songbooks")
+                    this.$router.replace("/profile/songbooks")
                     console.log("delete result", data)
 
                 })

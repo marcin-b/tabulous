@@ -96,6 +96,7 @@ span {
     font: normal 1em/150% "Muli", sans-serif;
     padding: .2em 0;
     cursor: pointer;
+    border-bottom: 1px dashed #444;
 }
 span:hover {
     color: darkorange;
@@ -115,7 +116,7 @@ span:hover {
     opacity: .5;
 }
 .fliphide-leave-to {
-    transform: rotateY(-90deg) ;
+    transform: rotateY(-90deg);
     opacity: .5;
 }
 </style>

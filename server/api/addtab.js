@@ -4,7 +4,7 @@ import db from "./db"
 const router = Router()
 
 // POST new Tab to database
-router.post("/addtab", (req, res, next) => {
+router.post("/addtab", (req, res) => {
 
     const { title, artist, type, haslyrics, tab } = req.body
     const params = [ title, artist, type, haslyrics, tab ]
@@ -14,12 +14,12 @@ router.post("/addtab", (req, res, next) => {
         VALUES ($1, $2, $3, $4, $5)
     `;
     db.query(q, params)
-        .then(() => next())
+        .then(() => res.json({success: true}))
         .catch(err => res.json({ error: err }))
 })
 
 // Update exisiting Tab
-router.post("/update-tab", (req, res, next) => {
+router.post("/update-tab", (req, res) => {
 
     const { title, artist, type, haslyrics, tab, id } = req.body
     const params = [ title, artist, type, haslyrics, tab, id ]
@@ -31,12 +31,12 @@ router.post("/update-tab", (req, res, next) => {
     `
 
     db.query(q, params)
-    .then(result => next())
+    .then(result => res.json({success: true}))
     .catch(err => res.json({ error: err }))
 })
 
 // Delete Tab
-router.delete("/delete-tab", (req, res, next) => {
+router.delete("/delete-tab", (req, res) => {
 
     let q = `
         DELETE FROM tabs
@@ -44,7 +44,7 @@ router.delete("/delete-tab", (req, res, next) => {
     `
 
     db.query(q, req.body.id)
-    .then(() => next())
+    .then(() => res.json({success: true}))
     .catch(err => res.json({ error: err }))
 })
 
