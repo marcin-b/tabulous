@@ -5,6 +5,24 @@
         </nuxt-link>
         <h2>{{songbook.name}}</h2>
 
+        <div class="col-cont pos-rel persp">
+            <span id="give-away">Wanna share?</span>
+            <transition name="xflip" mode="out-in" >
+                <button
+                    v-if="!sharing"
+                    @click="copyToClipboard"
+                    type="button"
+                    id="link"
+                    key="copy">
+                    Copy Link
+                </button>
+
+                <button v-else type="button" id="sharer" key="copied">copied</button>
+            </transition>
+
+        </div>
+        <input v-if="mounted" id="share" :value="url" />
+
         <ul>
             <li v-if="!tabs || tabs.length === 0" id="get-started">
                 <i>
@@ -52,7 +70,8 @@
             </li>
         </ul>
 
-        <div v-if="songbook.owner_id === $store.state.authUser.id">
+        <div v-if="songbook.owner_id === $store.state.authUser.id"
+            id="del">
             <button
             @click="deleteSb"
             type="button"
@@ -72,6 +91,9 @@ import axios from "~/plugins/axios"
 export default {
     data() {
         return {
+            mounted: false,
+            sharing: false,
+            url: "",
             songbook: {},
             tabs: [],
             songHovered: false,
@@ -88,7 +110,10 @@ export default {
         })
         .catch(err => console.log("get SB err: ", err))
     },
-
+    mounted() {
+        this.mounted = true;
+        this.url = window.location.href
+    },
     methods: {
         deleteSb() {
             // Confirm before delete
@@ -102,6 +127,23 @@ export default {
                 })
                 .catch(err => console.log("Error deleting SB: ", err))
             }
+        },
+        copyToClipboard() {
+            this.sharing = true
+            var href = document.getElementById('share')
+            console.log("clicked and true", document.getElementById('share').value);
+            href.focus()
+            href.select()
+            // document.getElementById('share').innerHTML.select()
+            console.log(document.execCommand('copy'));
+            this.hide()
+
+        },
+        hide() {
+            setTimeout(() =>{
+                this.sharing = false
+                console.log("now false", this.sharing)
+            }, 2000)
         },
         deleteTab(tabId, index) {
             let info = {
@@ -142,7 +184,6 @@ section {
 #back-to:hover, #back-to:active, #back-to:focus {
     outline: 5px dotted #FF8C00;
 }
-
 ul {
     margin-bottom: 2em;
 }
@@ -186,33 +227,76 @@ li > span {
 i {
     display: block;
 }
-i, div > span {
-    font: normal normal 1em/150% "Inconsolata", monospace;
+i, #del, #sharer, #link, #delete-sb, #give-away  {
+    font: normal normal .9em/150% "Inconsolata", monospace;
 }
 #starter {
     transform-origin: center;
     text-decoration: underline darkorange;
     margin: 1em 0;
 }
+input {
+    background: transparent;
+    border: 0;
+}
 .accent {
     color: darkorange;
 }
-#delete-sb {
+#delete-sb, #link, #sharer {
     cursor: pointer;
-    color: red;
-    font: normal normal 1em/150% "Inconsolata", monospace;
     background: none;
-    border: 1px solid #eee;
     padding: 0 1em;
+}
+#link, #sharer {
+    border: 1px solid #666;
+    margin-bottom: 1.5em;
+    color: darkorange;
+}
+#sharer {
+    background: YELLOWGREEN;
+    color: black;
+}
+#link:hover, #link:active, #link:focus {
+    border-color: darkorange;
+    color: black;
+    background: darkorange;
+}
+#delete-sb {
+    font-size: 1em;
+    border: 0;
+    color: red;
+    margin-right: .5em;
     margin-top: 1em;
-    margin-right: 1em;
+    transition: color ease .1s, background ease .1s;
+}
+#delete-sb:hover {
+    background: red;
+    color: black;
 }
 #del-tab {
     position: absolute;
     right: .5em;
     cursor: pointer;
 }
-.hovered {
+#share {
+    position: fixed;
+    color: transparent;
+    z-index: -999;
+    bottom: -10em;
+    height: 1px;
+}
+/* transitions */
+.xflip-enter-active, :hover.xflip-enter-active {
+    transition: all ease-out .1s;
+}
+.xflip-leave-active, :hover.xflip-leave-active, :active.xflip-leave-active, :focus.xflip-leave-active {
+    transition: all ease-in .2s;
+}
+.xflip-enter, :hover.xflip-enter {
+    transform: rotateX(90deg);
 
+}
+.xflip-leave-to, :hover.xflip-leave-to {
+    transform: rotateX(-90deg);
 }
 </style>

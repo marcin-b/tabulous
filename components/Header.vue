@@ -69,41 +69,4 @@ div > a, div > span {
 div > a:hover, div > span:hover {
     text-decoration: underline darkorange;
 }
-.search {
-    display: flex;
-    align-items: center;
-}
-header input {
-    font-family: Muli;
-    /* border: 1px solid; */
-    border: 0;
-    font-size: 1.2em;
-    line-height: 100%;
-    height: 1.8em;
-    width: 180px;
-    padding: 0 0 0 .5em;
-}
-input:focus {
-    border: 0;
-}
-header button {
-    background-color: transparent;
-    border: 1px solid #eee;
-    cursor: pointer;
-    height: 2.6em;
-    margin: 0 .3em;
-    padding: .2em .3em;
-    width: 2.7em;
-}
-header button:hover {
-    background-color: rgba(0, 0, 0, .5);
-
-}
-header button img {
-    align-self: center;
-    width: 100%;
-    height: 100%;
-    transform: rotateY(180deg)
-}
-
 </style>

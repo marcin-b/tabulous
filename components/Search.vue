@@ -49,7 +49,6 @@ export default {
                 console.log("val:", this.value);
                 axios.get("/api/tab-search/" + this.value)
                 .then(results => {
-                    console.log("results:", results);
                     this.results = results.data
                 })
                 .catch(err => console.log("Search error: ", err))
@@ -68,15 +67,15 @@ export default {
     z-index: 9;
 }
 input {
+    border: 1px solid #eee;
     font: normal 1.2em/100% "Muli", sans-serif;
-    border: 0;
     height: 1.8em;
     width: 300px;
     padding: 0 0 0 .5em;
 }
 input:focus {
-    outline: 2px solid darkorange;
-    border: 0;
+    border: 1px solid darkorange;
+    outline: 0;
 }
 button {
     background-color: transparent;

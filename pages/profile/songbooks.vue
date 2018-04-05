@@ -93,9 +93,6 @@ export default {
 </script>
 
 <style scoped>
-.persp {
-    perspective: 400px;
-}
 button {
     border: 1px solid darkorange;
     color: black;

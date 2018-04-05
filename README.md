@@ -1,8 +1,16 @@
 # Tabulous
 
-> My final project.
+A PWA to collect the best tabs, chords and lyrics for your personal songbooks. Add them to Tabuluses database of only the best and add them to your repertoire.
 
-## Build Setup
+
+## Features
+
+- Write, copy/paste & edit tabs, chords, lyrics etc.
+- Create a sonbook and save your favorite songs.
+- Share them with friends or bandmates.
+- Autoscroll function.
+
+
 
 ``` bash
 # install dependencies

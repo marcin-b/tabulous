@@ -73,19 +73,16 @@ a:hover, a:focus,
 form {
     font-family: "Muli", "Lato", sans-serif;
 }
-textarea, input, button, select
-{
+textarea, input, button, select {
     outline: none;
     background-color: #eee;
 }
-textarea:focus, input:focus, select:focus
-{
+textarea:focus, input:focus, select:focus {
     outline: thin solid darkorange;
 }
 .form > input:focus, .form > textarea:focus, select:focus, #tabinput:focus {
     outline: 1px solid darkorange;
 }
-
 h1 {
     background-color: rgba(0, 0, 0, 0);
     color: #fff;
@@ -102,7 +99,7 @@ h2 {
     display: inline-block;
     font: normal bold 1.6em/150% "Muli", sans-serif;
     letter-spacing: 1px;
-    margin: 0 0 .8em;
+    margin: 0 0 .6em;
     text-shadow: 1px 3px 0px #000;
 }
 h3 {
@@ -134,6 +131,12 @@ h3 {
     flex-flow: column;
     align-items: center;
     /* justify-content: center; */
+}
+.pos-rel {
+    position: relative;
+}
+.persp {
+    perspective: 400px;
 }
 pre {
     background-color: #eee;
