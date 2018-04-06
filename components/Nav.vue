@@ -16,6 +16,11 @@
             <nuxt-link :to="'/profile/songbooks'">
                 My Songbooks
             </nuxt-link>
+            
+            <nuxt-link :to="'/about'">
+                About
+            </nuxt-link>
+
         </div>
 
 

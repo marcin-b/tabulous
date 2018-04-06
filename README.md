@@ -1,7 +1,6 @@
 # Tabulous
 
-A PWA to collect the best tabs, chords and lyrics for your personal songbooks. Add them to Tabuluses database of only the best and add them to your repertoire.
-
+A PWA to collect the best tabs, chords and lyrics for your personal songbooks. Add them to the Tabulous database of only the best and save them to your repertoire.
 
 ## Features
 
@@ -10,21 +9,21 @@ A PWA to collect the best tabs, chords and lyrics for your personal songbooks. A
 - Share them with friends or bandmates.
 - Autoscroll function.
 
+## Tech Stack
 
+- Vue
+- Nuxt
+- Node
+- Express
+- Axios
+- PostgreSQL
 
-``` bash
-# install dependencies
-$ npm install # Or yarn install
+## Screenshots
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+![screenshot1](https://github.com/marcin-b/tabulous/blob/master/static/img/screenshot1.jpg)
 
-# build for production and launch server
-$ npm start
-```
+![screenshot2](https://github.com/marcin-b/tabulous/blob/master/static/img/screenshot2.jpg)
 
-For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
+![screenshot3](https://github.com/marcin-b/tabulous/blob/master/static/img/screenshot3.jpg)
 
-## Backpack
-
-We use [backpack](https://github.com/palmerhq/backpack) to watch and build the application, so you can use the latest ES6 features (module syntax, async/await, etc.).
+![screenshot4](https://github.com/marcin-b/tabulous/blob/master/static/img/screenshot4.jpg)
