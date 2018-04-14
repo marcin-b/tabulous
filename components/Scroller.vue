@@ -142,13 +142,13 @@ export default {
     flex-direction: column;
     align-items: center;
     align-self: center;
-    margin: 0 auto;
+
 }
 .scroller {
     display: flex;
     flex-flow: row;
     position: fixed;
-    top: 90vh;
+    bottom: 2em;
     z-index: 5;
 }
 

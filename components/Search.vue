@@ -1,15 +1,15 @@
 <template>
 
     <section>
-        <div class="search">
+        <form @submit.prevent="getResults" class="search">
             <input
             @focus="showResults = true"
-            @blur="showResults = false"
+            @blur="hideSearch"
             @input="search"
-            v-model="value"
+            v-model.lazy="value"
             type="text" />
 
-            <button type="buttton" name="submit" value="">
+            <button type="submit">
                 <img src="~/assets/img/null.png" alt="">
             </button>
 
@@ -19,7 +19,7 @@
                 <li v-if="results.length === 0" class="nofound">No results :(</li>
 
                 <li
-                    v-for="(result, index) in results">
+                    v-for="(result, index) in results" :key="index">
                     <nuxt-link :to="`/tab/${result.id}`">
                         {{result.title}} - {{result.artist}}
                     </nuxt-link>
@@ -27,7 +27,7 @@
 
             </ul>
 
-        </div>
+        </form>
     </section>
 
 </template>
@@ -47,13 +47,23 @@ export default {
         search() {
             if (this.value) {
                 console.log("val:", this.value);
-                axios.get("/api/tab-search/" + this.value)
+                axios.get("/api/tab-search?search=" + this.value)
                 .then(results => {
-                    this.results = results.data
+                    this.results = results.data.slice(0, 6)
+                    
                 })
                 .catch(err => console.log("Search error: ", err))
 
             }
+        },
+        getResults() {
+            console.log("searched");
+            this.$router.push({ path: 'results', query: { search: this.value }})
+        },
+        hideSearch(){
+            // Add timeout otherwise links are not clickable, because
+            // they are hidden too fast
+            setTimeout(() => this.showResults = false, 500)
         }
     }
 }

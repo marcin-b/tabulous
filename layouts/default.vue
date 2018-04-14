@@ -1,5 +1,5 @@
 <template>
-    <div @login="showUserInfo">
+    <div class="pushcont" @login="showUserInfo">
 
 
         <nuxt/>
@@ -31,9 +31,6 @@ export default {
             }
         }
     },
-    mounted() {
-
-    },
     methods: {
         showUserInfo() {
             console.log("User: ", this.user);
@@ -43,12 +40,9 @@ export default {
 </script>
 
 <style>
-.container
-{
-    margin: 0;
-    width: 100%;
-    padding: 100px 0;
-    text-align: center;
-}
-
+/* .pushcont {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+} */
 </style>

@@ -3,7 +3,7 @@
 * {
     box-sizing: border-box;
 }
-html, boy, div, span, applet, object, iframe,
+html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, font, img, ins, kbd, q, s, samp,
@@ -24,12 +24,6 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 /* remember to define focus styles! */
 :focus {
 	outline: 0;
-}
-body {
-	line-height: 1;
-	color: black;
-	background: white;
-    margin-bottom: 5em;
 }
 ol, ul {
 	list-style: none;
@@ -62,8 +56,10 @@ html, body
     height: 100vh;
     margin: 0;
 }
-#__nuxt {
-    padding-bottom: 3em;
+body {
+}
+#__layout {
+
 }
 a:hover, a:focus,
 {
@@ -112,19 +108,12 @@ h3 {
     max-height: 289px;
 }
 #big-logo {
-    color: darkorange;
-    display: block;
-    font: normal normal 3.4em/200% "Rock Salt", script;
-    text-shadow: 1px 4px 0px #000;
-    text-align: center;
+    margin: .5em 0;
+    width: 300px;
 }
 #logo {
-    align-self: flex-end;
-    box-sizing: border-box;
-    color: darkorange;
-    font: normal normal 2.5em/150% "Rock Salt", script;
-    display: block;
-    text-shadow: 1px 3px 0px #000;
+    margin: .3em 0;
+    width: 200px;
 }
 .col-cont {
     display: flex;
@@ -147,7 +136,7 @@ pre {
     font: normal normal 1.1em/110% "Inconsolata", monospace;
     letter-spacing: -.4px;
     padding: 1em 1.5em;
-    margin-bottom: 3em;
+    margin-bottom: 4em;
     text-shadow: 0px 1px 0px #fff;
     text-rendering: optimizeLegibility;
     width: 700px;
@@ -156,6 +145,7 @@ pre {
 .accent {
     color: darkorange;
 }
+
 /* Page transitions */
 /* default */
 .page-enter-active, .page-leave-active {

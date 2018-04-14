@@ -1,7 +1,8 @@
 <template>
     <header>
-        <span id="logo">Tabulous</span>
-
+        <nuxt-link to="/">
+            <img id="logo" src="/img/logo_200px.png" alt="Tabulous">
+        </nuxt-link>
         <Search />
 
         <div class="">

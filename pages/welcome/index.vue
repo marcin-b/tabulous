@@ -1,7 +1,8 @@
 <template lang="html">
     <div class="welc-container">
 
-        <span id="big-logo">Tabulous</span>
+            <img id="big-logo" src="/img/logo_300px.png" alt="Tabulous">
+
 
         <div class="intro-cont">
             <Intro/>

@@ -2,8 +2,7 @@
 
     <section class="col-cont">
 
-        <span id="big-logo">Tabulous</span>
-
+        <img id="big-logo" src="/img/logo_300px.png" alt="Tabulous">
         <h1>{{ error.statusCode }}</h1>
 
         <h2 class="info">{{ error.message }}</h2>
@@ -32,6 +31,7 @@ export default {
     margin: 0;
 }
 .button {
+    border: 2px solid transparent;
     background: #eee;
     color: #222;
     margin-top: 50px;

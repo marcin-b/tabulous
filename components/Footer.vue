@@ -1,20 +1,43 @@
 <template>
+
     <footer>
-        &copy Marcin B
+
+        <img src="/img/logo_bw_200px.png" alt="Tabulous">
+
+        &copy 2018 Marcin Balinski
+
+
+
     </footer>
+
 </template>
 
-<style >
+<style scoped>
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
 footer {
-    background-color: #222;
-    border-top: 1px solid darkorange;
-    border-right: 1px solid darkorange;
-    color: #eee;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #eee;
+    border-top: 1px solid black;
+    box-shadow: 0px -2px 10px rgba(0, 0, 0, 1);
+    color: #222;
     font: normal normal 1em/200% "Muli", sans-serif;
     text-align: center;
-    padding: 0 1em;
-    position: fixed;
+    margin-top: 3em;
+    padding: 2em 0;
+    position: static;
     bottom: 0;
-    left: 0;
+    width: 100%;
+}
+img {
+    display: block;
+    margin-bottom: 1em;
 }
 </style>

@@ -39,16 +39,14 @@ router.get("/tabs", (req, res, next) => {
 })
 
 // Tab SEARCH
-router.get("/tab-search/:val", (req, res) => {
-
+router.get("/tab-search", (req, res) => {
     let q = `
         SELECT id, title, artist, type, haslyrics FROM tabs
         WHERE LOWER(title) LIKE $1||'%'
         OR LOWER(artist) LIKE $1||'%'
         ORDER BY title ASC
-        LIMIT 6
     `
-    db.query(q, req.params.val.toLowerCase())
+    db.query(q, req.query.search.toLowerCase())
         .then(results => {
             res.json(results)
         })

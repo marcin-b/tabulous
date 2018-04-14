@@ -1,5 +1,4 @@
 module.exports = {
-
   /*
   ** Headers of the page
   */
@@ -13,6 +12,7 @@ module.exports = {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Rock+Salt' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto+Mono' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Muli' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Lato' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Inconsolata' },
