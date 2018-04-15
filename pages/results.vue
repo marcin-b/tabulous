@@ -77,7 +77,7 @@ li {
     padding-right: 2em;
 }
 
-li > a {
+li > a, .nofound {
     color: #eee;
     display: inline-block;
     font: normal 400 1.4em/150% "Lato", sans-serif;

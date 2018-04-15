@@ -6,7 +6,7 @@
             @focus="showResults = true"
             @blur="hideSearch"
             @input="search"
-            v-model.lazy="value"
+            v-model="value"
             type="text" />
 
             <button type="submit">
@@ -50,7 +50,7 @@ export default {
                 axios.get("/api/tab-search?search=" + this.value)
                 .then(results => {
                     this.results = results.data.slice(0, 6)
-                    
+
                 })
                 .catch(err => console.log("Search error: ", err))
 
@@ -58,12 +58,12 @@ export default {
         },
         getResults() {
             console.log("searched");
-            this.$router.push({ path: 'results', query: { search: this.value }})
+            this.$nuxt.$router.replace({ path: 'results', query: { search: this.value }})
         },
         hideSearch(){
             // Add timeout otherwise links are not clickable, because
             // they are hidden too fast
-            setTimeout(() => this.showResults = false, 500)
+            setTimeout(() => this.showResults = false, 100)
         }
     }
 }
@@ -117,9 +117,9 @@ ul {
 li {
     height: auto;
 }
-a, .nofound {
+.nofound, a {
     color: #eee;
-    font: normal 1em/150% "Inconsolata", monospace;
+    font: normal normal 1em/150% "Inconsolata", monospace;
     text-decoration: none;
     display: block;
     padding: .3em .5em;

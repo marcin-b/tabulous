@@ -15,7 +15,7 @@
             Enjoy!
 
         </p>
-        
+
     </section>
 </template>
 
@@ -48,8 +48,7 @@ section {
 }
 p {
     box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 1);
-    border-radius: 10px;
-    background: rgba(255, 255, 255, .8);
+    background: #eee;
     color: #000;
     font: normal 1.1em/120% "Inconsolata", monospace;
     align-self: center;

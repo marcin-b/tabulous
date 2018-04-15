@@ -30,10 +30,8 @@ footer {
     color: #222;
     font: normal normal 1em/200% "Muli", sans-serif;
     text-align: center;
-    margin-top: 3em;
     padding: 2em 0;
-    position: static;
-    bottom: 0;
+    align-self: flex-end;
     width: 100%;
 }
 img {

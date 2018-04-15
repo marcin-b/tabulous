@@ -48,12 +48,10 @@ blockquote, q {
 /* ---------- Start styling here ---------- */
 /* ---------------------------------------- */
 
-html, body
-{
+html, body {
     background-color: #222;
     color: #eee;
     letter-spacing: 0.5px;
-    height: 100vh;
     margin: 0;
 }
 body {
@@ -61,8 +59,17 @@ body {
 #__layout {
 
 }
-a:hover, a:focus,
-{
+#pushcont {
+    height: auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+#pushcont > section {
+    margin-bottom: 2em;
+}
+a:hover, a:focus {
     color: darkorange;
 }
 /* Froms and inputs */

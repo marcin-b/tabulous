@@ -101,10 +101,21 @@ export default {
             },
         }
     },
-
+    mounted() {
+    },
     methods: {
         toggleTab() {
             this.isActive = !this.isActive
+            // Adjust document height
+            if (this.isActive) {
+                setTimeout(() => {
+                    document.getElementById('pushcont').style.height = (document.documentElement.scrollHeight + document.getElementsByTagName("footer")[0].clientHeight + 10) + "px";
+                }, 500)
+            } else {
+                setTimeout(() => {
+                    document.getElementById('pushcont').style.height = " 100%"
+                }, 500)
+            }
         },
         toggleEditor() {
             this.showEditor = !this.showEditor
@@ -189,7 +200,6 @@ button {
     padding: 0 .5em;
     box-shadow: 1px 2px 3px #000;
     transition: transform ease .1s;
-
 }
 button:hover {
     color: darkorange;
@@ -210,7 +220,6 @@ button:hover {
     left: -26%;
     top: -3em;
     z-index: 6;
-
 }
 #add-to-sb:hover {
     transform: none;

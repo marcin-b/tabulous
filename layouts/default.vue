@@ -1,5 +1,5 @@
 <template>
-    <div class="pushcont" @login="showUserInfo">
+    <div id="pushcont" @login="showUserInfo">
 
 
         <nuxt/>
