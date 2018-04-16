@@ -75,7 +75,6 @@ export default {
     methods: {
         toggleAdder() {
             this.showAdder = !this.showAdder
-            console.log("HERE", this.showAdder);
         },
     }
 }

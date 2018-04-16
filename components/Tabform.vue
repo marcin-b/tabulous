@@ -58,7 +58,6 @@ export default {
     mounted() {
         axios.get('/api/getcsrftoken')
             .then((response) => {
-                console.log("token resp", response.data)
                 axios.defaults.headers.common['X-CSRF-TOKEN'] = response.data.csrfToken
             })
             .catch(err => console.log("Error getting Token: ", err))

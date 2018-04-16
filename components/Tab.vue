@@ -20,7 +20,7 @@
             <div v-if="isActive" class="pre-tab-container">
 
                 <button @click="toggleTab" type="button" id="close-tab">
-                    Close Tab
+                    Close <span>[esc]</span>
                 </button>
 
                 <!-- Add to Songbook Button -->
@@ -49,7 +49,7 @@
                 </button>
 
                 <!-- Scroller -->
-                <Scroller/>
+                <Scroller @closetab="toggleTab" />
 
                 <!-- Tab container -->
                 <div class="pre-cont">
@@ -130,7 +130,6 @@ export default {
         },
         toggleAdder() {
             this.showAdder = !this.showAdder
-            console.log("HERE", this.showAdder);
         },
     },
 
@@ -215,6 +214,9 @@ button:hover {
     top: -2.2em;
     z-index: 6;
 }
+#close-tab > span {
+    font-size: .9em;
+}
 #add-to-sb {
     position: absolute;
     left: -26%;
@@ -248,6 +250,7 @@ button:hover {
 
 /* Editor */
 .fade-leave-active, .fade-enter-active {
+    position: absolute;
     transition: all ease .5s;
 }
 .fade-enter {

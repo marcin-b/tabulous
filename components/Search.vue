@@ -46,19 +46,15 @@ export default {
     methods: {
         search() {
             if (this.value) {
-                console.log("val:", this.value);
                 axios.get("/api/tab-search?search=" + this.value)
                 .then(results => {
                     this.results = results.data.slice(0, 6)
-
                 })
                 .catch(err => console.log("Search error: ", err))
-
             }
         },
         getResults() {
-            console.log("searched");
-            this.$nuxt.$router.replace({ path: 'results', query: { search: this.value }})
+            this.$nuxt.$router.push({ path: '/results', query: { search: this.value }})
         },
         hideSearch(){
             // Add timeout otherwise links are not clickable, because

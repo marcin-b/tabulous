@@ -28,3 +28,6 @@ A PWA to collect the best tabs, chords and lyrics for your personal songbooks. S
 ![screenshot3](https://github.com/marcin-b/tabulous/blob/master/static/img/screenshot3.jpg)
 
 ![screenshot4](https://github.com/marcin-b/tabulous/blob/master/static/img/screenshot4.jpg)
+
+## License
+MIT (c) 2018 Marcin Balinski

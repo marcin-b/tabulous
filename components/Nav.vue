@@ -16,7 +16,7 @@
             <nuxt-link :to="'/profile/songbooks'">
                 My Songbooks
             </nuxt-link>
-            
+
             <nuxt-link :to="'/about'">
                 About
             </nuxt-link>
@@ -43,8 +43,7 @@ export default {
     width: 100%;
     background:url(~/assets/img/imagebw.jpg);
     background-size: cover;
-    background-position: 0 calc((50px + 60px) * -1);
-    background-color: rgba(255, 255, 255, .5);
+    background-position: 0 calc((50px + 64px) * -1);
 }
 .user-nav {
     background: rgba(0, 0, 0, .7);

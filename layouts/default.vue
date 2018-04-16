@@ -33,16 +33,8 @@ export default {
     },
     methods: {
         showUserInfo() {
-            console.log("User: ", this.user);
+            // console.log("User: ", this.user);
         }
     }
 }
 </script>
-
-<style>
-/* .pushcont {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-} */
-</style>

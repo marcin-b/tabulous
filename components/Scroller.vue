@@ -61,26 +61,26 @@ export default {
 
     },
     mounted() {
-        console.log("SCROLLER MOUNTED");
         this.yoff = document.querySelector("pre").getBoundingClientRect().y
 
         window.addEventListener("keyup", (e) => {
             e.preventDefault()
             e.stopPropagation()
-
+            // left
             if (e.which === 39) {
                 this.increaseSpeed()
-
+            // right
             } else if (e.which === 37) {
                 this.decreaseSpeed()
-
+            // CTRL/CMD
             } else if (e.which === 17) {
                 this.startScroll();
-
+            // enter
             } else if (e.which === 13 && document.querySelector("pre")) {
-                console.log("enter");
                 this.scrollTop()
-
+            // escape
+            } else if (e.which === 27) {
+                this.$emit("closetab")
             }
         })
     },
@@ -89,7 +89,7 @@ export default {
             this.step += this.scrollSpeed
 
             // 60 compensates the bottom margin of <pre/>
-            if (this.currY - 60 <=  (document.querySelector("pre").clientHeight + this.yoff - window.innerHeight)  && this.scrolling) {
+            if (this.currY - 100 <=  (document.querySelector("pre").clientHeight + this.yoff - window.innerHeight)  && this.scrolling) {
                 if (this.step >= 10) {
                     this.currY = window.pageYOffset + 1;
                     window.scroll(0, this.currY);
@@ -138,11 +138,11 @@ export default {
 
 <style lang="css" scoped>
 .scroll-cont {
+
     display: flex;
     flex-direction: column;
     align-items: center;
     align-self: center;
-
 }
 .scroller {
     display: flex;

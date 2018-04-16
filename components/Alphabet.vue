@@ -44,7 +44,7 @@ export default {
 nav {
     background:url(~/assets/img/imagebw.jpg);
     background-size: cover;
-    background-position: 0 calc((50px + 86px) * -1);
+    background-position: 0 calc((50px + 89px) * -1);
     flex-wrap: wrap;
     display: flex;
     justify-content: center;
@@ -70,6 +70,6 @@ nav > a:hover, nav > a:active, nav > a:focus {
 
 }
 .notlogged {
-    background-position: 0 calc((50px + 60px) * -1);
+    background-position: 0 calc((50px + 64px) * -1);
 }
 </style>
