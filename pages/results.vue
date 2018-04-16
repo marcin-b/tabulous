@@ -53,11 +53,20 @@ export default {
     asyncData(context) {
         return axios.get("/api/tab-search?search=" + context.route.query.search)
         .then(({data}) => {
-            console.log(data);
             return {
                 results: data
             }
         })
+        .catch(err => console.log(err))
+    },
+    watch: {
+        '$route.query' (newQuery, oldQuery) {
+            axios.get("/api/tab-search?search=" + newQuery.search)
+            .then(({data}) => {
+                this.results = data
+            })
+            .catch(err => console.log(err))
+        }
     }
 }
 </script>
