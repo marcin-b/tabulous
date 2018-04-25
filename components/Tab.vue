@@ -3,8 +3,9 @@
     <li>
         <h2 @click="toggleTab" :class="{ activeclass: isActive}">
             {{ updatedTab.title }} - {{ updatedTab.artist }}
-        </h2>
+            <span v-if="updatedTab.ver > 0">ver{{updatedTab.ver}}</span>
 
+        </h2>
         <span>
             <span class="accent">{{ updatedTab.type }}</span>
 
@@ -69,7 +70,6 @@
                 :tab="updatedTab"/>
         </transition>
 
-
     </li>
 
 </template>
@@ -97,7 +97,8 @@ export default {
                 haslyrics: this.tab.haslyrics,
                 tab: this.tab.tab,
                 id: this.tab.id,
-                "creator_id": this.tab.creator_id
+                "creator_id": this.tab.creator_id,
+                ver: this.tab.ver
             },
         }
     },
@@ -137,7 +138,10 @@ export default {
 </script>
 
 <style scoped>
-
+h2 > span {
+    font-size: 1em;
+    color: #999;
+}
 /* Single Tab Item */
 li {
     border-bottom: 1px dashed #444;

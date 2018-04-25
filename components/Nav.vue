@@ -13,7 +13,7 @@
                 Profile
             </nuxt-link>
 
-            <nuxt-link :to="'/profile/songbooks'">
+            <nuxt-link :to="'/songbooks'">
                 My Songbooks
             </nuxt-link>
 

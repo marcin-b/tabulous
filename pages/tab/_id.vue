@@ -5,34 +5,57 @@
 
         <Nav/>
 
-        <nuxt-link @click.native="$router.back()" to="/profile/songbooks" id="back-to">
+        <nuxt-link @click.native="$router.back()" to="/songbooks" id="back-to">
             <span class="accent"><-</span> Back
         </nuxt-link>
 
-        <h2>{{tab.title}} - {{tab.artist}}</h2>
+        <h2>
+            {{tab.title}} - {{tab.artist}}
+            <span v-if="tab.ver > 0">ver{{tab.ver}}</span>
+        </h2>
 
         <!-- Add to Songbook Button -->
         <div class="relative">
             <button
-            v-if="$store.state.authUser"
-            @click="toggleAdder"
-            type="button"
-            id="add-to-sb">
-            Add to Songbook
-        </button>
+                v-if="$store.state.authUser"
+                @click="toggleAdder"
+                type="button"
+                id="add-to-sb">
+                Add to Songbook
+            </button>
 
-        <transition name="slidein">
-            <Songbooks
-            @hideAdder="toggleAdder"
-            v-if="showAdder"
-            :tabId="tab.id" />
-        </transition>
+            <transition name="slidein">
+                <Songbooks
+                @hideAdder="toggleAdder"
+                v-if="showAdder"
+                :tabId="tab.id" />
+            </transition>
 
+            <!-- Editor -->
+            <button
+                v-if="$store.state.authUser && tab.creator_id == $store.state.authUser.id"
+                @click="toggleEditor"
+                type="button"
+                id="open-editor">
+                Edit
+            </button>
+
+            <!-- Editor -->
+            <transition name="fade">
+                <Editor
+                @update="updateTab"
+                @deleted="tabDelete"
+                @close="toggleEditor"
+                v-if="showEditor"
+                :tab="tab"/>
+            </transition>
         </div>
 
+        <!-- Scroller -->
         <Scroller />
 
         <pre>{{tab.tab}}</pre>
+
 
     </section>
 </template>
@@ -40,11 +63,11 @@
 <script>
 import axios from "~/plugins/axios"
 
-import MyFooter from '~/components/Footer.vue'
 import Scroller from '~/components/Scroller.vue'
 import MyHeader from '~/components/Header.vue'
 import Songbooks from '~/components/Songbooks.vue'
 import Nav from '~/components/Nav.vue'
+import Editor from '~/components/Editor.vue'
 
 export default {
     components: {
@@ -52,12 +75,13 @@ export default {
         MyHeader,
         Nav,
         Scroller,
-        MyFooter,
+        Editor
     },
     data() {
         return {
             showAdder: false,
-            tab: {}
+            showEditor: false,
+            tab: {},
         }
     },
     asyncData(context) {
@@ -76,6 +100,12 @@ export default {
         toggleAdder() {
             this.showAdder = !this.showAdder
         },
+        toggleEditor() {
+            this.showEditor = !this.showEditor
+        },
+        updateTab(update) {
+            this.tab = update
+        },
     }
 }
 </script>
@@ -88,6 +118,10 @@ section {
 }
 pre {
     width: auto;
+}
+h2 > span {
+    font-size: 1em;
+    color: #999;
 }
 #back-to {
     outline: 5px dotted #444;
@@ -121,13 +155,19 @@ button {
     transition: transform ease .1s;
     position: absolute;
     top: -103px;
-    left: 0%;
+    /* left: 0%; */
 }
 button:hover {
     color: black;
     background: darkorange;
     transform: none;
 }
+#open-editor {
+    position: absolute;
+    right: 20%;
+    z-index: 6;
+}
+
 /* adder trasition */
 .slidein-leave-active, .slidein-enter-active {
     transform-origin: left;

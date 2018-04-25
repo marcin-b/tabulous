@@ -1,4 +1,17 @@
 module.exports = {
+    router: {
+        routes: [
+            {
+                path: "/songbooks",
+                component: "pages/songbooks.vue",
+                middleware: "auth",
+            },
+            {
+                path: "/songbooks/:id",
+                component: "pages/songbooks/_id.vue",
+            }
+        ]
+    },
   /*
   ** Headers of the page
   */

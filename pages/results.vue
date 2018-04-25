@@ -15,6 +15,7 @@
             v-for="(result, index) in results">
             <nuxt-link :to="`/tab/${result.id}`">
                 {{result.title}} - {{result.artist}}
+                <span v-if="result.ver > 0">ver{{result.ver}}</span>
             </nuxt-link>
 
             <span>
@@ -94,7 +95,7 @@ li > a, .nofound {
     text-decoration: none;
     letter-spacing: .03em;
     margin: 0;
-    padding-right: 3.3em;
+    padding-right: 3em;
     transition: transform ease .1s;
     transform-origin: left;
     transform: scale(.9, .9);
@@ -110,9 +111,12 @@ li > span {
     align-self: flex-end;
     padding-bottom: 2px;
     position: absolute;
-    right: 2em;
+    right: 0;
     bottom: 0;
     z-index: 1;
 }
-
+a > span {
+    font-size: 1em;
+    color: #999;
+}
 </style>

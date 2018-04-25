@@ -3,13 +3,7 @@
 
         <h1>Profile</h1>
 
-        <img :src="user.img" :alt="user.username" />
-
-        <ul>
-            <li>dumb</li>
-            <li>list</li>
-            <li>items</li>
-        </ul>
+        <h2>You: {{$store.state.authUser.username}}</h2>
 
         <nuxt-child/>
     </section>

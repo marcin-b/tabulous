@@ -1,8 +1,17 @@
 <template lang="html">
     <section>
-        <nuxt-link to="/profile/songbooks" id="back-to">
+        <nuxt-link
+            to="/songbooks" id="back-to"
+            v-if="$store.state.authUser">
             <span class="accent"><-</span> back to your Songbooks
         </nuxt-link>
+        <nuxt-link
+            to="/" id="back-to"
+            v-else>
+            <span class="accent"><-</span> Home
+        </nuxt-link>
+
+
         <h2>{{songbook.name}}</h2>
 
         <div class="col-cont pos-rel persp">
@@ -35,7 +44,6 @@
             </li>
 
             <li
-
                 v-else
                 v-for="(tab, index) in tabs"
                 :key="index"
@@ -43,10 +51,10 @@
                 @mouseleave.stop="songHovered = false" >
 
                 <nuxt-link
-
                     :key="index"
                     :to="`/tab/${tab.id}`" >
                 {{tab.title}} - {{tab.artist}}
+                <span v-if="tab.ver > 0">ver{{tab.ver}}</span>
                 </nuxt-link>
 
                 <span>
@@ -60,9 +68,10 @@
                 </span>
 
                 <span
+                    title="Delete Tab from Songbook"
                     @click="deleteTab(tab.id, index)"
                     :class="{ hovered: songHovered }"
-                    v-if="songHovered === index && songbook.owner_id === $store.state.authUser.id"
+                    v-if="$store.state.authUser && songHovered === index && songbook.owner_id === $store.state.authUser.id"
                     id="del-tab">
                     X
                 </span>
@@ -70,7 +79,7 @@
             </li>
         </ul>
 
-        <div v-if="songbook.owner_id === $store.state.authUser.id"
+        <div v-if="$store.state.authUser && songbook.owner_id === $store.state.authUser.id"
             id="del">
             <button
             @click="deleteSb"
@@ -89,6 +98,7 @@
 import axios from "~/plugins/axios"
 
 export default {
+    middleware: null,
     data() {
         return {
             mounted: false,
@@ -102,7 +112,6 @@ export default {
     asyncData(context) {
         return axios.get("/api/songbook/" + context.params.id)
         .then(({data}) => {
-            console.log("get SB: ", data)
             return {
                 songbook: data.songbook,
                 tabs: data.tabs
@@ -121,9 +130,7 @@ export default {
 
                 axios.delete("/api/delete-songbook/" + this.$route.params.id)
                 .then(({data}) => {
-                    this.$router.replace("/profile/songbooks")
-                    console.log("delete result", data)
-
+                    this.$router.replace("/songbooks")
                 })
                 .catch(err => console.log("Error deleting SB: ", err))
             }
@@ -150,18 +157,18 @@ export default {
                 tabId,
                 sbId: this.$route.params.id
             }
-            console.log("tab id: ", info);
-            if (confirm("Are you sure you want to remove this Song?"))
-             {
+            if (confirm("Are you sure you want to remove this Song?")) {
                 axios.post("/api/delete-song-from-songbook/", info)
                 .then(({data}) => {
                     this.tabs.splice(index, 1)
                 })
                 .catch(err => console.log("Error removing tab: ", err))
             }
-
         }
-    }
+    },
+    head() {
+        return { title: this.songbook.name }
+    },
 }
 </script>
 
@@ -192,7 +199,6 @@ li {
     position: relative;
     padding-right: 2em;
 }
-
 li > a {
     color: #eee;
     display: inline-block;
@@ -206,6 +212,10 @@ li > a {
     transform-origin: left;
     transform: scale(.9, .9);
     text-shadow: none;
+}
+a > span {
+    font-size: 1em;
+    color: #999;
 }
 li > a:hover {
     text-shadow: 1px 2px 2px #000;
@@ -228,8 +238,9 @@ i {
     display: block;
 }
 i, #del, #sharer, #link, #delete-sb, #give-away  {
-    font: normal normal .9em/150% "Inconsolata", monospace;
+    font: normal normal 1.1em/150% "Inconsolata", monospace;
 }
+#give-away { font-size: 1em; }
 #starter {
     transform-origin: center;
     text-decoration: underline darkorange;
@@ -248,12 +259,13 @@ input {
     padding: 0 1em;
 }
 #link, #sharer {
-    border: 1px solid #666;
-    margin-bottom: 1.5em;
+    border: 1px dashed #666;
+    margin: .5em 0 1.5em;
     color: darkorange;
 }
 #sharer {
-    background: YELLOWGREEN;
+    border: 1px solid yellowgreen;
+    background: yellowgreen;
     color: black;
 }
 #link:hover, #link:active, #link:focus {
@@ -287,16 +299,15 @@ input {
 }
 /* transitions */
 .xflip-enter-active, :hover.xflip-enter-active {
-    transition: all ease-out .1s;
+    transition: all ease .1s;
 }
 .xflip-leave-active, :hover.xflip-leave-active, :active.xflip-leave-active, :focus.xflip-leave-active {
-    transition: all ease-in .2s;
+    transition: all ease .1s;
 }
 .xflip-enter, :hover.xflip-enter {
-    transform: rotateX(90deg);
-
+    transform: rotateY(90deg);
 }
 .xflip-leave-to, :hover.xflip-leave-to {
-    transform: rotateX(-90deg);
+    transform: rotateY(-90deg);
 }
 </style>

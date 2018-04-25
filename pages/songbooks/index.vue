@@ -11,7 +11,7 @@
 
                 <nuxt-link
                     :tabs="songbook.tabs"
-                    :to="'/profile/songbooks/' + songbook.id">
+                    :to="'/songbooks/' + songbook.id">
                     {{songbook.name}}
                 </nuxt-link>
 

@@ -41,6 +41,7 @@ export default {
         tabAdd() {
             axios.post("/api/addtab", this.newTab)
                 .then(({ data }) => {
+                    console.log(data);
                     this.$emit("hide")
                     this.$emit("tabadded")
                     // empty all fields
@@ -48,7 +49,7 @@ export default {
                         title: "",
                         artist: "",
                         type: "guitar",
-                        haslyrics: false,
+                        haslyrics: "false",
                         tab: ""
                     }
                 })

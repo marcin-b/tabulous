@@ -63,11 +63,19 @@ router.get("/songbook/:id", (req, res) => {
                 }
             })
             let getTab = `
-            SELECT title, artist, id, type, haslyrics FROM tabs
+            SELECT title, artist, id, type, haslyrics, ver FROM tabs
             WHERE id IN (${valueStr})
             `
             db.query(getTab, songbook[0].tabs)
             .then(tabs => {
+                // Convert "true/false" strings to boolean for better v-if compatibility
+                tabs.forEach(tab => {
+                    if (tab.haslyrics === "true") {
+                        tab.haslyrics = true
+                    } else {
+                        tab.haslyrics = false
+                    }
+                })
                 res.json({
                     songbook: songbook[0],
                     tabs

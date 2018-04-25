@@ -5,6 +5,7 @@ CREATE TABLE tabs (
     type VARCHAR(10) not null,
     haslyrics VARCHAR(50) not null,
     tab TEXT not null,
+    ver INTEGER DEFAULT 0,
     creator_id INTEGER not null DEFAULT 1,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -26,8 +27,7 @@ CREATE TABLE songbooks (
 -- Comands to alter bd state
 
 -- Add column
-ALTER TABLE tabs ADD type VARCHAR(10) not null;
-ALTER TABLE tabs ADD creator_id INTEGER not null DEFAULT 1;
+ALTER TABLE tabs ADD ver INTEGER DEFAULT 0;
 
 -- Change type
 ALTER TABLE tabs ALTER tab TYPE MEDIUMTEXT;
@@ -39,8 +39,7 @@ ALTER TABLE tabs ADD UNIQUE (tab);
 ALTER TABLE users ALTER img SET DEFAULT '/img/defaultavatar.png';
 
 -- Delete rows
-DELETE FROM users
-WHERE id = $1;
+DELETE FROM users WHERE id = $1;
 
 -- Update row
 UPDATE users SET img = '/img/saitama.jpg' WHERE id = 2;
@@ -48,6 +47,16 @@ UPDATE users SET img = '/img/saitama.jpg' WHERE id = 2;
 -- ADD tabs to songbook array
 UPDATE songbooks SET tabs = tabs || $1
 WHERE id = $2;
--- REMOVE tabs to songbook array
+-- REMOVE tabs from songbook array
 UPDATE songbooks SET tabs = array_remove(tabs, $1)
 WHERE id = $2;
+
+-- Version control INSERT
+INSERT INTO tabs (title, artist, type, haslyrics, tab, vers)
+VALUES ($1, $2, $3, $4, $5, (
+    SELECT COUNT(*) FROM tabs
+    WHERE title = $1
+    AND artist = $2
+    AND type = $3
+    AND haslyrics = $4
+))

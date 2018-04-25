@@ -1,8 +1,12 @@
 <template>
 
 <section>
+    <my-header/>
+
+    <Nav />
+
     <div
-        v-if="$route.path === '/profile/songbooks'"
+        v-if="$store.state.authUser && $route.path === '/songbooks'"
         class="col-cont">
 
         <h1>Your Songbooks</h1>
@@ -51,7 +55,11 @@
 
         </div>
     </div>
-
+    <div v-if="!$store.state.authUser && $route.path === '/songbooks'" class="col-cont">
+        <h2>
+            Nothing to see here if you're not logged in :/
+        </h2>
+    </div>
     <nuxt-child
         :addedSongbook="addedSongbook" />
 
@@ -61,7 +69,15 @@
 
 <script>
 import axios from "~/plugins/axios"
+import MyHeader from '~/components/Header.vue'
+import Nav from '~/components/Nav.vue'
+
 export default {
+    components: {
+        MyHeader,
+        Nav,
+
+    },
     transition: {
         name: "page",
         mode: "out-in"
@@ -72,7 +88,7 @@ export default {
             showInput: false,
             addedSongbook: {},
             newSongbook: {
-                ownerId: this.$store.state.authUser.id,
+                ownerId: this.$store.state.authUser ? this.$store.state.authUser.id : 0,
             }
         }
     },
@@ -93,6 +109,9 @@ export default {
 </script>
 
 <style scoped>
+h2 {
+    margin-top: 2em;
+}
 button {
     border: 1px solid darkorange;
     color: black;

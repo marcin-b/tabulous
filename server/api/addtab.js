@@ -7,15 +7,20 @@ const router = Router()
 router.post("/addtab", (req, res) => {
 
     const { title, artist, type, haslyrics, tab } = req.body
-    const params = [ title, artist, type, haslyrics, tab ]
+    const params = [ title, artist, type, haslyrics.toString(), tab ]
     const q = `
-        INSERT INTO tabs
-        (title, artist, type, haslyrics, tab)
-        VALUES ($1, $2, $3, $4, $5)
-    `;
+        INSERT INTO tabs (title, artist, type, haslyrics, tab, ver)
+        VALUES ($1, $2, $3, $4, $5, (SELECT COUNT(*) FROM tabs
+        WHERE title = $1
+        AND artist = $2
+        AND type = $3
+        AND haslyrics = $4))`
     db.query(q, params)
-        .then(() => res.json({success: true}))
-        .catch(err => res.json({ error: err }))
+    .then(result => {
+
+        res.json({success: true})
+    })
+    .catch(err => res.json({ error: err }))
 })
 
 // Update exisiting Tab

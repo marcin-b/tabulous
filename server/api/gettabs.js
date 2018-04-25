@@ -41,7 +41,7 @@ router.get("/tabs", (req, res, next) => {
 // Tab SEARCH
 router.get("/tab-search", (req, res) => {
     let q = `
-        SELECT id, title, artist, type, haslyrics FROM tabs
+        SELECT id, title, artist, type, haslyrics, ver FROM tabs
         WHERE LOWER(title) LIKE $1||'%'
         OR LOWER(artist) LIKE $1||'%'
         ORDER BY title ASC
