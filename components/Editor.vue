@@ -82,11 +82,11 @@ export default {
             // Confirm before delete
             if (confirm("Are you sure you want to delete the Tab?")) {
                 axios.delete("/api/delete-tab", {data: {id: this.updatedTab.id}})
-                .then(({data}) => {
+                .then((resp) => {
                     this.closeEditor()
                     this.$emit("deleted")
                 })
-                .catch(err => console.log("delete error: "), err)
+                .catch(err => console.log("delete error: ", err))
             }
         }
     },

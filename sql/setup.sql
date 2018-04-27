@@ -51,6 +51,10 @@ WHERE id = $2;
 UPDATE songbooks SET tabs = array_remove(tabs, $1)
 WHERE id = $2;
 
+-- remove tab from all songbooks that use them
+SELECT tabs FROM songbooks WHERE $1 = ANY(tabs)
+UPDATE songbooks SET tabs = array_remove(tabs, $1)
+
 -- Version control INSERT
 INSERT INTO tabs (title, artist, type, haslyrics, tab, vers)
 VALUES ($1, $2, $3, $4, $5, (

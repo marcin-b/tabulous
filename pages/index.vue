@@ -17,7 +17,7 @@
 
         <transition name="slide-fade">
             <Tabform
-            v-show="show"
+            v-if="show"
             @tabadded="updateTabs"
             @hide="hideForm"
             :tabformShown="this.show" />

@@ -33,7 +33,8 @@ export default {
                 artist: "",
                 type: "guitar",
                 haslyrics: false,
-                tab: ""
+                tab: "",
+                creatorId: this.$store.state.authUser.id
             }
         }
     },

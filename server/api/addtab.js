@@ -6,11 +6,11 @@ const router = Router()
 // POST new Tab to database
 router.post("/addtab", (req, res) => {
 
-    const { title, artist, type, haslyrics, tab } = req.body
-    const params = [ title, artist, type, haslyrics.toString(), tab ]
+    const { title, artist, type, haslyrics, tab, creatorId } = req.body
+    const params = [ title, artist, type, haslyrics.toString(), tab, creatorId ]
     const q = `
-        INSERT INTO tabs (title, artist, type, haslyrics, tab, ver)
-        VALUES ($1, $2, $3, $4, $5, (SELECT COUNT(*) FROM tabs
+        INSERT INTO tabs (title, artist, type, haslyrics, tab, creator_id, ver)
+        VALUES ($1, $2, $3, $4, $5, $6, (SELECT COUNT(*) FROM tabs
         WHERE title = $1
         AND artist = $2
         AND type = $3
@@ -42,14 +42,17 @@ router.post("/update-tab", (req, res) => {
 
 // Delete Tab
 router.delete("/delete-tab", (req, res) => {
-
+    // second query delets the tab from any songbooks that have the tab
     let q = `
         DELETE FROM tabs
-        WHERE id = $1
+        WHERE id = $1;
+        UPDATE songbooks SET tabs = array_remove(tabs, $1)
+        WHERE $1 = ANY(tabs)
     `
-
     db.query(q, req.body.id)
-    .then(() => res.json({success: true}))
+    .then((resp) => {
+        res.json({ successful: true })
+    })
     .catch(err => res.json({ error: err }))
 })
 
