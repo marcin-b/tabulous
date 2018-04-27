@@ -164,3 +164,30 @@ pre {
 .page-leave {
     opacity: 0
 }
+
+/* Component transitions */
+
+/* Adder */
+.slidein-leave-active, .slidein-enter-active {
+    transform-origin: left;
+    transition: all ease .4s;
+}
+.slidein-enter {
+    transform: scale(0, 0) translateX(-400px);
+    opacity: 0.5;
+}
+.slidein-leave-to {
+    transform: scale(0, 0) translateX(-400px);
+    opacity: 0.5;
+}
+
+/* Main page Tab and editor slide */
+.slide-enter-active, .slide-leave-active {
+    transition: all ease .5s;
+}
+.slide-enter {
+    transform: translateX(100vw);
+}
+.slide-leave-to {
+    transform: translateX(-100vw);
+}

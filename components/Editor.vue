@@ -105,7 +105,7 @@ export default {
     display: block;
     font-weight: normal;
     font-size: 1.1em;
-    margin: .3em 0 1em;
+    margin: 0 0 1em;
     padding: .5em .5em 1em;
     position: absolute;
 }
@@ -116,7 +116,6 @@ export default {
 .small-cont {
     display: inline-block;
 }
-
 input {
     border: 1px solid black;
     font: normal 1em/150% "Muli", sans-serif;
@@ -151,7 +150,6 @@ select {
     display: flex;
     font-size: .9em;
     align-items: center;
-    /* margin-bottom: .5em; */
 }
 .checkbox {
     height: 18px;
@@ -168,8 +166,7 @@ button {
     margin: .3em .6em;
     padding: 0 .6em;
     box-shadow: 1px 2px 3px #000;
-    transition: transform ease .1s;
-
+    transition: all ease .1s;
 }
 button:hover {
     color: darkorange;
@@ -178,18 +175,12 @@ button:hover {
 #close-editor {
     background: #eee;
     color: #222;
-    /* position: absolute;
-    left: -.5em;
-    top: -2.5em; */
 }
 #update-tab {
     border-color: darkorange;
     background: darkorange;
     color: #000;
     font-size: 1em;
-    /* position: absolute;
-    left: -6em;
-    top: 0; */
     transform-origin: center;
 }
 #delete-tab {
@@ -202,6 +193,11 @@ button:hover {
     color: #000;
     background-color: darkorange;
     border-color: darkorange;
-    /* font-weight: bold; */
+}
+#delete-tab:hover, #delete-tab:focus {
+    color: #000;
+    background-color: red;
+    border-color: red;
+    transform: none;
 }
 </style>

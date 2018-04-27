@@ -3,8 +3,7 @@
     <div class="scroll-cont">
 
         <div
-            class="scroller"
-            :class="{ positioner: isActive }">
+            id="scroller">
 
 
             <button
@@ -88,7 +87,7 @@ export default {
         scroller() {
             this.step += this.scrollSpeed
 
-            // 60 compensates the bottom margin of <pre/>
+            // 100 compensates the bottom margin of <pre/>
             if (this.currY - 100 <=  (document.querySelector("pre").clientHeight + this.yoff - window.innerHeight)  && this.scrolling) {
                 if (this.step >= 10) {
                     this.currY = window.pageYOffset + 1;
@@ -138,13 +137,12 @@ export default {
 
 <style lang="css" scoped>
 .scroll-cont {
-
     display: flex;
     flex-direction: column;
     align-items: center;
     align-self: center;
 }
-.scroller {
+#scroller {
     display: flex;
     flex-flow: row;
     position: fixed;

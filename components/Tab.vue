@@ -40,7 +40,7 @@
                         :tabId="updatedTab.id" />
                 </transition>
 
-                <!-- Editor -->
+                <!-- Edit Button -->
                 <button
                     v-if="$store.state.authUser && tab.creator_id == $store.state.authUser.id"
                     @click="toggleEditor"
@@ -49,25 +49,26 @@
                     Edit
                 </button>
 
-                <!-- Scroller -->
-                <Scroller @closetab="toggleTab" />
 
                 <!-- Tab container -->
                 <div class="pre-cont">
                     <pre>{{ updatedTab.tab }}</pre>
                 </div>
 
+                <!-- Scroller -->
+                <Scroller
+                v-if="transEnd"
+                @closetab="toggleTab" />
             </div>
-        </transition>
 
-        <!-- Editor -->
-        <transition name="fade">
+            <!-- Editor -->
             <Editor
-                @update="updateTab"
-                @deleted="tabDelete"
-                @close="toggleEditor"
-                v-if="showEditor"
-                :tab="updatedTab"/>
+            @update="updateTab"
+            @deleted="tabDelete"
+            @close="toggleEditor"
+            v-if="showEditor"
+            :tab="updatedTab"/>
+
         </transition>
 
     </li>
@@ -87,6 +88,7 @@ export default {
     props: [ "tab" ],
     data () {
         return {
+            transEnd:false,
             showAdder: false,
             isActive: false,
             showEditor: false,
@@ -106,13 +108,18 @@ export default {
     },
     methods: {
         toggleTab() {
-            this.isActive = !this.isActive
-            // Adjust document height
-            if (this.isActive) {
+            // this.isActive = !this.isActive
+            // Adjust document height & show scroller only after transition so avoid "jumping"
+            if (!this.isActive) {
+                this.isActive = true
                 setTimeout(() => {
+                    this.transEnd = true
                     document.getElementById('pushcont').style.height = (document.documentElement.scrollHeight + document.getElementsByTagName("footer")[0].clientHeight + 10) + "px";
-                }, 500)
+                }, 550)
             } else {
+                // small timeout so scroller is hidden when tab closes
+                setTimeout(() => this.isActive = false, 10)
+                this.transEnd = false
                 setTimeout(() => {
                     document.getElementById('pushcont').style.height = " 100%"
                 }, 500)
@@ -236,48 +243,5 @@ button:hover {
     right: -20%;
     top: 1em;
     z-index: 6;
-}
-
-/* Animations */
-
-/* Tab <pre> */
-.slide-enter-active, .slide-leave-active {
-    transition: all ease .5s;
-}
-
-.slide-enter {
-    transform: translateX(100vw);
-}
-.slide-leave-to {
-    transform: translateX(-100vw);
-}
-
-/* Editor */
-.fade-leave-active, .fade-enter-active {
-    position: absolute;
-    transition: all ease .5s;
-}
-.fade-enter {
-    transform: translateX(100vw);
-}
-.fade-leave-to {
-    transform: translateX(-100vw);
-}
-.activeclass {
-    text-shadow: 1px 2px 3px #000;
-}
-
-/* the adder */
-.slidein-leave-active, .slidein-enter-active {
-    transform-origin: left;
-    transition: all ease .4s;
-}
-.slidein-enter {
-    transform: scale(0, 0) translateX(-400px);
-    opacity: 0.5;
-}
-.slidein-leave-to {
-    transform: scale(0, 0) translateX(-400px);
-    opacity: 0.5;
 }
 </style>

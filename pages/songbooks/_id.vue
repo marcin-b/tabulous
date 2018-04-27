@@ -186,7 +186,7 @@ section {
     text-decoration: none;
     padding: 0 1em;
     margin: 1em 0;
-    transition: all ease .2s;
+    transition: all ease .1s;
 }
 #back-to:hover, #back-to:active, #back-to:focus {
     outline: 5px dotted #FF8C00;

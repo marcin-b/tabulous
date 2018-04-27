@@ -25,20 +25,17 @@ const store = () => new Vuex.Store({
         nuxtServerInit ({ commit }, { req }) {
             if (req.session && req.session.authUser) {
                 commit("SET_USER", req.session.authUser)
-
-                console.log("Action NXT srvr init:", req.session.authUser);
             }
         },
 
         signup({ commit }, { user }) {
-
+            // Promisify to catch errors
             return new Promise((resolve, reject) => {
                 axios.post("/api/signup", user)
                 .then(({data}) => {
                     if (data.error) {
                         return reject(data)
                     }
-                    console.log("Login Successful: ", data);
                     commit("SET_USER", data)
                     resolve(data)
                 })
@@ -53,7 +50,6 @@ const store = () => new Vuex.Store({
                     if (data.error) {
                         return reject(data)
                     }
-                    console.log("Login Successful: ", data);
                     commit("SET_USER", data)
                     resolve(data)
                 })
@@ -61,7 +57,7 @@ const store = () => new Vuex.Store({
         },
 
         logout({ commit }) {
-            this.$router.push("/welcome")
+            this.$router.push("/")
             axios.get("/api/logout")
             .then(() => commit("SET_USER", null))
 

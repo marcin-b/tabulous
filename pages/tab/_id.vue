@@ -14,8 +14,8 @@
             <span v-if="tab.ver > 0">ver{{tab.ver}}</span>
         </h2>
 
-        <!-- Add to Songbook Button -->
         <div class="relative">
+            <!-- Add to Songbook Button -->
             <button
                 v-if="$store.state.authUser"
                 @click="toggleAdder"
@@ -31,7 +31,7 @@
                 :tabId="tab.id" />
             </transition>
 
-            <!-- Editor -->
+            <!-- Edit Button -->
             <button
                 v-if="$store.state.authUser && tab.creator_id == $store.state.authUser.id"
                 @click="toggleEditor"
@@ -40,15 +40,19 @@
                 Edit
             </button>
 
+
+        </div>
+        <div class="positioner">
             <!-- Editor -->
-            <transition name="fade">
+            <transition name="slide">
                 <Editor
                 @update="updateTab"
-                @deleted="tabDelete"
+                @deleted="$router.back()"
                 @close="toggleEditor"
                 v-if="showEditor"
                 :tab="tab"/>
             </transition>
+
         </div>
 
         <!-- Scroller -->
@@ -131,16 +135,16 @@ h2 > span {
     text-decoration: none;
     padding: 0 1em;
     margin: 1em 0;
-    transition: all ease .2s;
+    transition: all ease .1s;
 }
 #back-to:hover, #back-to:active, #back-to:focus {
     outline: 5px dotted #FF8C00;
 }
 .relative {
-    display: block;
+    /* display: ; */
     position: relative;
-    width: 500px;
-    height: 10px;
+    margin-bottom: 1em;
+    /* width: 450px; */
 }
 button {
     background-color: #222;
@@ -152,10 +156,9 @@ button {
     margin: .5em;
     padding: .2em 1em;
     box-shadow: 1px 2px 3px #000;
-    transition: transform ease .1s;
-    position: absolute;
-    top: -103px;
-    /* left: 0%; */
+    transition: all ease .1s;
+    /* position: absolute;
+    top: -103px; */
 }
 button:hover {
     color: black;
@@ -163,22 +166,11 @@ button:hover {
     transform: none;
 }
 #open-editor {
-    position: absolute;
+    /* position: absolute;
     right: 20%;
-    z-index: 6;
+    z-index: 6; */
 }
-
-/* adder trasition */
-.slidein-leave-active, .slidein-enter-active {
-    transform-origin: left;
-    transition: all ease .4s;
-}
-.slidein-enter {
-    transform: scale(0, 0) translateX(-400px);
-    opacity: 0.5;
-}
-.slidein-leave-to {
-    transform: scale(0, 0) translateX(-400px);
-    opacity: 0.5;
+.positioner {
+    width: 450px;
 }
 </style>
