@@ -113,7 +113,7 @@ export default {
     cursor: pointer;
     font: normal 400 1.5em/130% "Muli", sans-serif;
     text-rendering: optimizeLegibility;
-    margin: 0 0 1em;
+    margin: 0 0 .8em;
     padding: 0 .8em;
     box-shadow: 1px 2px 3px rgba(0,0,0,.7);
     transition: transform ease .1s;
@@ -127,7 +127,8 @@ export default {
     color: white;
     background: rgba(0, 0, 0, .5);
 }
-.swapper {
+.swapper, #reseter {
+    text-decoration: none;
     color: darkorange;
     cursor: pointer;
     font: normal bold 1em/150% "Muli", sans-serif;

@@ -30,8 +30,7 @@ router.post("/signup", (req, res) => {
             req.session.authUser = {
                 id: result[0].id,
                 email,
-                username: name,
-                img: result[0].img
+                username: name
             }
             res.json(req.session.authUser)
         })
@@ -46,7 +45,7 @@ router.post("/login", (req, res) => {
     db.query(q, email)
         .then(result => {
 
-            const { id, username, img, hashedpass } = result[0]
+            const { id, username, hashedpass } = result[0]
 
             checkPassword(password, hashedpass)
                 .then(doesMatch => {
@@ -56,10 +55,8 @@ router.post("/login", (req, res) => {
                         req.session.authUser = {
                             username,
                             email,
-                            id,
-                            img
+                            id
                         }
-                        console.log("Login AUTH: ", req.session.authUser);
                         res.json(req.session.authUser)
                     }
                     else {
@@ -80,7 +77,6 @@ router.post("/login", (req, res) => {
 })
 
 router.get("/logout", (req, res) => {
-
     delete req.session.authUser
     res.json({ success: true })
 })

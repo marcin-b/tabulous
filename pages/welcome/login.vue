@@ -19,12 +19,22 @@
 
         <button type="submit" name="button">Login</button>
 
-        If you are not registered
-        <span
-            @click="swapRegLog"
-            class="swapper">
-            Sign Up
-        </span>
+        <div class="seper">
+            If you are not registered<br>
+            <span
+                @click="swapRegLog"
+                class="swapper">
+                Sign Up
+            </span>
+
+        </div>
+
+        Forgot your Password?
+        <nuxt-link
+            id="reseter"
+            to="/forgotten">
+            reset it
+        </nuxt-link>
 
         <span v-if="error" class="error">{{errorMsg}}</span>
 
@@ -47,7 +57,6 @@ export default {
     methods: {
         swapRegLog() {
             this.$emit("swap", false)
-            console.log("ref",this.$refs.email);
         },
         submitLog() {
             // Credential check for lack of Support of "required"
@@ -77,7 +86,14 @@ export default {
 input + .err-indicator {
     border: 1px solid red;
 }
+.seper {
+    text-align: center;
+    padding-bottom: .8em;
+    border-bottom: 2px dashed darkorange;
+    margin-bottom: .5em;
+}
 .error {
+    color: red;
     font-size: 1em;
     border: 1px solid red;
     padding: 0 .5em;
