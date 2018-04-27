@@ -8,7 +8,7 @@
         <h1>About</h1>
 
         <p>
-            Tabulous emerged as my final project at SPICED Academy where I learned to code. Other than building web apps I found a cool bunch of people who I regularly jammed with and we encountered the problem of coming up with songs to play. <br>
+            Tabulous emerged as my final project at SPICED Academy. Other than learning to build web apps I found a cool bunch of people who I jam with and we encountered the problem of coming up with songs to play. <br>
             We learn so many songs that sometimes it's hard to remember all of them and looking for good tabs or chords can be annoying sometimes because there are so many inacurate ones.<br>
             So I came up with the idea for Tabulous. Save good tabs if you find them. They will be available for all users of Tabulous so they too can save the best tabs to their songbooks and have them ready when playing or jamming.<br>
             I will be adding features in the future and I hope people will find a use for this as I do. I don't want your data so I kept the registration and profile reqirements to a minimum.<br>
