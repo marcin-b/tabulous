@@ -29,12 +29,14 @@
 
         </div>
 
+        <!-- 
         Forgot your Password?
         <nuxt-link
             id="reseter"
             to="/forgotten">
             reset it
-        </nuxt-link>
+        </nuxt-link> -->
+
 
         <span v-if="error" class="error">{{errorMsg}}</span>
 
